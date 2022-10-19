@@ -1,0 +1,354 @@
+<style>
+    .style {
+        font-size: 80px;
+        color: #C80000;
+        line-height: 90px;
+    }
+
+    .list-group-item:first-child {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+</style>
+
+{{>header}}
+<div id="productTable">
+<header>
+    <!-- Carousel wrapper -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://vcdn1-vnexpress.vnecdn.net/2022/03/30/ANH-2-1648614507.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=vNeAdiJIPeDOBddNxhltzw"
+                    class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://i1-dulich.vnecdn.net/2022/04/08/CanThoVnExpress-1649418901-9461-1649419070.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=7xM6eJkbNu9Klud9rt7DWA" class="d-block w-100"
+                    alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://statics.vinpearl.com/cho-noi-cai-rang-7_1624263008.jpg" class="d-block w-100"
+                    alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://thamhiemmekong.com/wp-content/uploads/2019/05/caudibo-cantho.jpg"
+                    class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/13/819222/Duong-Bich-Hoa-O-Can-04.JPG"
+                    class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://statics.vinpearl.com/cho-noi-cai-rang-23_1625335426.jpg" class="d-block w-100"
+                    alt="...">
+            </div>
+        </div>
+    </div>
+    <!-- Carousel wrapper -->
+</header>
+{{!-- ---------------------------- --}}
+
+<div class="container text-center">
+    <br>
+    <h1 class="font-effect-shadow-multiple" style="font-size: 80px">C Ầ N T H Ơ</h1>
+    <p><em><b>Biệt danh: </b>Tây Đô | Thủ phủ miền Tây | Đô thị miền sông nước</em></p>
+    <p style="font-size: 17px;">
+        Cần Thơ là một thành phố trực thuộc trung ương của Việt Nam, là thành phố sầm uất và phát triển nhất ở Đồng bằng
+        sông Cửu Long. Cần Thơ hiện là đô thị loại I, là trung tâm kinh tế, văn hóa, xã hội, y tế, giáo dục và thương
+        mại của vùng Đồng bằng sông Cửu Long, là thành phố trung tâm cấp vùng và cấp quốc gia cùng với Đà Nẵng, Hải
+        Phòng.
+
+    </p>
+    <br>
+</div>
+
+<!-- Container (TOUR Section) -->
+<div class="container">
+    <div id="tour" class="bg-1" style="background-color: rgba(0, 0, 0, 0.7);">
+        <div class="container">
+            <h3 class="text-center pt-1" style="color:aliceblue; font-size: 50px;">TOURs</h3>
+            <p class="text-center">Hãy cùng trải nghiệm và tận hưởng những chuyến du lịch tuyệt vời.<br> Nhớ đặt tour mà bạn thích nhé!</p>
+            <ul class="list-group">
+                <li class="list-group-item"><b>DU LỊCH CẦN THƠ</b></li>
+            </ul>
+            {{!-- Tour --}}
+            <div class="mt-3 p-3 tour">
+                <div class="row">
+                    {{#each tours}}
+                    <div class="col-sm-6 col-lg-4 py-2">
+                        <div class="card" style="width: 25rem;">
+                            <a href="/tour/{{this.slug}}">
+                                <img style="height: 270px;" src="{{this.image}}" class="card-img-top"
+                                    alt="{{this.name}}">
+                            </a>
+                            <div class="card-body" style="height: 145px;">
+                                <a class="text-center" href="/tour/{{this.slug}}">
+                                    <h5 class="card-title"><b>{{this.name}}</b></h5>
+                                </a>
+                                <p class="card-text text-center" style="line-height: 1px;"><i>Thời gian: {{this.time}}</i></p>
+                                <p style="margin-left: 0;"><b>Giá:</b> {{this.price}}<a style="margin-left: 28%" href="{{this.contact}}" target="_blank" class="btn btn-danger">Tìm hiểu</a></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="btn1" style="width: 200px;">
+            <a style="color:aliceblue;" href="/tour"><b>Xem thêm tour</b></a>
+        </div>
+        <br>
+    </div>
+</div>
+            {{!-- Tour --}}
+
+{{!-- ---------------------------- --}}
+<div class="container">
+    <div class="row py-4">
+        <div class="col-5">
+            <h1 style="font-size: 80px"><b>ẤN TƯỢNG</b></h1>
+            <h2 style="font-size: 60px"><b>BẾN NINH KIỀU</b></h2><br />
+            <h3 style="color: red; font-size: 40px;"><b>TƯỢNG ĐÀI HỒ CHÍ MINH</b></h3>
+            <br />
+
+            <h6 style="color: rgb(89, 89, 89); font-size: 40px"><b class="style">7,2</b>m</h6>
+            <p style="line-height: 10%;">Chiều cao</p>
+            <br>
+            <h6 style="color: rgb(89, 89, 89); font-size: 40px"><b class="style">12</b>tấn</h6>
+            <p style="line-height: 10%;">Cân nặng</p>
+            <br>
+            <h6 style="color: rgb(89, 89, 89); font-size: 40px"><b class="style">3,6</b>m</h6>
+            <p style="line-height: 10%;">Được bố trí trên bệ cao</p>
+        </div>
+        <div class="col-7">
+            <br />
+            <p><b style="color: #B80000">Lịch sử hình thành và tên gọi bến Ninh Kiều Cần Thơ: </b> Nơi đây được hình
+                thành từ thế kỷ thứ XIX, thời vua Gia Long, nhà Nguyễn. Trước đây bến Ninh Kiều vốn chỉ là một bến sông
+                nhỏ tại đầu khu vực chợ Cần Thơ.</p>
+            <p>Còn cái tên gọi Ninh Kiều đã có cách đây hơn 60 năm trước, được đặt theo một sự kiện trong lịch sử Việt
+                Nam và lấy tên một địa danh lịch sử chiến thắng quân Minh của nghĩa quân Lam Sơn lúc bấy giờ do Lê Lợi
+                chỉ huy.</p>
+            <br /><br />
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner" style="height: 500px;">
+                    <div class="carousel-item active">
+                        <img src="https://tourismcantho.vn/files/images/diem-den/ben-ninh-kieu/12.jpg"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://statics.vinpearl.com/ben-ninh-kieu-1_1624326787.jpg" class="d-block w-100"
+                            alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://statics.vinpearl.com/ben-ninh-kieu-6_1624326951.jpg" class="d-block w-100"
+                            alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://thamhiemmekong.com/wp-content/uploads/2019/05/caudibo-cantho.jpg"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://statics.vinpearl.com/ben-ninh-kieu-7_1624326995.png" class="d-block w-100"
+                            alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- ---------------------------- --}}
+
+{{!-- button --}}
+<div class="button-circle">
+    <h2 style="text-align: center; font-size: 60px"><b>Sống động từng trải nghiệm</b></h2>
+    <br />
+    <span class="sub-button-circle">
+        <button type="button" class="btn btn-outline-success btn-circle btn-xl">
+            <div class="bg-image-style" data-filter=".sort-red ">
+                <a href="/kham-pha/van-hoa-&-lich-su">
+                    <div class="btn-navi__inner">
+                        <span class="btn-navi__icon">
+                            <img class="fill" src="https://visithcmc.vn/uploads/0000/1/2021/07/26/tab1.svg">
+                        </span>
+                        <p class="btn-navi__title van-hoa-lich-su">Văn hóa<br> &amp; Lịch sử</p>
+                    </div>
+                </a>
+            </div>
+        </button>
+    </span>
+
+    <span class="sub-button-circle">
+        <button type="button" class="btn btn-outline-primary btn-circle btn-xl" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
+            <div class="bg-image-style">
+                <a href="/du-lich/dia-diem">
+                    <div class="btn-navi__inner">
+                        <span class="btn-navi__icon">
+                            <img class="fill" src="https://visithcmc.vn/uploads/0000/1/2021/07/26/tab4.svg">
+                        </span>
+                        <p class="btn-navi__title giai-tri">Địa điểm <br />du lịch</p>
+                    </div>
+                </a>
+            </div>
+        </button>
+    </span>
+
+    <span class="sub-button-circle">
+        <button type="button" class="btn btn-outline-warning btn-circle btn-xl" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
+            <div class="bg-image-style" data-filter=".sort-ogrange ">
+                <a href="/du-lich/am-thuc">
+                    <div class="btn-navi__inner">
+                        <span class="btn-navi__icon">
+                            <img class="fill" src="https://visithcmc.vn/uploads/0000/1/2021/07/26/tab2.svg">
+                        </span>
+                        <p class="btn-navi__title am-thuc">Ẩm thực </p>
+                    </div>
+                </a>
+            </div>
+        </button>
+    </span>
+
+</div>
+{{!-- button --}}
+{{!-- Dia diem --}}
+<div class="p-5 container">
+    <div class="row">
+        {{#each places}}
+        <div class="col-sm-6 col-lg-4 py-2">
+            <div class="card img-fluid zoomin">
+                <a href="/du-lich/dia-diem/{{this.slug}}">
+                    <img style="height: 360px;" class="card-img-top" src="{{this.image}}"
+                        alt="Card image">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white title1 text-center p-1"><b>{{this.name}}</b></h4>
+                    </div>
+                </a>
+                <div class="card-img-overlay text-center p-2 place" style="background: linear-gradient(90deg,  rgb(5, 0, 92) 0%, rgb(13, 30, 156) 35%, rgb(5, 234, 255) 100%);">
+                    <a href="{{this.place}}" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        {{this.address}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+{{!-- Dia diem --}}
+
+{{!-- ---------Le-Hoi---------------- --}}
+<div class="container">
+    <h2 style="text-align: center; font-size: 60px;"><b>Sắc màu Lễ Hội</b></h2>
+    <div class="row py-4">
+        <div class="col-7 mt-4">
+            <a href="/le-hoi/hoa-minh-vao-hoi-hoa-dang-can-tho" class="card img-fluid" style="width: 700px; color:black;">
+                <img src="https://media.mia.vn/uploads/blog-du-lich/hoa-minh-vao-hoi-hoa-dang-can-tho-dep-lung-linh-da-sac-mau-04-1649212355.jpeg" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <h4 class="card-title text-white title1 text-center p-1">HỘI HOA ĐĂNG CẦN THƠ</h4>
+                </div>
+            </a>
+            <br>
+        </div>
+        <div class="col-5 lehoi" style="text-align: justify;">
+            <a href="/le-hoi/le-hoi-banh-dan-gian-nam-bo" target="_blank">
+                <h3><b>LỄ HỘI BÁNH DÂN GIAN NAM BỘ</b></h3>
+                <p>Lễ hội bánh dân gian Nam Bộ là lễ hội cấp quốc gia được tổ chức nhằm lan tỏa và mang đến những trải nghiệm ẩm thực vô cùng đặc sắc cho mọi người khi Du lịch Cần Thơ. Đến với lễ hội, bạn sẽ được ...</p>
+            </a>
+            <br>
+            <a href="/le-hoi/le-hoi-trai-cay-tan-loc" target="_blank">
+                <h3><b>LỄ HỘI TRÁI CÂY TÂN LỘC</b></h3>
+                <p>Lễ hội trái cây Tân Lộc chính là dịp để người dân nơi đây cùng quây quần, tôn vinh thành quả và công sức lao động sau một năm làm việc chăm chỉ. Đến với lễ hội khi Du lịch Cần Thơ, bạn sẽ được hòa chung vào bầu không khí vui tươi và ...</p>
+            </a>
+            <br>
+            <a href="/le-hoi/le-hoi-ky-yen-dinh-binh-thuy" target="_blank">
+                <h3><b>LỄ HỘI KỲ YÊN ĐÌNH BÌNH THUỶ</b></h3>
+                <p>Lễ hội Kỳ Yên đình Bình Thủy đáo lệ mỗi năm 2 lần chính là một trong những lễ hội lớn nhất năm tại Cần Thơ. Sự tồn tại của lễ hội chính là một minh chứng lịch sử vô cùng quan trọng của người Việt. Bỏ lỡ lễ hội này ...</p>
+            </a>
+            <br>
+            <a href="/le-hoi/le-hoi-chua-ong-can-tho" target="_blank">
+                <h3><b>LỄ HỘI CHÙA ÔNG CẦN THƠ</b></h3>
+                <p>Khám phá Lễ hội chùa Ông Cần Thơ đem đến bạn một cái nhìn thật khác giữa bản sắc văn hóa của người Việt và người Hoa sinh sống tại thành phố Cần Thơ. Mỗi khi vào mùa lễ hội, ...</p>
+            </a>
+        </div>
+    </div>
+    <div class="btn1"><a style="color:aliceblue; padding: 4px" href="/le-hoi"><b>Xem tất cả</b></a></div>
+    <br>
+</div>
+{{!-- -------Ban-Do----------------- --}}
+<div class="container text-center py-3">
+    <h2 style="text-align: center; font-size: 60px;"><b>Bản đồ các điểm đến du lịch ở Cần Thơ</b></h2>
+    <br>
+    <iframe style="width: 100%; height: 700px" src="https://www.google.com/maps/d/embed?mid=1fIVue2jq1eCYSVpHQY5XKytHDQB9PWY&hl=vi&ehbc=2E312F" width="640" height="480"></iframe>
+    <br>
+</div>
+{{!-- ---Goc-ReView---Trai-Nghiem-------------------- --}}
+<div class="container">
+    <br>
+    <h2 style="text-align: center; font-size: 50px;"><b>Góc ReView - Trải nghiệm</b></h2>
+    <div class="row py-4" style="text-align: justify; font-size: 18px; ">
+        <div class="col-4 review">
+            <ol style="font-weight: bold; color: grey;">
+                <li><a href="/tour/trai-nghiem/review-cuc-co-tam-kinh-nghiem-di-con-son-can-tho" target="_blank"><b>Review cực có tâm kinh nghiệm đi Cồn Sơn Cần Thơ -></b></a></li>
+                <li><a href="/tour/trai-nghiem/review-chat-luong-vinpearl-can-tho-va-cach-dat-phong-gia-re" target="_blank"><b>Review chất lượng Vinpearl Cần Thơ và cách đặt phòng giá rẻ -></b></a></li>
+                <li><a href="/tour/trai-nghiem/review-ly-do-ban-nen-den-cho-noi-cai-rang-mot-lan" target="_blank"><b>Review lý do bạn nên đến chợ nổi Cái Răng một lần -></b></a></li>
+                <li><a href="/tour/trai-nghiem/review-kinh-nghiem-di-can-tho-tu-tuc-sieu-tiet-kiem" target="_blank"><b>Review kinh nghiệm đi Cần Thơ tự túc siêu tiết kiệm -></b></a></li>
+            </ol>
+            <br>
+            <div class="btn1" style="margin-left: 0%;"><a style="color:aliceblue;" href="/tour/trai-nghiem"><b>Xem tất cả</b></a></div>
+        </div>
+        <div class="col-4">
+            <div class="card img-fluid zoomin trainghiem">
+                <a href="/tour/trai-nghiem/review-cam-trai-can-tho-va-nhung-trai-nghiem-thu-vi-co-mot-khong-hai">
+                    <img style="height: 360px;" class="card-img-top" src="https://media.mia.vn/uploads/blog-du-lich/review-cam-trai-can-tho-va-nhung-trai-nghiem-thu-vi-co-mot-khong-hai-01-1650371240.jpeg"
+                        alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title p-1"><b><i style="padding-left: 5px; border-left: 5px solid yellow;"></i>Review cắm trại Cần Thơ và những trải nghiệm thú vị có một không hai</b></h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card img-fluid zoomin trainghiem">
+                <a href="/tour/trai-nghiem/review-an-sap-can-tho-khi-kham-pha-2-cho-dem-noi-tieng">
+                    <img style="height: 360px;" class="card-img-top" src="https://media.mia.vn/uploads/blog-du-lich/review-an-sap-can-tho-khi-kham-pha-2-cho-dem-noi-tieng-09-1650377591.jpeg"
+                        alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title p-1"><b><i style="padding-left: 5px; border-left: 5px solid rgb(6, 255, 6);"></i>Review ăn sập Cần Thơ khi khám phá 2 Chợ đêm nổi tiếng</b></h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+      $(document).ready(function(){
+            $("#myFilter").on("keyup", function() {
+                  var value = $(this).val().toLowerCase();
+                  $("#productTable div").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                  });
+            });
+      });
+</script>
+{{!-- ---------------------------- --}}
+{{>footer}}

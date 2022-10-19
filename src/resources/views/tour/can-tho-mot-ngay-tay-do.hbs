@@ -1,0 +1,158 @@
+{{>header}}
+<div style="background: linear-gradient(0deg, rgb(9, 147, 189) 0%, rgb(247, 19, 232) 100%);" class="background-news"></div>
+<div class="container">
+    <h1 class="tin-tuc font-effect-anaglyph"><b>Tour - Cần Thơ</b></h1>
+    <hr>
+    <div class="fb-like" data-href="http://localhost:3000/kham-pha" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
+    <div class="fb-share-button" data-href="http://localhost:3000/kham-pha" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+    <div style="text-align: justify; width: 80%; margin: auto;">
+        <h5 class="pt-4"><b>{{tours.name}}</b></h5>
+        <hr>
+        <div class="row">
+            <div class="col-8">
+                <p>Giá: <b style="color: red;">{{tours.price}}</b></p>
+                <p>Ngày khởi hành: <b>{{tours.time}}</b></p>
+                <p>Phương tiện: <img src="https://img.icons8.com/ios-filled/344/water-transportation.png" width="20" height="20" alt="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-truck-front-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.5 0A2.5 2.5 0 0 0 1 2.5v9c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2v-9A2.5 2.5 0 0 0 12.5 0h-9ZM3 3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3.9c0 .625-.562 1.092-1.17.994C10.925 7.747 9.208 7.5 8 7.5c-1.208 0-2.925.247-3.83.394A1.008 1.008 0 0 1 3 6.9V3Zm1 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-5-2a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Z"/>
+                    </svg>
+                </p>
+                <p>Điện thoại hỗ trợ: <b style="color: red;">0774814684</b></p>
+            </div>
+            <div class="col-4 mt-5 nav nav-tabs">
+                <a href="#DatTour" class="btn btn-warning" style="width: 170px; height: 60px; margin: auto; font-size: 20px"><b>ĐẶT TOUR </b><img src="https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/344/external-contract-business-and-management-febrian-hidayat-outline-color-febrian-hidayat.png" alt="" width="35px"; height="35px"></a>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <p>
+            <li class="nav-item">
+                <a class="nav-link border-info" data-bs-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Chương trình tour
+                </a>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link border-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
+                    Giá
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link border-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseExample">
+                    Điều khoản 
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link border-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseExample">
+                    Liên hệ
+                </button>
+            </li>
+            </p>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <div id="collapseOne" class="accordion-collapse collapse show border-info" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <h5 style="color: red;"><b>NGÀY 1: Cần Thơ – Một Ngày Tây Đô (Ăn Sáng, Tối)</b></h5>
+                            <strong>06h00: </strong> Quý khách tập trung tại số <b>46 - đường Hai Bà Trưng </b> (đối diện tượng đài Bác Hồ bến Ninh Kiều) xuống tàu du lịch tham quan.
+                            <br>
+                            <img class="py-3" src="{{tours.image}}" alt="" width="100%">
+                            <br>
+                            <ul style="line-height: 30px;">
+                                <li><b>Chợ Nổi Cái Răng </b> - chợ nổi bán sĩ lớn nhất Miền Tây. Len lỏi giữa hàng trăm chiếc ghe bán hàng nông sản, quý khách có thể thưởng thức những đặc sản địa phương tại ghe.</li>
+                                <li>Qúy khách có thể lên tàu địa phương hoặc các bè trái cây để mua về làm quà cho người thân.</li>
+                                <li>Đến chợ nổi thuyền dừng chân tại ghe điểm tâm nổi của người địa phương – quý khách cùng thưởng thức đặc sản địa phương và trải nghiệm dùng bữa sáng trên sông: <b><i>Hủ Tiếu, Bún Riêu, Bún Mắm,…</i></b></li>
+                                <li>Sau đó, thuyền ghé vào ghe Dứa/Khóm của dân địa phương tại chợ nổi (tự túc) – đoàn chụp ảnh và thưởng thức Dứa/Khóm tại ghe.</li>
+                            </ul>
+                            <p><b>07h00: Thuyền tiếp tục vào rạch nhỏ tham quan </b> cơ sở sản xuất hủ tiếu – thưởng thức đặc sản <b>pizza hủ tiếu </b> (chi phí tự túc).</p>
+                            <p><b>08h00:</b> Thuyền tiếp tục vào rạch bần tham quan <b>mô hình nhà vườn Nam Bộ </b> – tìm hiểu về những loại cây ăn quả miền Nam và trải nghiệm đi cầu khỉ miền Tây - thưởng thức đặc sản trái cây theo mùa.</p>
+                            <img class="py-3" src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/10/nha-binh-thuy.jpg" alt="" width="100%">
+                            <br>
+                            <p><b>09h00: </b> Quý khách về bến Ninh Kiều. Xe đón đoàn di chuyển tham quan <b>Nhà Cổ Bình Thủy </b> – ngôi nhà hơn 140 năm tuổi có sự giao thia hài hoà giữa hai nét văn hoá kiến trúc Đông Tây, ngoài ra ngôi nhà còn là phim trường chính của những bộ phim nổi tiếng như: Người Đẹp Tây Đô, Những Nẻo Đường Phù Sa, Người Tình…</p>
+                            <ul>
+                                <li>Sau khi tìm hiểu <b>Nhà Cổ </b> đoàn sẽ tiếp tục di chuyển đến bến phà <b>Cô Bắc</b>. Đò ngang sẽ xuôi dòng sông Hậu đưa Qúy khách đến với làng cá bè <b>Cồn Sơn </b> tại đây đoàn sẽ được tham quan mô hình <b>nuôi cá bè </b> với khoảng 50 bè cá, cùng người địa phương cho cá ăn, chụp ảnh lưu niệm.</li>
+                                <li>Rời bè cá, Quý khách tiếp tục di chuyển trên sông Hậu. Đò ngang đưa đoàn đến Cồn Sơn. Quý khách sẽ được người dân <b>Cồn Sơn </b> mến khách chào đón bằng loại nước mát đặc trưng được nấu từ lá cây Sa Kê và Đinh Lăng trong vườn nhà, <b>trải nghiệm làm các loại bánh ngon dân dã</b> mang đậm chất Nam Bộ.</li>
+                            </ul>
+                            <p><b>Trưa: </b> Dùng cơm trưa với các món ăn đậm chất miền Tây dân dã tại nhà dân địa phương.</p>
+                            <ul>
+                                <li>Đoàn di chuyển <b>tham quan Vườn</b> chôm chôm/bưởi hay vú sữa tùy vào từng thởi điểm.</li>
+                                <li>Khám phá tuyệt chiêu <b>“cá lóc bay” </b> của nông dân sông Hậu.</li>
+                                <li>Trong suốt hình trình khám phá và tìm hiểu về người và đất Cồn Sơn quý khách sẽ được <b>thưởng thức các trái cây đặc sản địa phương  </b>(theo mùa như: vú sữa, ổi, bưởi...)</li>
+                            </ul>
+                            <p><b>16h00: </b> Quý khách trở về đất liền, HDV đưa quý khách về lại điểm hẹn, kết thúc chuyến hành trình. Trước khi chia tay HDV thay mặt công ty nói lời chào tạm biệt và hẹn gặp lại.</p>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><b>GIÁ TOUR BAO GỒM</b></p>
+                            <ul style="line-height: 27px;">
+                                <li>Xe đi tour chất lượng tốt phục vụ theo chương trình tham quan tùy theo số lượng khách.</li>
+                                <li>Vé vào cổng tham quan.</li>
+                                <li>Ăn sáng tại chợ nổi Cái Răng.</li>
+                                <li>Bữa ăn chính: 1 bữa ăn trưa tại nhà dân.</li>
+                                <li>Vé tàu/thuyền tham quan</li>
+                                <li>Bảo hiểm du lịch với mức bồi thường thiệt hại tối đa 100.000.000 đồng.</li>
+                                <li>Hướng dẫn viên tiếng Việt hoặc tiếng Anh thuyết minh và phục vụ trong chuyến tham quan.</li>
+                            </ul>
+                            <br>
+                            <p><b>GIÁ TOUR KHÔNG BAO GỒM</b></p>
+                            <ul style="line-height: 27px;">
+                                <li>Thức uống giải khát trong bữa ăn.</li>
+                                <li>Các chi phí cá nhân: chụp ảnh, điện thoại, nước uống trong phòng.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><b>QUY ĐỊNH CHO TRẺ EM</b></p>
+                            <ul style="line-height: 27px;">
+                                <li>Trẻ từ 05 tuổi trở xuống: Miễn phí (ngủ chung giường với gia đình trên xe và khách sạn, gia đình tự lo cho trẻ nếu có chi phí phát sinh).</li>
+                                <li>Trẻ từ 06 đến 09 tuổi: 75% giá tour (bao gồm giường riêng trên xe, ngủ chung giường khách sạn với gia đình).</li>
+                                <li>Trẻ từ 10 tuổi trở lên: 100% giá tour như người lớn.</li>
+                                <li>Tiêu chuẩn 75% vé: được 01 suất ăn (nếu có) + 1 ghế ngồi trên xe (nếu có) + 1 ghế ngồi trên tàu (nếu có) + 1 suất ngủ (nếu có).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><b>Điện thoại: </b> 0774814684</p>
+                            Email: <a href="mailto:huongb1809130@student.ctu.edu.vn">huongb1809130@student.ctu.edu.vn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+        <div class="py-4" id="DatTour">
+            <p class="border-bottom-info"><b>THÔNG TIN LIÊN HỆ</b></p>
+            <form action="mailto:tuyethuong2510@gmail.com" method="POST" enctype="multipart/form-data" name="contact_form">
+                <label class="form-label" for="form4Example1">Họ và Tên</label>
+                <input type="text" name="name" id="form4Example1" class="form-control" />
+                <br>
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="email@example.com" required/>
+                <br>
+                <label class="form-label" for="form4Example1">Số điện thoại</label>
+                <input type="text" name="phone" id="form4Example1" class="form-control" required/>
+                <br>
+                <label class="form-label" for="form4Example3">Địa Chỉ</label>
+                <textarea class="form-control" name="address" id="form4Example3" rows="4"></textarea>
+                <br>
+                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4">Đặt Tour</button>
+            </form>
+            <a href="mailto:tuyethuong2510@gmail.com?
+                 cc=tlthuong2510@gmail.com&
+                 bcc=huongb1809130@student.ctu.edu.vn
+                 &subject=CoBanDatTour
+                 &body=Add what you want to suggest">
+        </a>
+        </div>
+    </div>
+    <div class="fb-comments" data-href="https://www.facebook.com/login" data-width="100%" data-numposts="5"></div>
+</div>
+{{>footer}}
+<script src="https://smtpjs.com/v3/smtp.js">
+</script>

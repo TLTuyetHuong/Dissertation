@@ -1,0 +1,36 @@
+<style>
+  a {
+    color: royalblue;
+  }
+  .content a:hover{
+    color: red;
+  }
+</style>
+{{>header}}
+<div class="background-news"></div>
+<div class="container">
+    <h1 class="tin-tuc font-effect-anaglyph">
+      <b>TIN TỨC</b>
+      <img style="width: 50px; height: 50px; margin-left: 10px;" src="https://img.icons8.com/doodle/344/news.png" alt="">
+      <img style="width: 50px; height: 50px;" src="https://img.icons8.com/doodle/344/press-kit.png" alt="">
+    </h1>
+    <hr>
+    <div class="p-2">
+        <div class="row">
+            {{#each tintucs}}
+            <div class="col-sm-6 col-lg-4 py-3">
+                <div class="card img-fluid zoomin trainghiem">
+                    <a href="/tin-tuc/{{this.slug}}">
+                        <img style="height: 360px;" class="card-img-top" src="{{this.image}}"
+                            alt="Card image">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title p-1"><b><i style="padding-left: 5px; border-left: 5px solid {{this.color}};"></i>{{this.title}}</b></h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{>footer}}

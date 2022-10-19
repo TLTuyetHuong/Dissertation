@@ -1,0 +1,340 @@
+@import 'variables';
+
+*{
+    // font-family: Arial, Helvetica, sans-serif;
+    // font-family:'Times New Roman', Times, serif;
+    font-family: Inter Tight;
+}
+
+body a {
+    text-decoration: none;
+}
+
+#navbar {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: 100%;
+    float: left;
+}
+
+.nav-item {
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.nav-item li a {
+    text-decoration: none;
+}
+   
+.carousel-item {
+    height: 715px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: auto;
+}
+
+.caption h1{
+    font-size: 60px;
+    text-shadow: 2px 2px black;
+    color: rgb(205, 195, 195);
+}
+
+
+.sub-button-circle {
+    margin-left: 17%;
+}
+
+.btn-circle.btn-xl {
+    width: 150px;
+    height: 150px;
+    border-radius: 80px;
+}
+
+.btn-circle.btn-xl a {
+    text-decoration: none;
+    color: #404040;
+}
+
+.btn-circle.btn-xl p {
+    padding-top: 5px;
+}
+
+.bg-image-style {
+    background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20190718/pngtree-vector-background-with-abstract-geometric-design-of-white-circle-image_283904.jpg');
+    padding-top: 20px;
+    padding-right: 10px;
+    border-radius: 100%;
+    height: 140px;
+    width: 140px;
+}
+
+.dropdown ul {
+    padding-left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dropdown-content{
+    position: absolute;
+    display: none;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+} 
+
+.dropdown-content a {
+    float: left;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropend:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    right: auto;
+    left: 100%;
+}
+
+.dropdown-menu a {
+    font-size: 20px;
+}
+
+// .dropdown a:hover {
+//     display: block;
+// }
+
+.sub-menu li a{
+    color: aliceblue;
+}
+
+.sub-menu li a:hover {
+    background:  rgba(181, 180, 180, 0.2);
+    color: aliceblue;
+}
+
+.fill-header {
+    width: 50px;
+    height: 50px;
+    padding: 0 10px;
+}
+
+#btn-back-to-top {
+    margin-left: 100%;
+    border-radius: 100%;
+}
+
+.tour a {
+    text-decoration: none;
+}
+
+.tour a:hover {
+    color: red;
+}
+
+.img-fluid a {
+    text-decoration: none;
+}
+
+.img-fluid h4 {
+    background-color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    text-shadow: 1px 1px black;
+}
+
+#top-up {
+    font-size: 3rem;
+    cursor: pointer;
+    position: fixed;
+    z-index: 9999;
+    color:red;
+    bottom: 20px;
+    right: 15px;
+    display: none;
+    }
+    #top-up:hover {
+    color: green;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.header-w {
+    margin-top: 70px;
+    width: 100%;
+    margin-right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 100%);
+    position: absolute;
+    z-index: 1;
+}
+
+.background-news {
+    height: 74px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.tin-tuc, .admin {
+    padding: 3px;
+    background: -webkit-linear-gradient(rgb(255, 166, 0), rgb(255, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fb-comment-comment {
+    width: 500px;
+  }
+
+
+.place {
+    height:35px; 
+    overflow:hidden; 
+    text-overflow:clip;
+    margin: 0 0 50px;
+    font-weight: bold;
+    transition: all .3s ease;
+    background: linear-gradient(90deg,  rgba(0,92,29,1) 0%, rgba(42,156,13,1) 35%, rgba(145,255,5,1) 100%);
+    a{
+        color: aliceblue;
+        
+    }
+    a:hover {
+        color: rgb(255, 94, 0);
+        text-shadow: 0 1px rgb(255, 115, 0);
+        background: -webkit-linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+    }
+}
+
+.place:hover {
+    color: black;
+    font-weight: bold;
+    overflow: visible;
+    height: 80px;
+    background: linear-gradient(90deg,  rgba(0,92,29,1) 0%, rgba(42,156,13,1) 35%, rgba(145,255,5,1) 100%);
+}
+
+.title1 {
+    margin-top: 40%; 
+    border-top: 3px solid; 
+    border-bottom: 3px solid;
+}
+
+.title1:hover {
+    margin-top: 39%;
+    padding: 2px;
+    font-size: 30px;
+}
+
+.trainghiem h5{
+    height: 54px; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    margin-top: 75%;
+    transition: all .3s ease;
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 3px 3px;
+    &:hover {
+        height: 54px;
+        margin-top: 70%;
+        color: aliceblue;
+        text-shadow: 1px 1px black;
+        // background-color: rgba(255, 255, 255, 0);
+        background-color: #9999cc39;
+    }
+}
+
+.zoomin img{
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.zoomin img:hover {
+    transform: scale(1.5);
+}
+
+.btn1 {
+    text-align: center;
+    margin-left: 42%; 
+    width: 140px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    color:aliceblue; 
+    // background: linear-gradient(90deg, rgb(214, 55, 55) 0%, rgba(246, 221, 64, 0.942) 100%);
+    background: linear-gradient(90deg, green 0%, rgba(242, 249, 39, 0.942) 100%);
+    border-radius: 1px 43px;
+    &:hover {
+        background: linear-gradient(90deg, rgba(246, 221, 64, 0.942) 0%, rgb(255, 0, 179)  100%);
+        border-radius: 43px 1px;
+    }
+}
+
+.text-muted a{
+    color: aquamarine;
+    font-size: 15px;
+    &:hover {
+        color: rgb(127, 255, 127);
+    }
+}
+
+.text-muted li a{
+    color: greenyellow;
+    font-size: 15px;
+    &:hover {
+        color:green;
+    }
+}
+
+.lehoi a{
+    color: gray;
+    &:hover {
+        color: black;
+    }
+}
+
+.review li {
+    padding: 5px;
+    &:hover {
+        box-shadow: 1px 1px 1px 1px #AAA;
+        padding: 5px;
+        color: black;
+    }
+}
+
+.review a {
+    padding: 5px;
+    color:rgb(60, 60, 60);
+    &:hover {
+        color: black;
+        padding: 5px;
+    }
+}
+
+.xemnhanh {
+    background-color: rgb(202, 229, 222);
+    border-radius: 2px 2px;
+    font-weight: bold;
+    padding: 10px;
+    padding-left: 30px;
+    a {
+        color: black;
+    }
+    a:hover {
+        color:rgb(255, 106, 0);
+    }
+}
