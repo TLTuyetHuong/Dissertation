@@ -121,11 +121,19 @@ class AdminController {
             .catch(next);
       }
 
+      // [DELETE] /admin/danh-sach-admin/:id
+      deleteAdmin(req, res, next){
+        Admin.deleteOne({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next);
+      }
+
       // [GET] /admin/quan-ly-dia-diem
       ql_diadiem(req, res, next) {
         DiaDiem.find({})
           .then((diadiem) => {
             res.render("admin/ql_diadiem", {
+              title: 'Quản lý Điểm đến',
               diadiem: multipleMongooseToObject(diadiem),
             });
           })
@@ -137,7 +145,20 @@ class AdminController {
         AmThuc.find({})
           .then((amthucs) => {
             res.render("admin/ql_amthuc", {
+              title: 'Quản lý Ẩm thực',
               amthucs: multipleMongooseToObject(amthucs),
+            });
+          })
+          .catch(next);
+      }
+
+      // [GET] /admin/danh-sach-admin
+      ds_admin(req, res, next) {
+        Admin.find({})
+          .then((admins) => {
+            res.render("admin/danh-sach-admin", {
+              title: 'Danh sách Admin',
+              admins: multipleMongooseToObject(admins),
             });
           })
           .catch(next);
