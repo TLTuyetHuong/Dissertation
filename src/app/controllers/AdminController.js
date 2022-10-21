@@ -33,13 +33,12 @@ class AdminController {
             email: req.body.email,
           });
           if (!admin) {
-            // const images = req.querySelector("#myImg").getAttribute("src")
             const salt = bcrypt.genSaltSync(10);
             const password = req.body.password;
             const admins = new Admin({
               name: req.body.name,
               email: req.body.email,
-              image: images,
+              image: req.body.gender,
               password: bcrypt.hashSync(password, salt),
             });
             admins

@@ -18,7 +18,7 @@ body a {
 }
 
 .nav-item {
-    font-size: 20px;
+    font-size: 25px;
     padding: 0 10px;
 }
 
@@ -169,7 +169,7 @@ body a {
     width: 100%;
 }
 .header-w {
-    margin-top: 70px;
+    margin-top: 85px;
     width: 100%;
     margin-right: 0;
     background: rgba(0, 0, 0, 0.7);
@@ -179,7 +179,7 @@ body a {
 }
 
 .background-news {
-    height: 74px;
+    height: 89px;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 }
@@ -337,4 +337,18 @@ body a {
     a:hover {
         color:rgb(255, 106, 0);
     }
+}
+
+.choose-avatar {
+    label {
+        cursor: pointer;
+        filter: grayscale(100%);
+      }
+      
+      label:hover {
+        filter: grayscale(0);
+      }
+      input[type="radio"]:checked + label {
+        filter: grayscale(0);
+      }
 }

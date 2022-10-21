@@ -1,3 +1,4 @@
+
 <section class="vh-100" style="background-color: #eee;">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -45,9 +46,52 @@
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
-                      <input class="form-control" name="avatar" type="file" id="formFile">
-                      <label for="formFile" class="form-label">Your image</label>
-                      <img id="myImg" src="#" width="300px" alt="">
+                      <fieldset class="choose-avatar">
+                        <legend>
+                          Please choose an avatar
+                        </legend>
+                        <input type="radio" name="gender" class="sr-only" id="girl1" value="girl1.png">
+                        <label for="girl1">
+                          <img src="/img/girl1.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="girl2" value="girl2.png">
+                        <label for="girl2">
+                          <img src="/img/girl2.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="girl3" value="girl3.png">
+                        <label for="girl3">
+                          <img src="/img/girl3.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="girl4" value="girl4.png">
+                        <label for="girl4">
+                          <img src="/img/girl4.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="girl5" value="girl5.png">
+                        <label for="girl5">
+                          <img src="/img/girl5.png" width="60px" alt="">
+                        </label>
+                        <br>
+                        <input type="radio" name="gender" class="sr-only" id="boy1" value="boy1.png">
+                        <label for="boy1">
+                          <img src="/img/boy1.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="boy2" value="boy2.png">
+                        <label for="boy2">
+                          <img src="/img/boy2.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="boy3" value="boy3.png">
+                        <label for="boy3">
+                          <img src="/img/boy3.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="boy4" value="boy4.png">
+                        <label for="boy4">
+                          <img src="/img/boy4.png" width="60px" alt="">
+                        </label>
+                        <input type="radio" name="gender" class="sr-only" id="boy5" value="boy5.png">
+                        <label for="boy5">
+                          <img src="/img/boy5.png" width="60px" alt="">
+                        </label>
+                      </fieldset>
                     </div>
                   </div>
 
@@ -78,21 +122,3 @@
     </div>
   </div>
 </section>
-<script>
-  window.addEventListener('load', function(){
-      document.querySelector('input[type="file"]').addEventListener('change', function(){
-          if(this.files && this.files[0]) {
-              const imageData = this.files[0]
-              var img = document.querySelector('img');
-              img.onload = () => {
-                  URL.revokeObjectURL(img.src);
-              }
-              img.src = URL.createObjectURL(this.files[0]);
-
-              imageData.preview = URL.createObjectURL(this.files[0])
-
-              console.log(imageData);
-          }
-      })
-  })
-</script>

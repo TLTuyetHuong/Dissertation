@@ -11,7 +11,7 @@ body a {
   float: left; }
 
 .nav-item {
-  font-size: 20px;
+  font-size: 25px;
   padding: 0 10px; }
 
 .nav-item li a {
@@ -132,7 +132,7 @@ body a {
   width: 100%; }
 
 .header-w {
-  margin-top: 70px;
+  margin-top: 85px;
   width: 100%;
   margin-right: 0;
   background: rgba(0, 0, 0, 0.7);
@@ -141,7 +141,7 @@ body a {
   z-index: 1; }
 
 .background-news {
-  height: 74px;
+  height: 89px;
   background: #020024;
   background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%); }
 
@@ -269,3 +269,13 @@ body a {
     color: black; }
   .xemnhanh a:hover {
     color: #ff6a00; }
+
+.choose-avatar label {
+  cursor: pointer;
+  filter: grayscale(100%); }
+
+.choose-avatar label:hover {
+  filter: grayscale(0); }
+
+.choose-avatar input[type="radio"]:checked + label {
+  filter: grayscale(0); }
