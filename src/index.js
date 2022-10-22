@@ -4,6 +4,7 @@ const express = require('express');
 const session = require('express-session')
 const morgan = require('morgan');
 const cors = require("cors");
+const methodOverride = require('method-override')
 const multer = require('multer');
 const bcrypt = require('bcrypt')
 const { expressjwt: jwt } = require("express-jwt");
@@ -35,6 +36,9 @@ app.use(
 //configuring bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 // Custom middlewares
 // app.use(SortMiddleware);

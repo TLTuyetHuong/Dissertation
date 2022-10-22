@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 
 mongoose.plugin(slug);
 
-const Detail = new Schema({
+const DiaDiem = new Schema({
+    name: { type: String, require: true},
+    address: { type: String, require: true},
+    place: { type: String},
+    image: { type: String, require: true},
     open: { type: String},
     close: { type: String},
     price: { type: String},
@@ -12,16 +16,8 @@ const Detail = new Schema({
     email: { type: String, require: true},
     description: { type: String},
     map: { type: String},
-    phone: { type: String}
-})
-
-const DiaDiem = new Schema({
-    name: { type: String, require: true},
-    address: { type: String, require: true},
-    place: { type: String},
-    image: { type: String, require: true},
-    slug: { type: String, slug: 'name', unique: true },
-    detail: [Detail]
+    phone: { type: String},
+    slug: { type: String, slug: 'name', unique: true }
 },{
     timestamps: true,
 });

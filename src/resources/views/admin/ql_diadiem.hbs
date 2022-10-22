@@ -13,37 +13,37 @@
                                           class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                         </div>
 
+                        <div id="change">
                         <!-- Button trigger modal -->
-                        <div class="container" style="text-align: right;">
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#formCreate">
+                        <div style="text-align: right;">
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
                                     Thêm điểm đến
                               </button>
                         </div>
 
-                        <div class="container" id="diemden">
+                        <div id="diemden">
 
                               <div>
                                     <table class="table table-hover" id="dtBasicExample">
-                                          <thead>
+                                          <thead style="text-align: center;">
                                                 <tr>
                                                       <th scope="col">STT</th>
+                                                      <th scope="col">Hình ảnh</th>
                                                       <th scope="col">Tên điểm đến</th>
-                                                      <th scope="col" colspan="2">Địa chỉ</th>
+                                                      <th scope="col">Địa chỉ</th>
+                                                      <th scope="col"></th>
                                                 </tr>
                                           </thead>
                                           <tbody id="filter">
-                                                {{#each diadiem}}
+                                                {{#each diadiems}}
                                                 <tr>
-                                                      <th scope="row">{{sum @index 1}}</th>
+                                                      <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                      <td><img src="{{this.image}}" width="100px" alt=""></td>
                                                       <td>{{this.name}}</td>
                                                       <td>{{this.address}}</td>
                                                       <td>
-                                                            <a href="/admin/quan-ly-dia-diem/{{this._id}}/sua"
-                                                                  type="button" class="btn btn-warning">Sửa</a>
-                                                            <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"
-                                                                  data-bs-toggle="modal"
-                                                                  data-bs-target="#modalDelete">Xoá</a>
+                                                            <a href="/admin/quan-ly-dia-diem/{{this._id}}/sua-dia-diem" class="btn btn-warning">Sửa</a>
+                                                            <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
                                                       </td>
                                                 </tr>
                                                 {{/each}}
@@ -66,137 +66,71 @@
                                                 </div>
                                                 <div class="modal-body">
                                                       <div>
-                                                            <section class="vh-100" style="background-color: #eee;">
+                                                            <section class="vh-100" style="background-color: #eee; color:black">
 
                                                                   <div class="row px-5">
-                                                                        {{!-- <p
-                                                                              class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                                                                              THÊM ĐIỂM
-                                                                              ĐẾN MỚI</p> --}}
                                                                         <div class="col">
-                                                                              <div
-                                                                                    class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="name"
-                                                                                          id="form3Example1c"
-                                                                                          class="form-control"
-                                                                                          required />
-                                                                                    <label class="form-label"
-                                                                                          for="form3Example1c">Tên điểm
-                                                                                          đến</label>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="name" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Tên điểm đến</label>
                                                                               </div>
-                                                                              <div
-                                                                                    class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="address"
-                                                                                          id="form3Example1c"
-                                                                                          class="form-control"
-                                                                                          required />
-                                                                                    <label class="form-label"
-                                                                                          for="form3Example1c">Địa
-                                                                                          chỉ</label>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="address" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Địa chỉ</label>
                                                                               </div>
-                                                                              <div
-                                                                                    class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="email" name="email"
-                                                                                          id="form3Example1c"
-                                                                                          class="form-control" />
-                                                                                    <label class="form-label"
-                                                                                          for="form3Example1c">Email</label>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="email" name="email" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">Email</label>
                                                                               </div>
                                                                               <div class="row">
-                                                                                    <div
-                                                                                          class="col-3 form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text" name="time"
-                                                                                                id="form3Example1c"
-                                                                                                class="form-control" />
-                                                                                          <label class="form-label"
-                                                                                                for="form3Example1c">Thời
-                                                                                                gian tham quan</label>
+                                                                                    <div class="col-3 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="time" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Thời gian tham quan</label>
                                                                                     </div>
-                                                                                    <div
-                                                                                          class="col-3 form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text"
-                                                                                                name="price"
-                                                                                                id="form3Example1c"
-                                                                                                class="form-control" />
-                                                                                          <label class="form-label"
-                                                                                                for="form3Example1c">Giá</label>
+                                                                                    <div class="col-3 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="price" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Giá</label>
                                                                                     </div>
                                                                               </div>
                                                                         </div>
                                                                         <div class="col">
-                                                                              <div
-                                                                                    class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="phone"
-                                                                                          id="form3Example1c"
-                                                                                          class="form-control" />
-                                                                                    <label class="form-label"
-                                                                                          for="form3Example1c">Số điện
-                                                                                          thoại</label>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="phone" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">Số điện thoại</label>
                                                                               </div>
-                                                                              <div
-                                                                                    class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="place"
-                                                                                          id="form3Example1c"
-                                                                                          class="form-control" />
-                                                                                    <label class="form-label"
-                                                                                          for="form3Example1c">URL vị
-                                                                                          trí</label>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="place" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">URL vị trí</label>
                                                                               </div>
-                                                                              <div
-                                                                                    class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="image"
-                                                                                          id="form3Example1c"
-                                                                                          class="form-control"
-                                                                                          required />
-                                                                                    <label class="form-label"
-                                                                                          for="form3Example1c">URL hình
-                                                                                          ảnh</label>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="image" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">URL hình ảnh</label>
                                                                               </div>
                                                                               <div class="row">
-                                                                                    <div
-                                                                                          class="col-3 form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text" name="open"
-                                                                                                id="form3Example1c"
-                                                                                                class="form-control" />
-                                                                                          <label class="form-label"
-                                                                                                for="form3Example1c">Thời
-                                                                                                gian mở cửa</label>
+                                                                                    <div class="col-3 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="open" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Thời gian mở cửa</label>
                                                                                     </div>
-                                                                                    <div
-                                                                                          class="col-3 form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text"
-                                                                                                name="close"
-                                                                                                id="form3Example1c"
-                                                                                                class="form-control" />
-                                                                                          <label class="form-label"
-                                                                                                for="form3Example1c">Thời
-                                                                                                gian đóng cửa</label>
+                                                                                    <div class="col-3 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="close" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Thời gian đóng cửa</label>
                                                                                     </div>
                                                                               </div>
                                                                         </div>
                                                                         <div class="form-outline flex-fill mb-0 py-2">
-                                                                              <input type="text" name="map"
-                                                                                    id="form3Example1c"
-                                                                                    class="form-control" required />
-                                                                              <label class="form-label"
-                                                                                    for="form3Example1c">Map</label>
+                                                                              <input type="text" name="map" id="form3Example1c" class="form-control" required />
+                                                                              <label class="form-label" for="form3Example1c">Map</label>
                                                                         </div>
                                                                         <div class="form-outline flex-fill mb-0 py-2">
-                                                                              <textarea row="500" type="description"
-                                                                                    name="description"
-                                                                                    id="form3Example1c"
-                                                                                    class="form-control"
-                                                                                    required></textarea>
-                                                                              <label class="form-label"
-                                                                                    for="form3Example1c">Mô tả</label>
+                                                                              <textarea row="500" type="description" name="description" id="form3Example1c" class="form-control" required></textarea>
+                                                                              <label class="form-label" for="form3Example1c">Mô tả</label>
                                                                         </div>
                                                                   </div>
                                                             </section>
                                                       </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Thoát</button>
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
                                                       <button type="submit" class="btn btn-success">Thêm</button>
                                                 </div>
                                           </form>
@@ -204,6 +138,26 @@
                               </div>
                         </div>
                         <!-- Form Thêm -->
+
+                        {{!-- Modal Xem --}}
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xem Chi Tiết</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                          ...
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                                <button type="button" class="btn btn-primary">Sửa</button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        {{!-- Modal Xem --}}
                         <!-- Modal Xoá -->
                         <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
                               aria-hidden="true">
@@ -231,6 +185,7 @@
                         {{!-- Form hidden delete --}}
                         <form name="form-dd-delete" method="POST"></form>
                         {{!-- Form hidden delete --}}
+                        </div>
                   </div>
 
             </div>
@@ -254,4 +209,23 @@
 
 <!-- Page level custom scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="/js/deleteDiaDiem.js"></script>
+<script src="/js/deletediadiems.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', function(){
+      var ddID;
+      var deleteForm = document.forms['form-dd-delete'];
+      var btnDelete = document.getElementById('btn-delete');
+
+      $('#modalDelete').on('show.bs.modal', event => {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            ddID = button.getAttribute('data-bs-id')
+      });
+
+      btnDelete.onclick = function () {
+            deleteForm.action = '/admin/quan-ly-dia-diem/' + ddID + '?_method=DELETE'; 
+            deleteForm.submit();
+      }
+})
+</script>
