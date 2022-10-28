@@ -1,0 +1,51 @@
+<div id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+        {{>admin}}
+        <div id="filter">
+                <!-- Begin Page Content -->
+                <div class="container-fluid" id="demo">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Quản lý Tin Tức</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                </div>
+                <form action="/admin/quan-ly-tin-tuc/{{tintucs._id}}?_method=PUT" method="POST">
+                <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">CẬP NHẬT TIN TỨC</h1>
+                        <a href="/admin/quan-ly-tin-tuc" type="button" class="btn-close" aria-label="Close"></a>
+                </div>
+                <div class="modal-body">
+                        <div>
+                                <section class="vh-100" style="background-color: #eee; color:black">
+
+                                        <div class="row px-5">
+                                        <div class="col">
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <input type="text" value="{{tintucs.title}}" name="title" id="form3Example1c" class="form-control" required />
+                                                        <label class="form-label" for="form3Example1c">Tên ẩm thực</label>
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <input type="text" value="{{tintucs.image}}" name="image" id="form3Example1c" class="form-control" required />
+                                                        <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <input type="color" value="{{tintucs.color}}" name="color" id="form3Example1c" class="form-control" />
+                                                        <label class="form-label" for="form3Example1c">Màu sắc đường viền</label>
+                                                </div>
+                                        </div>
+                                        </div>
+                                </section>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <a href="/admin/quan-ly-tin-tuc" type="button" class="btn btn-secondary">Thoát</a>
+                        <button type="submit" class="btn btn-success">Lưu lại</button>
+                </div>
+                </form>
+                </div>
+        </div>
+</div>
+</div>

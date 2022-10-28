@@ -9,14 +9,11 @@ const DiaDiem = new Schema({
     address: { type: String, require: true},
     place: { type: String},
     image: { type: String, require: true},
-    open: { type: String},
-    close: { type: String},
+    morning: { type: String},
+    afternoon: { type: String},
     price: { type: String},
-    time: { type: String},
-    email: { type: String, require: true},
-    description: { type: String},
+    description: { type: Object},
     map: { type: String},
-    phone: { type: String},
     slug: { type: String, slug: 'name', unique: true }
 },{
     timestamps: true,

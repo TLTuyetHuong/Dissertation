@@ -9,6 +9,10 @@ const AmThuc = new Schema({
     image: { type: String, require: true},
     address: { type: String, require: true},
     place: { type: String},
+    price: { type: String},
+    map: { type: String},
+    open: { type: String},
+    close: { type: String},
     tag: { type: String},
     slug: { type: String, slug: 'title', unique: true }
 },{

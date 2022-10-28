@@ -20,7 +20,7 @@
                 <p>Điện thoại hỗ trợ: <b style="color: red;">0774814684</b></p>
             </div>
             <div class="col-4 mt-5 nav nav-tabs">
-                <a href="#DatTour" class="btn btn-warning" style="width: 170px; height: 60px; margin: auto; font-size: 20px"><b>ĐẶT TOUR </b><img src="https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/344/external-contract-business-and-management-febrian-hidayat-outline-color-febrian-hidayat.png" alt="" width="35px"; height="35px"></a>
+                <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#DatTour" style="width: 170px; height: 60px; margin: auto; font-size: 20px"><b>ĐẶT TOUR </b><img src="https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/344/external-contract-business-and-management-febrian-hidayat-outline-color-febrian-hidayat.png" alt="" width="35px"; height="35px"></a>
             </div>
         </div>
         <ul class="nav nav-tabs">
@@ -126,33 +126,66 @@
                 </div>
             </div>
         </ul>
-        <div class="py-4" id="DatTour">
-            <p class="border-bottom-info"><b>THÔNG TIN LIÊN HỆ</b></p>
-            <form action="mailto:tuyethuong2510@gmail.com" method="POST" enctype="multipart/form-data" name="contact_form">
-                <label class="form-label" for="form4Example1">Họ và Tên</label>
-                <input type="text" name="name" id="form4Example1" class="form-control" />
-                <br>
-                <label for="exampleFormControlInput1" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="email@example.com" required/>
-                <br>
-                <label class="form-label" for="form4Example1">Số điện thoại</label>
-                <input type="text" name="phone" id="form4Example1" class="form-control" required/>
-                <br>
-                <label class="form-label" for="form4Example3">Địa Chỉ</label>
-                <textarea class="form-control" name="address" id="form4Example3" rows="4"></textarea>
-                <br>
-                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4">Đặt Tour</button>
-            </form>
-            <a href="mailto:tuyethuong2510@gmail.com?
-                 cc=tlthuong2510@gmail.com&
-                 bcc=huongb1809130@student.ctu.edu.vn
-                 &subject=CoBanDatTour
-                 &body=Add what you want to suggest">
-        </a>
+        <!-- Modal -->
+        <div class="modal fade mt-5" id="DatTour" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <form action="/tour" method="POST" id="myForm">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><b>ĐIỀN THÔNG TIN LIÊN HỆ</b></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="form4Example1"><b>Họ và Tên</b></label>
+                        <input type="text" name="name" id="ten" class="form-control" />
+                        <br>
+                        <label for="exampleFormControlInput1" class="form-label"><b>Email</b></label>
+                        <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="email@example.com" required/>
+                        <br>
+                        <label class="form-label" for="form4Example1"><b>Số điện thoại</b></label>
+                        <input type="tel" name="phone" id="form4Example1" class="form-control" required/>
+                        <br>
+                        <label class="form-label" for="form4Example3"><b>Địa Chỉ</b></label>
+                        <input class="form-control" name="address" id="form4Example3"></input>
+                        <br>
+                        <label class="form-label" for="form4Example1"><b>Số người đặt tour:</b></label><br>
+                        <div>
+                            <span>
+                                <label class="form-label" for="form4Example1">Trẻ em nhỏ hơn 6 tuổi: </label>
+                                <input type="number" name="sm6" min="1" max="5">
+                            </span>
+                            <span class="m-4">
+                                <label class="form-label" for="form4Example1">Trẻ em từ 6 - 9 tuổi: </label>
+                                <input type="number" name="f69" min="1" max="5">
+                            </span>
+                            <span>
+                                <label class="form-label" for="form4Example1">Từ 10 tuổi trở lên: </label>
+                                <input type="number" name="lg9" min="1" max="20">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                        <button class="btn btn-primary" type="submit">Đặt Tour</button>
+                    </div>
+                </form>
+                </div>
+            </div>
         </div>
     </div>
     <div class="fb-comments" data-href="https://www.facebook.com/login" data-width="100%" data-numposts="5"></div>
 </div>
 {{>footer}}
-<script src="https://smtpjs.com/v3/smtp.js">
+<script>
+    document.getElementById("myForm").addEventListener("submit", myFunction);
+
+    function myFunction() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("tb").innerHTML =
+            this.responseText;
+        }
+        xhttp.open("GET", "/admin");
+        xhttp.send();
+    }
 </script>

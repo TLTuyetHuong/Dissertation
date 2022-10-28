@@ -1,6 +1,184 @@
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Quản lý Ẩm Thực</h1>
-      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-</div>
+<div id="page-top">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+            {{>admin}}
+            <div id="filter">
+                  <!-- Begin Page Content -->
+                  <div class="container-fluid" id="demo">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                              <h1 class="h3 mb-0 text-gray-800">Quản lý Ẩm Thực</h1>
+                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        </div>
+
+                        <div id="change">
+                        <!-- Button trigger modal -->
+                        <div style="text-align: right;">
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
+                                    Thêm ẩm thực
+                              </button>
+                        </div>
+
+                        <div id="amthuc">
+
+                              <div>
+                                    <table class="table table-hover" id="dtBasicExample">
+                                          <thead style="text-align: center;">
+                                                <tr>
+                                                      <th scope="col">STT</th>
+                                                      <th scope="col">Hình ảnh</th>
+                                                      <th scope="col">Tên Quán</th>
+                                                      <th scope="col">Địa chỉ</th>
+                                                      <th scope="col"></th>
+                                                </tr>
+                                          </thead>
+                                          <tbody id="filter">
+                                                {{#each amthucs}}
+                                                <tr>
+                                                      <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                      <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
+                                                      <td>{{this.title}}</td>
+                                                      <td>{{this.address}}</td>
+                                                      <td>
+                                                            <a href="/admin/quan-ly-am-thuc/{{this._id}}/sua-am-thuc" class="btn btn-warning">Sửa</a>
+                                                            <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
+                                                      </td>
+                                                </tr>
+                                                {{/each}}
+                                          </tbody>
+                                    </table>
+                              </div>
+                        </div>
+                        <div id="pagination"></div>
+
+                        <!-- Form Thêm -->
+                        <div class="modal fade" id="formCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                          <form action="/admin/quan-ly-am-thuc" method="POST">
+                                                <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">THÊM ẨM THỰC MỚI</h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                      <div>
+                                                            <section class="vh-100" style="background-color: #eee; color:black">
+
+                                                                  <div class="row px-5">
+                                                                        <div class="col">
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="name" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Tên Quán</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="address" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Địa chỉ</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="price" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">Giá</label>
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                              <div class="row">
+                                                                                    <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="morning" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Giờ mở cửa</label>
+                                                                                    </div>
+                                                                                    <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="afternoon" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Giờ đóng cửa</label>
+                                                                                    </div>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="place" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">URL vị trí</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="image" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <input type="text" name="map" id="form3Example1c" class="form-control" required />
+                                                                              <label class="form-label" for="form3Example1c">Map</label>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <select name="tag" class="form-select" aria-label="Default select example">
+                                                                                    <option selected>Chọn tag</option>
+                                                                                    <option value="dacsan">Đặc sản</option>
+                                                                                    <option value="banhdangian">Bánh dân gian</option>
+                                                                                    <option value="anvat">Đồ ăn vặt</option>
+                                                                              </select>
+                                                                        </div>
+                                                                  </div>
+                                                            </section>
+                                                      </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                                      <button type="submit" class="btn btn-success">Thêm</button>
+                                                </div>
+                                          </form>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Form Thêm -->
+
+                        <!-- Modal Xoá -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Ẩm Thực?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xoá ẩm thực này?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button id="btn-delete" type="button"
+                                                      class="btn btn-danger">Xoá</button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Modal Xoá -->
+
+                        {{!-- Form hidden delete --}}
+                        <form name="form-dd-delete" method="POST"></form>
+                        {{!-- Form hidden delete --}}
+                        </div>
+                  </div>
+
+            </div>
+      </div>
+      <!-- End of Page Wrapper -->
+      <!-- End of Content Wrapper -->
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                        <span>Copyright &copy;2022</span>
+                  </div>
+            </div>
+      </footer>
+      <!-- End of Footer -->
+
+      </div>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="/js/deleteAmThuc.js"></script>
+

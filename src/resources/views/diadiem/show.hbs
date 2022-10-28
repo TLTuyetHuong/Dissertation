@@ -1,4 +1,61 @@
+{{>header}}
+<div style="background: linear-gradient(0deg, #318CE7 0%, #89CFF0 100%);" class="background-news"></div>
 <div class="container">
-    <img src="{{diadiem.image}}" alt="">
-    dddddđ
+    <div class="text-center">
+        <img src="{{diadiems.image}}" alt="">
+        <br>
+    </div>
+    <div style="text-align: justify; width: 80%; margin: auto;">
+        <div class="py-3" style="margin:auto">
+            <h3 class="text-center"><b>GIỚI THIỆU</b></h3>
+            <div class="row" style="font-size: 20px;">
+                <div class="col-8">
+                    <p><img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/344/external-ticket-casino-icongeek26-linear-colour-icongeek26.png" width="40px" alt=""> <b>Giá: </b>{{diadiems.price}}</p>
+                    <p class="dd-place"><a href="{{diadiems.place}}" target="_blank">
+                        <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-place-seo-flaticons-lineal-color-flat-icons.png" width="40px" alt=""> <b>Địa chỉ: </b>{{diadiems.address}}
+                    </a></p>
+                </div>
+                <div class="col-4">
+                    <p><img src="https://img.icons8.com/color/344/clock--v4.png" width="40px" alt=""> <b>Khung giờ mở cửa: </b></p>
+                    <ul>
+                        <li><b>Buổi sáng: </b>{{diadiems.morning}}</li>
+                        <li><b>Buổi chiều: </b>{{diadiems.afternoon}}</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <p>{{diadiems.description}}</p>
+        </div>
+        <div class="text-center">
+            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/344/external-double-arrows-dreamstale-lineal-dreamstale.png" width="30px" alt="">
+            </a>
+            <!-- Modal -->
+            <div class="modal fade mt-6" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><b>{{diadiems.name}}</b></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align:justify;">
+                    {{diadiems.description}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <hr>
+            <h3><b>BẢN ĐỒ</b></h3>
+            <br>
+            <iframe src="{{diadiems.map}}" width="800" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    <a href="/du-lich/dia-diem"><img src="https://img.icons8.com/avantgarde/344/back.png" width="50px" alt=""></a><br>
+    <div class="fb-comments" data-href="https://www.facebook.com/login" data-width="100%" data-numposts="5"></div>
 </div>
+{{>footer}}

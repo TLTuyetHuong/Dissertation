@@ -1,6 +1,9 @@
 const Admin = require("../models/Admin");
 const DiaDiem = require("../models/DiaDiem");
 const AmThuc = require("../models/AmThuc");
+const TinTuc = require("../models/TinTuc");
+const Tour = require("../models/Tour");
+const DatTour = require("../models/DatTour");
 const Resize = require("./Resize");
 const path = require("path");
 const fs = require("fs");
@@ -11,6 +14,7 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { parse } = require("dotenv");
+const { timeStamp } = require("console");
 
 class AdminController {
     // [GET] /admin
@@ -19,6 +23,37 @@ class AdminController {
     // }
     index(req, res, next) {
         res.render("admin");
+    }
+
+    // [GET] /admin/danh-sach-admin
+    async ds_admin(req, res, next) {
+        Admin.find({})
+            .then((admins) => {
+                res.render("admin/danh-sach-admin", {
+                    title: "Danh sách Admin",
+                    admins: multipleMongooseToObject(admins),
+                });
+            })
+            .catch(next);
+    }
+
+    // [GET] /admin/danh-sach-admin/:id
+    async editAdmin(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let admin = await Admin.findById(req.params.id).catch(next); 
+        
+        res.render("admin/edit-admin", {
+            title: "Quản lý Admin",
+            admins: mongooseToObject(admins),
+            admin: mongooseToObject(admin),
+        });
+    }
+
+    // [PUT] /admin/danh-sach-admin/:id
+    updateAdmin(req, res, next) {
+        Admin.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin"))
+            .catch(next);
     }
 
     // [DELETE] /admin/danh-sach-admin/:id
@@ -44,6 +79,8 @@ class AdminController {
                 name: req.body.name,
                 email: req.body.email,
                 image: req.body.gender,
+                phone: req.body.phone,
+                birthday: req.body.birthday,
                 password: bcrypt.hashSync(password, salt),
             });
             admins
@@ -70,7 +107,6 @@ class AdminController {
                 req.body.password,
                 admins.password
             );
-
             if (validPassword) {
                 res.render("admin", {
                     title: "Admin",
@@ -93,15 +129,15 @@ class AdminController {
     }
 
     // [GET] /admin/quan-ly-dia-diem
-    ql_diadiem(req, res, next) {
-        DiaDiem.find({})
-            .then((diadiems) => {
-                res.render("admin/ql_diadiem", {
-                    title: "Quản lý Điểm đến",
-                    diadiems: multipleMongooseToObject(diadiems),
-                });
-            })
-            .catch(next);
+    async ql_diadiem(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let diadiems = await DiaDiem.find({}).catch(next); 
+        
+        res.render("admin/ql_diadiem", {
+            title: "Quản lý Điểm đến",
+            admins: mongooseToObject(admins),
+            diadiems: multipleMongooseToObject(diadiems),
+        });
     }
 
     // [POST] /admin/quan-ly-dia-diem
@@ -122,15 +158,15 @@ class AdminController {
     }
 
     // [GET] /admin/quan-ly-dia-diem/:id
-    editDiaDiem(req, res, next) {
-        DiaDiem.findById(req.params.id)
-            .then((diadiems) => {
-                res.render("admin/edit", {
-                    title: "Quản lý Điểm đến",
-                    diadiems: mongooseToObject(diadiems),
-                });
-          })
-          .catch(next);
+    async editDiaDiem(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let diadiems = await DiaDiem.findById(req.params.id).catch(next); 
+        
+        res.render("admin/edit-dia-diem", {
+            title: "Quản lý Điểm đến",
+            admins: mongooseToObject(admins),
+            diadiems: mongooseToObject(diadiems),
+        });
     }
 
     // [DELETE] /admin/quan-ly-dia-diem/:id
@@ -143,31 +179,189 @@ class AdminController {
     // [PUT] /admin/quan-ly-dia-diem/:id
     updateDiaDiem(req, res, next) {
         DiaDiem.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect("admin/ql_diadiem"))
+            .then(() => res.redirect("/admin/quan-ly-dia-diem"))
             .catch(next);
     }
 
     // [GET] /admin/quan-ly-am-thuc
-    ql_amthuc(req, res, next) {
-        AmThuc.find({})
-            .then((amthucs) => {
-                res.render("admin/ql_amthuc", {
-                    title: "Quản lý Ẩm thực",
-                    amthucs: multipleMongooseToObject(amthucs),
+    async ql_amthuc(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        const page_size = 10;
+        let page = req.query.page || 1; 
+        if(page){
+            if(page < 1) page = 1;
+            page = parseInt(page);
+            const start = (page - 1) * page_size;
+            const end = page * page_size;
+            AmThuc.find({}).skip(start).limit(page_size)
+            .then(amthucs =>{
+                AmThuc.countDocuments({}).then((total)=>{
+                    // const tongSoPage = Math.ceil(total / page_size)
+                    res.render("admin/ql_amthuc", {
+                        title: "Quản lý Ẩm thực",
+                        admins: mongooseToObject(admins),
+                        amthucs: multipleMongooseToObject(amthucs),
+                    });
+
+                });
+            });
+        }
+        else {
+            AmThuc.find({})
+            .then(amthucs => {
+                res.render('admin/ql_amthuc', {
+                    title: 'Quản lý Ẩm Thực',
+                    admins: mongooseToObject(admins),
+                    amthucs: multipleMongooseToObject(amthucs)
                 });
             })
             .catch(next);
+        }
     }
 
-    // [GET] /admin/danh-sach-admin
-    ds_admin(req, res, next) {
-        Admin.find({})
-            .then((admins) => {
-                res.render("admin/danh-sach-admin", {
-                    title: "Danh sách Admin",
-                    admins: multipleMongooseToObject(admins),
-                });
-            })
+    // [POST] /admin/quan-ly-am-thuc
+    async addAmThuc(req, res, next) {
+        const formData = req.body;
+        const amthuc = await AmThuc.findOne({
+            title: formData.title,
+        });
+        if (!amthuc) {
+            const amthucs = new AmThuc(formData);
+            amthucs
+                .save()
+                .then(() => res.redirect("back"))
+                .catch((error) => {});
+        } else {
+            res.send("Đã có tài khoản này rồi!!!");
+        }
+    }
+
+    // [GET] /admin/quan-ly-am-thuc/:id
+    async editAmThuc(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let amthucs = await AmThuc.findById(req.params.id).catch(next); 
+        
+        res.render("admin/edit-am-thuc", {
+            title: "Quản lý Ẩm Thực",
+            admins: mongooseToObject(admins),
+            amthucs: mongooseToObject(amthucs),
+        });
+    }
+
+    // [DELETE] /admin/quan-ly-am-thuc/:id
+    deleteAmThuc(req, res, next) {
+        AmThuc.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-am-thuc/:id
+    updateAmThuc(req, res, next) {
+        AmThuc.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-am-thuc"))
+            .catch(next);
+    }
+
+    // [GET] /admin/quan-ly-tin-tuc
+    async ql_tintuc(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let tintucs = await TinTuc.find({}).catch(next); 
+        
+        res.render("admin/ql_tintuc", {
+            title: "Quản lý Tin tức",
+            admins: mongooseToObject(admins),
+            tintucs: multipleMongooseToObject(tintucs),
+        });
+    }
+
+    // [POST] /admin/quan-ly-tin-tuc
+    async addTinTuc(req, res, next) {
+        const formData = req.body;
+        const tintuc = await TinTuc.findOne({
+            title: formData.title,
+        });
+        if (!tintuc) {
+            const tintucs = new TinTuc(formData);
+            tintucs
+                .save()
+                .then(() => res.redirect("back"))
+                .catch((error) => {});
+        } else {
+            res.send("Đã có tài khoản này rồi!!!");
+        }
+    }
+
+    // [GET] /admin/quan-ly-tin-tuc/:id
+    async editTinTuc(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let tintucs = await TinTuc.findById(req.params.id).catch(next); 
+        
+        res.render("admin/edit-tin-tuc", {
+            title: "Quản lý Tin tức",
+            admins: mongooseToObject(admins),
+            tintucs: mongooseToObject(tintucs),
+        });
+    }
+
+    // [DELETE] /admin/quan-ly-tin-tuc/:id
+    deleteTinTuc(req, res, next) {
+        TinTuc.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-tin-tuc/:id
+    updateTinTuc(req, res, next) {
+        TinTuc.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-tin-tuc"))
+            .catch(next);
+    }
+
+    // [GET] /admin/quan-ly-tour
+    async ql_tour(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let tours = await Tour.find({}).catch(next); 
+        
+        res.render("admin/ql_tour", {
+            title: "Quản lý Tours",
+            admins: mongooseToObject(admins),
+            tours: multipleMongooseToObject(tours),
+        });
+    }
+
+    // [POST] /admin/quan-ly-tour
+    async addTour(req, res, next) {
+        const formData = req.body;
+        const tours = new Tour(formData);
+        tours
+            .save()
+            .then(() => res.redirect("back"))
+            .catch((error) => {});
+    }
+
+    // [GET] /admin/quan-ly-tour/:id
+    async editTour(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let tours = await Tour.findById(req.params.id).catch(next); 
+        
+        res.render("admin/edit-tour", {
+            title: "Quản lý Tours",
+            admins: mongooseToObject(admins),
+            tours: mongooseToObject(tours),
+        });
+    }
+
+    // [DELETE] /admin/quan-ly-tour/:id
+    deleteTour(req, res, next) {
+        Tour.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-tour/:id
+    updateTour(req, res, next) {
+        Tour.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-tour"))
             .catch(next);
     }
 }

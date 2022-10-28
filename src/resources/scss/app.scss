@@ -352,3 +352,35 @@ body a {
         filter: grayscale(0);
       }
 }
+
+.description {
+    height: 190px;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.dd-place a{
+    color: black;
+    &:hover{
+        color: crimson;
+    }
+}
+
+#pagination {
+    ul {
+        list-style-type: none;
+        display: flex;
+        margin: auto;
+    }
+    li {
+        border: 1px solid rgb(218, 218, 218);
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+    .active {
+        border: 4px solid rgba(141, 184, 253, 0.548);
+        background-color: rgb(234, 234, 234);
+    }
+}

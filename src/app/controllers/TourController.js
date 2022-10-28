@@ -1,4 +1,5 @@
 const Tour = require('../models/Tour');
+const DatTour = require('../models/DatTour');
 const TraiNghiem = require('../models/TraiNghiem');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { mongooseToObject } = require('../../until/mongoose');
@@ -28,6 +29,16 @@ class TourController {
                 }
             })
             .catch(next);
+    }
+
+    // [POST] /tour
+    datTour(req, res, next) {
+        const formData = req.body;
+        const dattours = new DatTour(formData);
+        dattours
+            .save()
+            .then(() => res.redirect("back"))
+            .catch((error) => {});
     }
 
     // [GET] /tour/trai-nghiem/

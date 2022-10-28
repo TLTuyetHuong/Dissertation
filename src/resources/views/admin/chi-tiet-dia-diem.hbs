@@ -1,0 +1,61 @@
+<form>
+    <div class="modal-header">
+            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">CHI TIẾT ĐIỂM ĐẾN</h1>
+            <a href="/admin/quan-ly-dia-diem" type="button" class="btn-close" aria-label="Close"></a>
+    </div>
+    <div class="modal-body">
+            <div>
+                    <section class="vh-100" style="background-color: #eee; color:black">
+
+                            <div class="row px-5">
+                            <div class="col">
+                                    <div class="form-outline flex-fill mb-0 py-2">
+                                            <input type="text" value="{{diadiems.name}}" name="name" id="form3Example1c" class="form-control" required />
+                                            <label class="form-label" for="form3Example1c">Tên điểm đến</label>
+                                    </div>
+                                    <div class="form-outline flex-fill mb-0 py-2">
+                                            <input type="text" value="{{diadiems.address}}" name="address" id="form3Example1c" class="form-control" required />
+                                            <label class="form-label" for="form3Example1c">Địa chỉ</label>
+                                    </div>
+                                    <div class="form-outline flex-fill mb-0 py-2">
+                                            <input type="text" value="{{diadiems.price}}" name="price" id="form3Example1c" class="form-control" />
+                                            <label class="form-label" for="form3Example1c">Giá</label>
+                                    </div>
+                            </div>
+                            <div class="col">
+                                    <div class="form-outline flex-fill mb-0 py-2">
+                                            <input type="text" value="{{diadiems.place}}" name="place" id="form3Example1c" class="form-control" />
+                                            <label class="form-label" for="form3Example1c">URL vị trí</label>
+                                    </div>
+                                    <div class="form-outline flex-fill mb-0 py-2">
+                                            <input type="text" value="{{diadiems.image}}" name="image" id="form3Example1c" class="form-control" required />
+                                            <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                    <input type="text" value="{{diadiems.morning}}" name="open" id="form3Example1c" class="form-control" />
+                                                    <label class="form-label" for="form3Example1c">Khoảng thời gian mở cửa buổi sáng</label>
+                                            </div>
+                                            <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                    <input type="text" value="{{diadiems.afternoon}}" name="close" id="form3Example1c" class="form-control" />
+                                                    <label class="form-label" for="form3Example1c">Khoảng thời gian mở cửa buổi chiều</label>
+                                            </div>
+                                    </div>
+                            </div>
+                            <div class="form-outline flex-fill mb-0 py-2">
+                                    <input type="text" value="{{diadiems.map}}" name="map" id="form3Example1c" class="form-control" required />
+                                    <label class="form-label" for="form3Example1c">Map</label>
+                            </div>
+                            <div class="form-outline flex-fill mb-0 py-2">
+                                    <textarea row="500" name="description" id="form3Example1c" class="form-control" required>{{diadiems.description}}</textarea>
+                                    <label class="form-label" for="form3Example1c">Mô tả</label>
+                            </div>
+                            </div>
+                    </section>
+            </div>
+    </div>
+</form>
+<div class="modal-footer">
+        <a href="/admin/quan-ly-dia-diem" type="button" class="btn btn-secondary">Thoát</a>
+        <a href="/admin/quan-ly-dia-diem/{{diadiems._id}}/sua-dia-diem" class="btn btn-warning">Sửa</a>
+</div>

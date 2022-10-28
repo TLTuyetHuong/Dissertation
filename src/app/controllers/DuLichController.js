@@ -45,7 +45,7 @@ class DuLichController {
         DiaDiem.findOne({slug: req.params.slug})
             .then(diadiems => {
                 res.render('diadiem/show', {
-                    title: diadiem.name,
+                    title: diadiems.name,
                     diadiems: mongooseToObject(diadiems)
                 }); 
             })
