@@ -9,10 +9,9 @@ const DatTour = new Schema({
     email: { type: String, require: true},
     phone: { type: String, require: true},
     address: { type: String},
-    sm6: { type: String},
-    f69: { type: String},
-    lg9: { type: String},
-    date: { type: Date, default: Date.now()},
+    sm6: { type: Number},
+    f69: { type: Number},
+    lg9: { type: Number},
 },{
     timestamps: true,
 });

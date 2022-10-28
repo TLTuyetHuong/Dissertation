@@ -1,3 +1,4 @@
+// const emailService = require('../services/emailSevice');
 const Tour = require('../models/Tour');
 const DatTour = require('../models/DatTour');
 const TraiNghiem = require('../models/TraiNghiem');
@@ -31,9 +32,11 @@ class TourController {
             .catch(next);
     }
 
-    // [POST] /tour
+    // [POST] /tour/:slug
     datTour(req, res, next) {
         const formData = req.body;
+        console.log(formData);
+        // await emailService.sendSimpleEmail(formData.email)
         const dattours = new DatTour(formData);
         dattours
             .save()

@@ -130,14 +130,14 @@
         <div class="modal fade mt-5" id="DatTour" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                <form action="/tour" method="POST" id="myForm">
+                <form action="/tour/{{tours.slug}}" method="POST">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel"><b>ĐIỀN THÔNG TIN LIÊN HỆ</b></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <label class="form-label" for="form4Example1"><b>Họ và Tên</b></label>
-                        <input type="text" name="name" id="ten" class="form-control" />
+                        <input type="text" name="name" class="form-control" />
                         <br>
                         <label for="exampleFormControlInput1" class="form-label"><b>Email</b></label>
                         <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="email@example.com" required/>
@@ -176,16 +176,3 @@
     <div class="fb-comments" data-href="https://www.facebook.com/login" data-width="100%" data-numposts="5"></div>
 </div>
 {{>footer}}
-<script>
-    document.getElementById("myForm").addEventListener("submit", myFunction);
-
-    function myFunction() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            document.getElementById("tb").innerHTML =
-            this.responseText;
-        }
-        xhttp.open("GET", "/admin");
-        xhttp.send();
-    }
-</script>
