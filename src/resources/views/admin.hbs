@@ -69,7 +69,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
-                                <button type="button" class="btn btn-primary">Sửa</button>
+                                <a type="button" class="btn btn-primary" href="/admin/{{admins._id}}/sua-thong-tin">Sửa Thông Tin</a>
                             </div>
                             </div>
                         </div>
@@ -414,18 +414,6 @@
         <!-- End of Footer -->
 
 </body>
-
-<script>
-function loadDoc() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        document.getElementById("demo").innerHTML =
-        this.responseText;
-    }
-    xhttp.open("GET", "/admin/danh-sach-admin");
-    xhttp.send();
-}
-</script>
 </body>
 
 </html>

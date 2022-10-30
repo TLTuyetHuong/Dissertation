@@ -90,7 +90,7 @@
                 <a class="collapse-item" href="/admin/login">Đăng nhập</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm Admin</a>
+                <a type="button" class="collapse-item" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm Admin</a>
                 <a class="collapse-item" href="/admin/danh-sach-admin">Danh sách Admin</a>
             </div>
         </div>
@@ -104,9 +104,9 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">THÊM MỚI ADMIN</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 1000px;">
+            <div class="modal-body">
                 <form class="mx-1 mx-md-4" method="POST" action="/admin/signup">
-                    <section class="vh-100" style="background-color: #eee;">
+                    <section style="background-color: #eee;">
                         <div class="h-100">
                             <div class="row d-flex justify-content-center align-items-center h-100">
                             <div class="col-lg-12 col-xl-11">
@@ -228,7 +228,7 @@
                         </div>
                         </section>
 
-                    <div class="d-flex justify-content-center mx-4 mb-1" style="margin-top: 200px;">
+                    <div class="d-flex justify-content-center mx-4 mb-1 mt-3">
                         <button type="submit" class="btn btn-primary btn-lg">Thêm</button>
                     </div>
                 </form>
@@ -329,23 +329,27 @@
                         <span class="badge badge-danger badge-counter">3+</span>
                     </a>
                     <!-- Dropdown - Alerts -->
-                    <div class="dropdown-list dropdown-menu shadow animated--grow-in"
-                        aria-labelledby="alertsDropdown">
+                    <ul class="dropdown-list dropdown-menu shadow animated--grow-in scrollable-menu mt-3"
+                        aria-labelledby="alertsDropdown" data-bs-spy="scroll">
                         <h6 class="dropdown-header">
                             Thông báo
                         </h6>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                    <i class="fas fa-file-alt text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">{{dattours.createdAt}}</div>
-                                <span id="tb" class="font-weight-bold">Khách hàng {{dattours.name}} vừa đặt tour!</span>
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        {{#each dattours}}
+                            <li class="font-tb">
+                                <a class="dropdown-item d-flex align-items-center" href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">{{this.createdAt}}</div>
+                                        <span id="tb">Khách hàng {{this.name}} vừa đặt tour {{this.nametour}}!</span>
+                                    </div>
+                                </a>
+                            </li>
+                        {{/each}}
+                        {{!-- <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="mr-3">
                                 <div class="icon-circle bg-success">
                                     <i class="fas fa-donate text-white"></i>
@@ -366,9 +370,9 @@
                                 <div class="small text-gray-500">December 2, 2019</div>
                                 Spending Alert: We've noticed unusually high spending for your account.
                             </div>
-                        </a>
-                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                    </div>
+                        </a> --}}
+                        {{!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> --}}
+                    </ul>
                 </li>
 
                 <!-- Nav Item - Messages -->
@@ -472,3 +476,14 @@
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script>
+function loadDSAdmin() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+    }
+    xhttp.open("GET", "/admin/danh-sach-admin");
+    xhttp.send();
+}
+</script>

@@ -1,0 +1,26 @@
+<head>
+    <link rel="stylesheet" href="/css/error500.css">
+</head>
+<div class="error-500" data-text="Chào mừng bạn đến với Quảng bá Du lịch và Ẩm thực Thành phố Cần Thơ! Mọi chi tiết xin vui lòng liên hệ 0774814684, xin cảm ơn!">
+    <spaguetti>
+    <fork></fork>
+    <meat></meat>
+    <pasta></pasta>
+    <plate></plate>
+  </spaguetti>
+</div>
+<a style="margin-top: 13%;" href="/" class="error-500" data-text="Quay về Trang chủ "></a>
+<script>
+    const error = document.querySelector(".error-500");
+    let i = 0, data = "", text = error.getAttribute("data-text");
+
+    let typing = setInterval(() => {
+    if(i == text.length){
+        clearInterval(typing);
+    }else{
+        data += text[i];
+        document.querySelector(".error-500").setAttribute("data-text", data);
+        i++;
+    }
+    }, 100);
+</script>

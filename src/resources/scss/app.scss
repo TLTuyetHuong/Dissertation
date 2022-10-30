@@ -384,3 +384,21 @@ body a {
         background-color: rgb(234, 234, 234);
     }
 }
+
+.font-tb a {
+    font-weight: bold;
+    color: brown;
+    &:active {
+        font-weight: normal;
+    }
+    &:visited {
+        color: rgb(13, 109, 133);
+        font-weight: normal;
+    }
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 720px;
+    overflow-y: hidden;
+}

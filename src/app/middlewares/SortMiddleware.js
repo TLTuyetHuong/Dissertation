@@ -1,7 +1,7 @@
-export default function SortMiddleware(res, req, next) {
+export default function sortMiddleware(res, req, next) {
     res.locals._sort = {
         enabled: false,
-        type: 'default'
+        type: 'default',
     };
 
     if (res.query.hasOwnProperty('_sort')){

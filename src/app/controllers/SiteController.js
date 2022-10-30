@@ -40,6 +40,11 @@ class SiteController {
         res.render('error400', {title: 'ERROR 400'});
     }
 
+    // [GET] /lien-he
+    lienhe(req, res){
+        res.render('lienhe', {title: 'Liên Hệ'});
+    }
+
 }
 
 module.exports = new SiteController();

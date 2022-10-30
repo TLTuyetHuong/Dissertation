@@ -25,6 +25,18 @@ class AdminController {
         res.render("admin");
     }
 
+    // [DELETE] /admin/:id
+    showTB(req, res, next) {
+        DatTour.findById({_id: req.params.id})
+            .then((dattours) => {
+                res.render("admin/thong-tin-dat-tour", {
+                    title: "Admin",
+                    dattours: mongooseToObject(dattours),
+                });
+            })
+            .catch(next);
+    }
+
     // [GET] /admin/danh-sach-admin
     async ds_admin(req, res, next) {
         Admin.find({})
@@ -37,26 +49,24 @@ class AdminController {
             .catch(next);
     }
 
-    // [GET] /admin/danh-sach-admin/:id
-    async editAdmin(req, res, next) {
-        let admins = await Admin.findOne({}).catch(next);
-        let admin = await Admin.findById(req.params.id).catch(next); 
+    // [GET] /admin/:id/sua-thong-tin
+    async editTTAdmin(req, res, next) {
+        let admins = await Admin.findById(req.params.id).catch(next); 
         
-        res.render("admin/edit-admin", {
+        res.render("admin/edit-profile-admin", {
             title: "Quản lý Admin",
             admins: mongooseToObject(admins),
-            admin: mongooseToObject(admin),
         });
     }
 
-    // [PUT] /admin/danh-sach-admin/:id
+    // [PUT] /admin/:id
     updateAdmin(req, res, next) {
         Admin.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect("/admin"))
             .catch(next);
     }
 
-    // [DELETE] /admin/danh-sach-admin/:id
+    // [DELETE] /admin/:id
     deleteAdmin(req, res, next) {
         Admin.deleteOne({ _id: req.params.id })
             .then(() => res.redirect("back"))
@@ -103,6 +113,7 @@ class AdminController {
         });
         if (admins) {
             // check user password with hashed password stored in the database
+            const dattours = await DatTour.find({}).sort({createdAt: -1});
             const validPassword = await bcrypt.compare(
                 req.body.password,
                 admins.password
@@ -111,6 +122,7 @@ class AdminController {
                 res.render("admin", {
                     title: "Admin",
                     admins: mongooseToObject(admins),
+                    dattours: multipleMongooseToObject(dattours),
                 });
             } else {
                 res.send({ message: "Sai mật khẩu !" });
@@ -132,11 +144,13 @@ class AdminController {
     async ql_diadiem(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let diadiems = await DiaDiem.find({}).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         res.render("admin/ql_diadiem", {
             title: "Quản lý Điểm đến",
             admins: mongooseToObject(admins),
             diadiems: multipleMongooseToObject(diadiems),
+            dattours: multipleMongooseToObject(dattours),
         });
     }
 
@@ -161,11 +175,13 @@ class AdminController {
     async editDiaDiem(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let diadiems = await DiaDiem.findById(req.params.id).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         res.render("admin/edit-dia-diem", {
             title: "Quản lý Điểm đến",
             admins: mongooseToObject(admins),
             diadiems: mongooseToObject(diadiems),
+            dattours: multipleMongooseToObject(dattours),
         });
     }
 
@@ -186,6 +202,7 @@ class AdminController {
     // [GET] /admin/quan-ly-am-thuc
     async ql_amthuc(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         const page_size = 10;
         let page = req.query.page || 1; 
         if(page){
@@ -201,6 +218,7 @@ class AdminController {
                         title: "Quản lý Ẩm thực",
                         admins: mongooseToObject(admins),
                         amthucs: multipleMongooseToObject(amthucs),
+                        dattours: multipleMongooseToObject(dattours),
                     });
 
                 });
@@ -240,11 +258,13 @@ class AdminController {
     async editAmThuc(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let amthucs = await AmThuc.findById(req.params.id).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         res.render("admin/edit-am-thuc", {
             title: "Quản lý Ẩm Thực",
             admins: mongooseToObject(admins),
             amthucs: mongooseToObject(amthucs),
+            dattours: multipleMongooseToObject(dattours),
         });
     }
 
@@ -266,11 +286,13 @@ class AdminController {
     async ql_tintuc(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let tintucs = await TinTuc.find({}).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         res.render("admin/ql_tintuc", {
             title: "Quản lý Tin tức",
             admins: mongooseToObject(admins),
             tintucs: multipleMongooseToObject(tintucs),
+            dattours: multipleMongooseToObject(dattours),
         });
     }
 
@@ -295,11 +317,13 @@ class AdminController {
     async editTinTuc(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let tintucs = await TinTuc.findById(req.params.id).catch(next); 
-        
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+
         res.render("admin/edit-tin-tuc", {
             title: "Quản lý Tin tức",
             admins: mongooseToObject(admins),
             tintucs: mongooseToObject(tintucs),
+            dattours: multipleMongooseToObject(dattours),
         });
     }
 
@@ -321,11 +345,25 @@ class AdminController {
     async ql_tour(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let tours = await Tour.find({}).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         res.render("admin/ql_tour", {
             title: "Quản lý Tours",
             admins: mongooseToObject(admins),
             tours: multipleMongooseToObject(tours),
+            dattours: multipleMongooseToObject(dattours),
+        });
+    }
+
+    // [GET] /admin/quan-ly-tour/danh-sach-khach-dat-tour
+    async ds_tour(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let dattours = await DatTour.find({}).catch(next); 
+        
+        res.render("admin/danh-sach-khach-dat-tour", {
+            title: "Quản lý Tours",
+            admins: mongooseToObject(admins),
+            dattours: multipleMongooseToObject(dattours),
         });
     }
 
@@ -343,24 +381,45 @@ class AdminController {
     async editTour(req, res, next) {
         let admins = await Admin.findOne({}).catch(next);
         let tours = await Tour.findById(req.params.id).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         res.render("admin/edit-tour", {
             title: "Quản lý Tours",
             admins: mongooseToObject(admins),
             tours: mongooseToObject(tours),
+            dattours: multipleMongooseToObject(dattours),
+        });
+    }
+
+    // [GET] /admin/quan-ly-tour/xem-chi-tiet/:id
+    async editDatTour(req, res, next) {
+        let admins = await Admin.findOne({}).catch(next);
+        let dattours = await DatTour.findById(req.params.id).catch(next); 
+        
+        res.render("admin/edit-dat-tour", {
+            title: "Quản lý Tours",
+            admins: mongooseToObject(admins),
+            dattours: mongooseToObject(dattours),
         });
     }
 
     // [DELETE] /admin/quan-ly-tour/:id
-    deleteTour(req, res, next) {
-        Tour.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect("back"))
-            .catch(next);
+    async deleteTour(req, res, next) {
+        await Tour.deleteOne({ _id: req.params.id }).catch(next);
+        await DatTour.deleteOne({ _id: req.params.id }).catch(next);
+        res.redirect("back")
     }
 
     // [PUT] /admin/quan-ly-tour/:id
     updateTour(req, res, next) {
         Tour.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-tour"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-tour/xem-chi-tiet/:id
+    updateDatTour(req, res, next) {
+        DatTour.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect("/admin/quan-ly-tour"))
             .catch(next);
     }

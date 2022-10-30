@@ -1,0 +1,53 @@
+<div id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+        {{>admin}}
+        <div id="filter">
+                <!-- Begin Page Content -->
+                <div class="container-fluid" id="demo">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Quản lý Thông Tin</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                </div>
+                <form action="/admin/{{admins._id}}?_method=PUT" method="POST">
+                <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">CẬP NHẬT THÔNG TIN</h1>
+                        <a href="/admin" type="button" class="btn-close" aria-label="Close"></a>
+                </div>
+                <div class="modal-body">
+                        <div>
+                                <section class="vh-100" style="background-color: #eee; color:black">
+
+                                        <div class="row px-5">
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Họ và Tên</label>
+                                                        <input type="text" value="{{admins.name}}" name="name" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Email</label>
+                                                        <input type="email" value="{{admins.email}}" name="email" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Số điện thoại</label>
+                                                        <input type="tel" value="{{admins.phone}}" name="phone" id="form3Example1c" class="form-control" />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Ngày sinh</label>
+                                                        <input type="date" value="{{admins.birthday}}" name="birthday" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                        </div>
+                                </section>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <a href="/admin" type="button" class="btn btn-secondary">Thoát</a>
+                        <button type="submit" class="btn btn-success">Lưu lại</button>
+                </div>
+                </form>
+                </div>
+        </div>
+</div>
+</div>
