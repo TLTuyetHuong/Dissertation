@@ -16,6 +16,18 @@ class DuLichController {
             .catch(next);
     }
 
+    // [GET] /du-lich/dia-diem/:slug
+    async show(req, res, next) {
+        DiaDiem.findOne({slug: req.params.slug})
+            .then(diadiems => {
+                res.render('diadiem/show', {
+                    title: diadiems.name,
+                    diadiems: mongooseToObject(diadiems)
+                }); 
+            })
+            .catch(next);
+    }
+
     // [GET] /du-lich/am-thuc
     amthuc(req, res, next) {
         AmThuc.find({})
@@ -40,17 +52,18 @@ class DuLichController {
             .catch(next);
     }
 
-    // [GET] /du-lich/dia-diem/:slug
-    async show(req, res, next) {
-        DiaDiem.findOne({slug: req.params.slug})
-            .then(diadiems => {
-                res.render('diadiem/show', {
-                    title: diadiems.name,
-                    diadiems: mongooseToObject(diadiems)
+    // [GET] /du-lich/am-thuc/:slug
+    async showAT(req, res, next) {
+        AmThuc.findOne({slug: req.params.slug})
+            .then(amthucs => {
+                res.render('amthuc/show', {
+                    title: amthucs.name,
+                    amthucs: mongooseToObject(amthucs)
                 }); 
             })
             .catch(next);
     }
+
 }
 
 module.exports = new DuLichController();

@@ -33,6 +33,7 @@ let sendSimpleEmail = async (dataSend) => {
             </ul>
         </ul>
         <p><b>Giá của Tour là: </b> ${dataSend.priceTour}</p>
+        <p><b>Tổng giá của Tour là: </b> ${dataSend.total}</p>
         <p>Nếu thông tin có sai sót hoặc có thắc mắc, xin vui lòng liên hệ qua email này hoặc qua số điện thoại <b>0774814684</b>.</p>
         <p>Chúng tôi sẽ liên hệ với bạn sau. Chúc bạn có một ngày thật vui vẻ 😊</p>
         <p>Xin chân thành cảm ơn. ❤️</p>

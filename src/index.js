@@ -3,10 +3,11 @@ const bodyParser = require("body-parser");
 const express = require('express');
 const session = require('express-session')
 const morgan = require('morgan');
-const cors = require("cors");
+const axios = require( 'axios' );
+const cors = require( 'cors' );
 const methodOverride = require('method-override')
 const multer = require('multer');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const { expressjwt: jwt } = require("express-jwt");
 const hbs = require('express-handlebars');
 const app = express();
@@ -33,9 +34,16 @@ app.use(
     }),
 );
 
+app.use(session({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true,
+  }));
+
 //configuring bodyparser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use( cors() );
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
@@ -45,11 +53,6 @@ app.use(methodOverride('_method'))
 
 // app.use(morgan('combined'));
 
-app.use(session({
-    secret: 'adsa897adsa98bs',
-    resave: false,
-    saveUninitialized: false,
-}))
 
 app.engine(
     'hbs',

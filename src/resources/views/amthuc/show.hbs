@@ -1,0 +1,69 @@
+{{>header}}
+<div style="background: linear-gradient(90deg,  rgba(0,92,29,1) 0%, rgba(42,156,13,1) 35%, rgba(145,255,5,1) 100%);" class="background-news"></div>
+<div class="container" id="filter">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="mt-3"><b>{{amthucs.title}}</b></h3>
+            <table class="table">
+                <tbody>  
+                <tr class="table-primary">
+                    <th><img src="https://img.icons8.com/color/344/clock--v4.png" width="30px" alt=""> Giờ mở cửa: </th>
+                    <td>{{amthucs.open}}</td>
+                </tr>
+                <tr class="table-success">
+                    <th><img src="https://img.icons8.com/color/344/clock--v4.png" width="30px" alt=""> Giờ đóng cửa: </th>
+                    <td>{{amthucs.close}}</td>
+                </tr>
+                <tr class="table-danger">
+                    <th><img src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/344/external-ticket-casino-icongeek26-linear-colour-icongeek26.png" width="30px" alt=""> Giá: </th>
+                    <td>{{amthucs.price}}</td>
+                </tr>
+                <tr class="table-info dd-place">
+                    <th><a href="{{amthucs.place}}" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-place-seo-flaticons-lineal-color-flat-icons.png" width="30px" alt=""> Địa chỉ: </a></th>
+                    <td><a href="{{amthucs.place}}" target="_blank" rel="noopener noreferrer">{{amthucs.address}}</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-6 text-center">
+            <img src="{{amthucs.image}}" width="100%" alt="">
+        </div>
+    </div>
+    <div style="text-align: justify; width: 80%; margin: auto;">
+        <h3 class="text-center mt-3"><b>GIỚI THIỆU</b></h3>
+        <div class="description">
+            <p>{{amthucs.description}}</p>
+        </div>
+        <div class="text-center">
+            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/344/external-double-arrows-dreamstale-lineal-dreamstale.png" width="30px" alt="">
+            </a>
+            <!-- Modal -->
+            <div style="margin-top: 70px;" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><b>{{amthucs.name}}</b></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="text-align:justify;">
+                        
+                        {{amthucs.description}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h3><b>BẢN ĐỒ</b></h3>
+            <br>
+            <iframe src="{{amthucs.map}}" width="800" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    <a href="/du-lich/am-thuc"><img src="https://img.icons8.com/avantgarde/344/back.png" width="50px" alt=""></a><br>
+    <div class="fb-comments" data-href="https://www.facebook.com/login" data-width="100%" data-numposts="5"></div>
+</div>
+{{>footer}}

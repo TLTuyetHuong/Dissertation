@@ -11,6 +11,7 @@ const AmThuc = new Schema({
     place: { type: String},
     price: { type: String},
     map: { type: String},
+    description: { type: String},
     open: { type: String},
     close: { type: String},
     tag: { type: String},

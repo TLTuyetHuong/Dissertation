@@ -105,7 +105,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="mx-1 mx-md-4" method="POST" action="/admin/signup">
+                <form class="mx-1 mx-md-4" method="POST" action="/admin/signup" enctype="multipart/form-data">
                     <section style="background-color: #eee;">
                         <div class="h-100">
                             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -164,53 +164,58 @@
 
                                         <div class="d-flex flex-row align-items-center mb-3">
                                             <div class="form-outline flex-fill mb-0">
+                                                <input class="form-control" type="file" id="formFile" name="avatar"><br>
+                                                <label class="form-label" for="form3Example4cd">Chọn ảnh đại diện</label>
+                                                <img id="myImg" src="#" width="200px" alt="">
+                                            </div>
+                                            {{!-- <div class="form-outline flex-fill mb-0">
                                             <fieldset class="choose-avatar">
                                                 <legend>
-                                                Bạn hãy chọn một ảnh đại diện nhé!
+                                                Bạn có thể chọn file hoặc chọn một ảnh đại diện bên dưới nhé!
                                                 </legend>
-                                                <input type="radio" name="gender" class="sr-only" id="girl1" value="girl1.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="girl1" value="girl1.png">
                                                 <label for="girl1">
                                                 <img src="/img/girl1.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="girl2" value="girl2.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="girl2" value="girl2.png">
                                                 <label for="girl2">
                                                 <img src="/img/girl2.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="girl3" value="girl3.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="girl3" value="girl3.png">
                                                 <label for="girl3">
                                                 <img src="/img/girl3.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="girl4" value="girl4.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="girl4" value="girl4.png">
                                                 <label for="girl4">
                                                 <img src="/img/girl4.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="girl5" value="girl5.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="girl5" value="girl5.png">
                                                 <label for="girl5">
                                                 <img src="/img/girl5.png" width="60px" alt="">
                                                 </label>
                                                 <br>
-                                                <input type="radio" name="gender" class="sr-only" id="boy1" value="boy1.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="boy1" value="boy1.png">
                                                 <label for="boy1">
                                                 <img src="/img/boy1.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="boy2" value="boy2.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="boy2" value="boy2.png">
                                                 <label for="boy2">
                                                 <img src="/img/boy2.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="boy3" value="boy3.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="boy3" value="boy3.png">
                                                 <label for="boy3">
                                                 <img src="/img/boy3.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="boy4" value="boy4.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="boy4" value="boy4.png">
                                                 <label for="boy4">
                                                 <img src="/img/boy4.png" width="60px" alt="">
                                                 </label>
-                                                <input type="radio" name="gender" class="sr-only" id="boy5" value="boy5.png">
+                                                <input type="radio" name="avatar" class="sr-only" id="boy5" value="boy5.png">
                                                 <label for="boy5">
                                                 <img src="/img/boy5.png" width="60px" alt="">
                                                 </label>
                                             </fieldset>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
 
@@ -349,96 +354,70 @@
                                 </a>
                             </li>
                         {{/each}}
-                        {{!-- <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-success">
-                                    <i class="fas fa-donate text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">December 7, 2019</div>
-                                $290.29 has been deposited into your account!
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-warning">
-                                    <i class="fas fa-exclamation-triangle text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">December 2, 2019</div>
-                                Spending Alert: We've noticed unusually high spending for your account.
-                            </div>
-                        </a> --}}
-                        {{!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> --}}
                     </ul>
                 </li>
 
                 <!-- Nav Item - Messages -->
                 <li class="nav-item dropdown no-arrow mx-1">
-                    {{!-- <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-envelope fa-fw"></i>
-                        <!-- Counter - Messages -->
-                        <span class="badge badge-danger badge-counter">7</span>
-                    </a> --}}
-                    <!-- Dropdown - Messages -->
-                    <div class="dropdown-list dropdown-menu shadow animated--grow-in"
-                        aria-labelledby="messagesDropdown">
-                        <h6 class="dropdown-header">
-                            Message Center
-                        </h6>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div class="font-weight-bold">
-                                <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                    problem I've been having.</div>
-                                <div class="small text-gray-500">Emily Fowler · 58m</div>
-                            </div>
+                    <div class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{admins.name}}</span>
+                            <img class="img-profile rounded-circle" src="/img/{{admins.image}}" width="35px" height="35px">
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
-                                <div class="status-indicator"></div>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileModal">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                        <!-- Modal Profile-->
+                        <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Profile</b></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div>
-                                <div class="text-truncate">I have the photos that you ordered last month, how
-                                    would you like them sent to you?</div>
-                                <div class="small text-gray-500">Jae Chun · 1d</div>
+                            <div class="modal-body text-center" style="color:aliceblue;background-image:url('https://mdbootstrap.com/img/new/fluid/city/018.jpg') ;">
+                                <img src="/img/{{admins.image}}" width="70px" height="70px" alt="">&#x3164;{{admins.name}}
+                                <br>
+                                <h5><b>Email</b></h5>
+                                <p>{{admins.email}}</p>
+                                <br>
+                                <h5><b>Số điện thoại</b></h5>
+                                <p>{{admins.phone}}</p>
+                                <br>
+                                <h5><b>Ngày sinh</b></h5>
+                                <p>{{admins.birthday}}</p>
                             </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
-                                <div class="status-indicator bg-warning"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                <a type="button" class="btn btn-primary" href="/admin/{{admins._id}}/sua-thong-tin">Sửa Thông Tin</a>
                             </div>
-                            <div>
-                                <div class="text-truncate">Last month's report looks great, I am very happy with
-                                    the progress so far, keep up the good work!</div>
-                                <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                             </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                    alt="...">
-                                <div class="status-indicator bg-success"></div>
-                            </div>
-                            <div>
-                                <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                    told me that people say this to all dogs, even if they aren't good...</div>
-                                <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                        </div>
                     </div>
                 </li>
 
-                <div class="topbar-divider d-none d-sm-block"></div>
+                <div class="topbar-divider d-none d-sm-block">
+                </div>
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
@@ -462,7 +441,7 @@
                                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                    <a class="btn btn-primary" href="/">Logout</a>
+                                    <a class="btn btn-primary" href="/admin/logout">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -477,13 +456,20 @@
 <script src="js/sb-admin-2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script>
-function loadDSAdmin() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        document.getElementById("demo").innerHTML =
-        this.responseText;
-    }
-    xhttp.open("GET", "/admin/danh-sach-admin");
-    xhttp.send();
-}
+    window.addEventListener('load', function(){
+        document.querySelector('input[type="file"]').addEventListener('change', function(){
+            if(this.files && this.files[0]) {
+                const imageData = this.files[0]
+                var img = document.getElementById('myImg');
+                img.onload = () => {
+                    URL.revokeObjectURL(img.src);
+                }
+                img.src = URL.createObjectURL(this.files[0]);
+
+                imageData.preview = URL.createObjectURL(this.files[0])
+
+                console.log(imageData);
+            }
+        })
+    })
 </script>

@@ -4,6 +4,8 @@ const adminController = require('../app/controllers/AdminController');
 const authController = require('../app/controllers/AuthController');
 const { verifySignUp } = require("../app/middlewares/verifySignUp");
 
+
+
 // Quan ly Tour
 router.put('/quan-ly-tour/xem-chi-tiet/:id', adminController.updateDatTour);
 router.put('/quan-ly-tour/:id', adminController.updateTour);

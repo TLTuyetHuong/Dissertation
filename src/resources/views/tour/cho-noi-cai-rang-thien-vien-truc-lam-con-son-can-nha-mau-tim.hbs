@@ -1,0 +1,224 @@
+{{>header}}
+<div style="background: linear-gradient(0deg, rgb(9, 147, 189) 0%, rgb(247, 19, 232) 100%);" class="background-news"></div>
+<div class="container">
+    <h1 class="tin-tuc font-effect-anaglyph"><b>Tour - Cần Thơ</b></h1>
+    <hr>
+    <div class="fb-like" data-href="http://localhost:3000/kham-pha" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
+    <div class="fb-share-button" data-href="http://localhost:3000/kham-pha" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+    <div style="text-align: justify; width: 80%; margin: auto;">
+        <h5 class="pt-4"><b>{{tours.name}}</b></h5>
+        <hr>
+        <div class="row">
+            <div class="col-8">
+                <p>Giá: <b style="color: red;">{{tours.price}}</b></p>
+                <p>Ngày khởi hành: <b>{{tours.time}}</b></p>
+                <p>Phương tiện: <img src="https://img.icons8.com/ios-filled/344/water-transportation.png" width="20" height="20" alt="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-truck-front-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.5 0A2.5 2.5 0 0 0 1 2.5v9c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2v-9A2.5 2.5 0 0 0 12.5 0h-9ZM3 3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3.9c0 .625-.562 1.092-1.17.994C10.925 7.747 9.208 7.5 8 7.5c-1.208 0-2.925.247-3.83.394A1.008 1.008 0 0 1 3 6.9V3Zm1 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-5-2a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Z"/>
+                    </svg>
+                </p>
+                <p>Điện thoại hỗ trợ: <b style="color: red;">0774814684</b></p>
+            </div>
+            <div class="col-4 mt-5 nav nav-tabs">
+                <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#DatTour" style="width: 170px; height: 60px; margin: auto; font-size: 20px"><b>ĐẶT TOUR </b><img src="https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/344/external-contract-business-and-management-febrian-hidayat-outline-color-febrian-hidayat.png" alt="" width="35px"; height="35px"></a>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <p>
+            <li class="nav-item">
+                <a class="nav-link border-info" data-bs-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Chương trình tour
+                </a>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link border-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
+                    Giá
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link border-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseExample">
+                    Điều khoản 
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link border-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseExample">
+                    Liên hệ
+                </button>
+            </li>
+            </p>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <div id="collapseOne" class="accordion-collapse collapse show border-info" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table class="table">
+                                <tbody>
+                                <tr class="table-dark">
+                                    <th class="itinerary" colspan="2">Hành trình &amp; Giới thiệu</th>
+                                </tr>
+                                <tr class="table-danger">
+                                    <th class="align" width="10%">07:00</th>
+                                    <td width="90%">
+                                    <p><strong>Du Lịch Thám Hiểm Mekong</strong>&nbsp;đón khách tại Tượng Đài Bác Hồ (Bến Ninh Kiều). Quý khách lên thuyền bắt đầu hành trình tham quan các điểm đến hấp dẫn:</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <th class="align" width="10%">07:30</th>
+                                    <td width="90%">
+                                    <p><strong>Chợ Nổi Cái Răng</strong>&nbsp;- Một nét văn hóa đặc sắc của các tỉnh đồng bằng sông Cửu Long. Quý khách tận mắt chứng kiến không khí mua bán tươi vui trên sông, với những cây “bẹo” giúp người mua dễ dàng nhận biết các sản phẩm được bày bán trên ghe.</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-success">
+                                    <th class="align" width="10%">08:00</th>
+                                    <td width="90%">
+                                    <p><strong>Hủ tiếu Pizza Sáu Hoài</strong>: Quý khách có dịp tìm hiểu về quy trình sản xuất hủ tiếu, thưởng thức món ngon Hủ Tiếu Pizza (Hủ tiếu chiên giòn) được chế biến cực kỳ công phu, ngon và hấp dẫn.</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-info">
+                                    <th class="align" width="10%">08:30</th>
+                                    <td width="90%">Đoàn lên xe khởi hành đi tham quan:
+
+                                    <p><strong>Thiền Viện Trúc Lâm Phương Nam</strong>: Là thiền viện lớn nhất Đồng Bằng Sông Cửu Long, có kiến trúc thời Lý – Trần với các tượng Phật được chạm trổ từ gỗ Du Sam trên 800 năm tuổi.</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-light">
+                                    <th class="align" width="10%">09:30</th>
+                                    <td width="90%">Tiếp tục hành trình trải nghiệm mô hình làng du lịch cộng đồng Cồn Sơn.
+
+                                    <p><strong>Tham quan làng cá bè</strong>: tại đây Quý Khách được tự tay thả mồi cho cá ăn với các loại cá như điêu hồng, thác lác…</p>
+                                    <p><strong>Vườn trái cây:</strong> Được thiên nhiên ưu đãi đất đai màu mỡ, kết hợp với khí hậu ấm áp quanh năm nên vùng đất này có nhiều loại trái cây nổi tiếng như vú sữa, nhãn, chôm chôm, bưởi ... Quý khách thưởng thức trái cây chín ngọt ngay tại vườn.</p>
+                                    <p><strong>Trải nghiệm làm bánh dân gian</strong>&nbsp;như bánh kẹp hoặc bánh in, bánh lá mít...thưởng thức những chiếc bánh ngon mình mới làm ra.</p>
+                                    <p>Tham quan trải nghiệm khu “<strong>Cá Lóc Nhảy”</strong>&nbsp;quý khách được chiêm ngưỡng màn biểu diễn độc đáo của các chú cá lóc bay nhảy trên mặt nước một cảnh tượng thật lạ và đẹp mắt và tham quan vườn ổi thưởng thức những trái ổi tươi ngon từ trên cành</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-danger">
+                                    <th class="align" width="10%">11:00</th>
+                                    <td width="90%">
+                                    <p>Ăn trưa tại cồn Sơn với những món ăn đậm chất Nam Bộ:&nbsp;<em><strong>Canh chua, Cá kho tộ, lục bình xào tép</strong></em>...Nghỉ ngơi tại nhà vườn.</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <th class="align" width="10%">14:00</th>
+                                    <td width="90%">Đoàn khởi hành về Cần Thơ đi tham quan:
+
+                                    <p><strong>Căn Nhà Màu Tím</strong>&nbsp;- thưởng thức cà phê ngắm khung cảnh màu tím mộng mơ. Toàn bộ căn nhà và khuôn viên vườn 5.000m2 được thiết kế toàn màu tím thơ mộng, cùng nhiều tiểu cảnh ấn tượng. Đúng như tên gọi,&nbsp;<em><strong>từ căn nhà, chi tiết trang trí đến chiếc xe đạp, xích đu, ghế ngồi…</strong></em>&nbsp;ở nơi này đều tràn ngập sắc tím. Tím nhạt, tím sen, tím đậm, rồi tím rịm… màu tím “đốn tim” du khách khi đến đây. Ngoài những đồ vật màu tím còn có những vật dụng nhuốm màu thời gian, gợi nhớ, gợi thương cho bao người như vỏ&nbsp;<em><strong>bình tích bằng trái dừa khô, radio, cây đèn dầu ống khói trái bắp hay thoại quay số</strong></em>.</p>
+                                    </td>
+                                </tr>
+                                <tr class="table-success">
+                                    <th class="align" width="10%">17:00</th>
+                                    <td width="90%">Đoàn khởi hành về Cần Thơ. Chia tay – Kết thúc chương trình tour.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><b>GIÁ TOUR BAO GỒM</b></p>
+                            <ul style="line-height: 27px;">
+                                <li>Tàu &nbsp;tham quan chợ Nổi theo chương trình.</li>
+                                <li>Xe đời mới, máy lạnh tham quan theo chương trình</li>
+                                <li>Hướng dẫn viên Tiếng Việt chuyên tour suốt tuyến.</li>
+                                <li>Vé tham quan các điểm trong chương trình.</li>
+                                <li>01 bữa ăn trưa 150.000,đồng/khách/bữa với các đặc sản địa phương.</li>
+                                <li>Phí thưởng thức trái cây.</li>
+                                <li>Trải nghiệm làm bánh</li>
+                                <li>Nước suối &nbsp;01 chai/ 01 khách/ 01 ngày.</li>
+                                <li>Nón du lịch: 01 cái /khách/chương trình.</li>
+                                <li>Bảo hiểm du lịch, mức bồi thường tối đa: 20.000.000 vnđ/ khách/ vụ.</li>
+                            </ul>
+                            <br>
+                            <p><b>GIÁ TOUR KHÔNG BAO GỒM</b></p>
+                            <ul style="line-height: 27px;">
+                                <li>Hóa đơn GTGT</li>
+                                <li>Chi phí ăn uống ngoài chương trình: bia, rượu, nước ngọt...</li>
+                                <li>Chi phí cá nhân, chi phí tham quan các điểm ngoài chương trình.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><b>QUY ĐỊNH CHO TRẺ EM</b></p>
+                            <ul style="line-height: 27px;">
+                                <li>Trẻ từ 05 tuổi trở xuống: Miễn phí (ngủ chung giường với gia đình trên xe và khách sạn, gia đình tự lo cho trẻ nếu có chi phí phát sinh).</li>
+                                <li>Trẻ từ 06 đến 09 tuổi: 75% giá tour (bao gồm giường riêng trên xe, ngủ chung giường khách sạn với gia đình).</li>
+                                <li>Trẻ từ 10 tuổi trở lên: 100% giá tour như người lớn.</li>
+                                <li>Tiêu chuẩn 75% vé: được 01 suất ăn (nếu có) + 1 ghế ngồi trên xe (nếu có) + 1 ghế ngồi trên tàu (nếu có) + 1 suất ngủ (nếu có).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><b>Điện thoại: </b> 0774814684</p>
+                            Email: <a href="mailto:huongb1809130@student.ctu.edu.vn">huongb1809130@student.ctu.edu.vn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+        <!-- Modal -->
+        <div class="modal fade mt-5" id="DatTour" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <form action="/tour/{{tours.slug}}" method="POST">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><b>ĐIỀN THÔNG TIN LIÊN HỆ</b></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="form4Example1"><b>Tên Tour</b></label>
+                        <input type="text" name="nametour" class="form-control" value="{{tours.name}}"/>
+                        <br>
+                        <label class="form-label" for="form4Example1"><b>Giá Tour</b></label>
+                        <input type="text" name="pricetour" class="form-control" value="{{tours.price}}"/>
+                        <br>
+                        <label class="form-label" for="form4Example1"><b>Họ và Tên</b></label>
+                        <input type="text" name="name" class="form-control" />
+                        <br>
+                        <label for="exampleFormControlInput1" class="form-label"><b>Email</b></label>
+                        <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="email@example.com" required/>
+                        <br>
+                        <label class="form-label" for="form4Example1"><b>Số điện thoại</b></label>
+                        <input type="tel" name="phone" id="form4Example1" class="form-control" required/>
+                        <br>
+                        <label class="form-label" for="form4Example3"><b>Địa Chỉ</b></label>
+                        <input class="form-control" name="address" id="form4Example3"></input>
+                        <br>
+                        <label class="form-label" for="form4Example1"><b>Số người đặt tour:</b></label><br>
+                        <div>
+                            <span>
+                                <label class="form-label" for="form4Example1">Trẻ em nhỏ hơn 6 tuổi: </label>
+                                <input type="number" name="sm6" min="1" max="5">
+                            </span>
+                            <span class="m-4">
+                                <label class="form-label" for="form4Example1">Trẻ em từ 6 - 9 tuổi: </label>
+                                <input type="number" name="f69" min="1" max="5">
+                            </span>
+                            <span>
+                                <label class="form-label" for="form4Example1">Từ 10 tuổi trở lên: </label>
+                                <input type="number" name="lg9" min="1" max="20">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                        <button class="btn btn-primary" type="submit" onclick="myFunction()">Đặt Tour</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fb-comments" data-href="https://www.facebook.com/login" data-width="100%" data-numposts="5"></div>
+</div>
+{{>footer}}
+<script>
+    function myFunction() {
+        alert("Bạn đã đặt tour thành công! Hãy kiểm tra thông tin qua email của bạn!");
+    }
+</script>

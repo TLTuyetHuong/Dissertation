@@ -24,7 +24,8 @@
                                         <tbody id="filter">
                                             {{#each admins}}
                                             <tr>
-                                                    <th scope="row">{{sum @index 1}}</th>
+                                                    <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                    <td><img src="/img/{{this.image}}" width="70px" alt=""></td>
                                                     <td>{{this.name}}</td>
                                                     <td>{{this.email}}</td>
                                                     <td>

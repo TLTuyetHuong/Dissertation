@@ -35,6 +35,10 @@ class TourController {
     // [POST] /tour/:slug
     datTour(req, res, next) {
         const formData = req.body;
+        const str = formData.pricetour.slice(0,3) * 1000;
+        const price75 = str * (75/100);
+        const dattours = new DatTour(formData);
+        dattours.total = (formData.f69 * price75) + (formData.lg9 * str);
         emailService.sendSimpleEmail({
             receiverEmail: formData.email,
             patientName: formData.name,
@@ -44,12 +48,8 @@ class TourController {
             patientLG10: formData.lg9,
             nameTour: formData.nametour,
             priceTour: formData.pricetour,
+            total: dattours.total,
         })
-        const str = formData.pricetour.slice(0,3) * 1000;
-        const price75 = str * (75/100);
-        console.log(price75);
-        const dattours = new DatTour(formData);
-        dattours.total = (formData.f69 * price75) + (formData.lg9 * str);
         dattours
             .save()
             .then(() => res.redirect("back"))
