@@ -83,6 +83,11 @@ class TourController {
     lichTrinh(req, res, next) {
         res.render('tour/lichtrinhgoiy', {title: 'Lịch trình gợi ý'})
     }
+
+    // [GET] /tour/lich-trinh-goi-y/:slug
+    lichTrinhGY(req, res, next) {
+        res.render('tour/'+req.params.slug, {title: 'Lịch trình gợi ý'})
+    }
 }
 
 module.exports = new TourController();
