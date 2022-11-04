@@ -4,7 +4,7 @@ const AmThuc = require("../models/AmThuc");
 const TinTuc = require("../models/TinTuc");
 const Tour = require("../models/Tour");
 const DatTour = require("../models/DatTour");
-const Resize = require("./Resize");
+const emailService = require('../services/verifyEmail');
 const path = require("path");
 const fs = require("fs");
 const { multipleMongooseToObject } = require("../../until/mongoose");
@@ -17,6 +17,7 @@ const { parse } = require("dotenv");
 const { timeStamp } = require("console");
 //multer
 const multer  = require('multer');
+const { countDocuments } = require("../models/DatTour");
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'src/public/img')
@@ -39,22 +40,78 @@ const upload = multer({
 
 class AdminController {
     // [GET] /admin
-    // index(req, res, next) {
-    //     res.render('admins/login', {title: 'Đăng nhập'})
-    // }
-    index(req, res, next) {
-        res.render("admin");
+    async index(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        if (req.session.daDangNhap) {
+            const today = new Date();
+            let docs = await DatTour.aggregate([
+                { $match: { status: 'Đã duyệt'} }
+            ]);
+            let sum = 0, sumM = 0, i;
+            for(i=0;i<docs.length;i++){
+                const year = docs[i].createdAt;
+                if(year.getFullYear() == today.getFullYear())
+                    sum = sum + docs[i].total;
+            }
+            for(i=0;i<docs.length;i++){
+                const date = docs[i].createdAt;
+                if(date.getMonth()+1 == today.getMonth()+1)
+                    sumM = sumM + docs[i].total;
+            }
+            res.render("admin", {
+                title: "Admin",
+                total: sum,
+                Sum: sumM,
+                admins: mongooseToObject(admins),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-dia-diem"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
     }
 
-    // [DELETE] /admin/:id
-    showTB(req, res, next) {
-        DatTour.findById({_id: req.params.id})
-            .then((dattours) => {
-                res.render("admin/thong-tin-dat-tour", {
-                    title: "Admin",
-                    dattours: mongooseToObject(dattours),
-                });
+    // [GET] /admin/quen-mat-khau
+    forgotPass(req, res, next) {
+        res.render('admin/verifyEmail',{
+            title: 'Xác minh Email',
+        })
+    }
+    // [POST] /admin/quen-mat-khau
+    async forgotPassword(req, res, next) {
+        const admins = await Admin.findOne({
+            email: req.body.email,
+        });
+        if(admins){
+            console.log(admins._id);
+            emailService.sendSimpleEmail({
+                receiverEmail: req.body.email,
+                id: admins._id,
             })
+            res.render('admin/warning');
+        }
+        else {
+            res.render('error404');
+        }
+    }
+
+    // [GET] /admin/doi-mat-khau/:id
+    async changePass(req, res, next) {
+        let admins = await Admin.findById(req.params.id).catch(next); 
+        
+        res.render("admin/doi-mat-khau", {
+            title: "Quản lý Admin",
+            admins: mongooseToObject(admins),
+        });
+    }
+    // [PUT] /admin/doi-mat-khau/:id
+    changePassword(req, res, next) {
+        const salt = bcrypt.genSaltSync(10);
+        const password = req.body.password;
+        Admin.updateOne({ _id: req.params.id}, {password: bcrypt.hashSync(password, salt) }, req.body)
+            .then(() => res.redirect("/admin/login"))
             .catch(next);
     }
 
@@ -158,8 +215,25 @@ class AdminController {
                     res.redirect(sess.back);
                 }
                 else {
+                    const today = new Date();
+                    let docs = await DatTour.aggregate([
+                        { $match: { status: 'Đã duyệt'} }
+                    ]);
+                    let sum = 0, sumM = 0, i;
+                    for(i=0;i<docs.length;i++){
+                        const year = docs[i].createdAt;
+                        if(year.getFullYear() == today.getFullYear())
+                            sum = sum + docs[i].total;
+                    }
+                    for(i=0;i<docs.length;i++){
+                        const date = docs[i].createdAt;
+                        if(date.getMonth()+1 == today.getMonth()+1)
+                            sumM = sumM + docs[i].total;
+                    }
                     res.render("admin", {
                         title: "Admin",
+                        total: sum,
+                        Sum: sumM,
                         admins: mongooseToObject(admins),
                         dattours: multipleMongooseToObject(dattours),
                     });

@@ -39,14 +39,18 @@ router.get('/quan-ly-am-thuc', adminController.ql_amthuc)   // Trang Quản lý 
 
 // Admin
 router.put('/:id', adminController.updateAdmin);    // Cập nhật thông tin Admin
+router.put('/doi-mat-khau/:id', adminController.changePassword); 
 router.delete('/danh-sach-admin/:id', adminController.deleteAdmin);
+router.post('/quen-mat-khau', adminController.forgotPassword);  
 router.post('/signup', adminController.signup); // Thêm Admin
 router.post('/', adminController.login);    // Đăng nhập Admin
 router.get('/signup', adminController.get_signup);  // Hiện trang Thêm admin
 router.get('/login', adminController.get_login);    // Hiện trang Đăng nhập admin
 router.get('/logout', adminController.logout);  // Đăng xuất
 router.get('/:id/sua-thong-tin', adminController.editTTAdmin);  //Hiện trang cập nhật thông tin
-router.get('/danh-sach-admin', adminController.ds_admin);   // Danh sách Admin
+router.get('/danh-sach-admin', adminController.ds_admin);  
+router.get('/doi-mat-khau/:id', adminController.changePass); 
+router.get('/quen-mat-khau', adminController.forgotPass);   // Quên mật khẩu
 router.get('/', adminController.index);
 
 module.exports = router;
