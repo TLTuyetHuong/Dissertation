@@ -19,12 +19,12 @@
                 </div>
                 <div class="modal-body">
                         <div>
-                                <section class="vh-100" style="background-color: #eee; color:black">
+                                <section style="background-color: #eee; color:black">
 
                                         <div class="row px-5">
                                         <div class="col">
                                                 <div class="form-outline flex-fill mb-0 py-2">
-                                                        <input type="text" value="{{amthucs.title}}" name="name" id="form3Example1c" class="form-control" required />
+                                                        <input type="text" value="{{amthucs.title}}" name="title" id="form3Example1c" class="form-control" required />
                                                         <label class="form-label" for="form3Example1c">Tên ẩm thực</label>
                                                 </div>
                                                 <div class="form-outline flex-fill mb-0 py-2">
@@ -65,12 +65,18 @@
                                                 <label class="form-label" for="form3Example1c">Mô tả</label>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 py-2">
-                                                <select name="tag" class="form-select" aria-label="Default select example">
-                                                        <option selected>Chọn tag</option>
-                                                        <option value="{{amthucs.tag}}">Đặc sản</option>
-                                                        <option value="{{amthucs.tag}}">Bánh dân gian</option>
-                                                        <option value="{{amthucs.tag}}">Đồ ăn vặt</option>
-                                                </select>
+                                                <br>
+                                                <label class="form-label" for="form3Example1c">Chọn tag:</label>
+                                                <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="dacsan">
+                                                        <label class="form-check-label" for="flexRadioDefault1">Đặc sản</label><br>
+
+                                                        <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="banhdangian">
+                                                        <label class="form-check-label" for="flexRadioDefault1">Bánh dân gian</label><br>
+
+                                                        <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="anvat">
+                                                        <label class="form-check-label" for="flexRadioDefault1">Ăn vặt</label>
+                                                </div>
                                         </div>
                                         </div>
                                 </section>

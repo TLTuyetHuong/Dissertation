@@ -78,10 +78,15 @@
       <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto">
         <span class="text-white"></span>
       </a>
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search" method="POST" action="/search">
         <div style="margin-right: 0;" class="input-group">
-          <input type="search" class="form-control rounded" id="myFilter" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="search-addon" />
-          <button type="button" class="btn btn-success"><img src="https://img.icons8.com/external-febrian-hidayat-flat-febrian-hidayat/344/external-Filter-user-interface-febrian-hidayat-flat-febrian-hidayat-2.png" width="20px" alt=""></button>
+          <input type="search" name="search" class="form-control rounded" id="myFilter" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="search-addon" />
+          <button type="submit" class="btn btn-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
+              <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+              <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
+            </svg>
+          </button>
         </div>
       </form>
       <div class="text-end">

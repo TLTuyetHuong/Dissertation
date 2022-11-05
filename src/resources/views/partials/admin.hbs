@@ -37,7 +37,7 @@
         <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#collapseTwo" role="button"
             aria-expanded="false" aria-controls="collapseExample">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Quản lý</span>
+            <span>Quản Lý Danh Mục</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -51,7 +51,7 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    {{!-- <li class="nav-item">
         <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#collapseUtilities"
             data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
@@ -67,7 +67,7 @@
                 <a class="collapse-item" href="utilities-other.html">Other</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -82,7 +82,7 @@
         <a class="nav-link dropdown-toggle" href="#collapsePages" data-bs-toggle="collapse"
             data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Quản lý Admin</span>
+            <span>Quản Lý Admin</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -245,18 +245,18 @@
         </div>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
+    {{!-- <li class="nav-item">
         <a class="nav-link" href="charts.html">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Charts</span></a>
-    </li>
+    </li> --}}
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    {{!-- <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -288,7 +288,7 @@
             <form
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" id="myFilter" class="form-control bg-light border-0 small" placeholder="Tìm kiếm ..."
+                    <input type="text" id="my_Filter" name="search" class="form-control bg-light border-0 small" placeholder="Tìm kiếm ..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
@@ -310,13 +310,13 @@
                     <!-- Dropdown - Messages -->
                     <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                         aria-labelledby="searchDropdown">
-                        <form class="form-inline mr-auto w-100 navbar-search">
+                        <form class="form-inline mr-auto w-100 navbar-search" method="GET" action="/search">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small"
+                                <input type="text" name="search" class="form-control bg-light border-0 small"
                                     placeholder="Tìm kiếm ..." aria-label="Search"
                                     aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
+                                    <button class="btn btn-primary" type="submit">
                                         <img src="https://img.icons8.com/avantgarde/344/filter.png" width="20px" alt="">
                                     </button>
                                 </div>
@@ -326,7 +326,7 @@
                 </li>
 
                 <!-- Nav Item - Alerts -->
-                <li class="nav-item dropstart no-arrow mx-1">
+                {{!-- <li class="nav-item dropstart no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell fa-fw"></i>
@@ -336,9 +336,34 @@
                     <!-- Dropdown - Alerts -->
                     <ul class="dropdown-list dropdown-menu shadow animated--grow-in scrollable-menu mt-3"
                         aria-labelledby="alertsDropdown" data-bs-spy="scroll">
-                        <h6 class="dropdown-header">
+                        <h6 class="dropdown-header" id="ThongBao">
                             Thông báo
                         </h6>
+                        {{#each dattours}}
+                            <li class="font-tb">
+                                <a class="dropdown-item d-flex align-items-center" href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">{{this.createdAt}}</div>
+                                        <span id="tb">Khách hàng {{this.name}} vừa đặt tour {{this.nametour}}!</span>
+                                    </div>
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li> --}}
+                <li class="btn-group nav-item dropstart no-arrow mx-1">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-bell fa-fw"></i>
+                        <!-- Counter - Alerts -->
+                        <span class="badge badge-danger badge-counter">3+</span></button>
+                    <ul class="dropdown-menu scrollable-menu" role="menu">
+                        <li style="background-color: rgb(42, 105, 206);">
+                            <h5 id="ThongBao" class="p-3"><b style="color: white;">Thông báo</b></h5>
+                        </li>
                         {{#each dattours}}
                             <li class="font-tb">
                                 <a class="dropdown-item d-flex align-items-center" href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}">
@@ -386,18 +411,54 @@
                                 <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Hồ sơ</b></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body text-center" style="color:aliceblue;background-image:url('https://mdbootstrap.com/img/new/fluid/city/018.jpg') ;">
-                                <img src="/img/{{admins.image}}" width="70px" height="70px" alt="">&#x3164;{{admins.name}}
-                                <br>
-                                <h5 class="mt-2"><b>Email</b></h5>
-                                <p>{{admins.email}}</p>
-                                <br>
-                                <h5><b>Số điện thoại</b></h5>
-                                <p>{{admins.phone}}</p>
-                                <br>
-                                <h5><b>Ngày sinh</b></h5>
-                                <p>{{admins.birthday}}</p>
-                                <h5><a href="">Đổi mật khẩu ?</a></h5>
+                            <div class="modal-body" >
+                                <link rel="stylesheet" href="/css/profile.css">
+                                <div class="padding">
+                                    <div class="row ">
+                                         <div class="col-xl-6 col-md-12">
+                                            <div class="card user-card-full">
+                                                <div class="row m-l-0 m-r-0">
+                                                    <div class="col-sm-4 bg-c-lite-green user-profile">
+                                                        <div class="card-block text-center text-white">
+                                                            <div class="m-b-25">
+                                                                <img src="/img/{{admins.image}}" class="img-radius" alt="User-Profile-Image" width="150px">
+                                                            </div>
+                                                            <h6 class="f-w-600">{{admins.name}}</h6>
+                                                            <p>Admin</p>
+                                                            <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="card-block">
+                                                            <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Thông tin</h6>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <p class="m-b-10 f-w-600">Email</p>
+                                                                    <h6 class="text-muted f-w-400">{{admins.email}}</h6>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <p class="m-b-10 f-w-600">Phone</p>
+                                                                    <h6 class="text-muted f-w-400">{{admins.phone}}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <p class="m-b-10 f-w-600">Ngày sinh</p>
+                                                                <h6 class="text-muted f-w-400">{{admins.birthday}}</h6>
+                                                            </div>
+                                                            <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <p class="m-b-10 f-w-600"><a href="/admin/doi-mat-khau/{{admins._id}}"><b>Đổi mật khẩu</b></a></p>
+                                                                    <h6 class="text-muted f-w-400"></h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>

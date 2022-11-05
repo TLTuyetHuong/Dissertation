@@ -399,8 +399,14 @@ body a {
 
 .scrollable-menu {
     height: auto;
-    max-height: 720px;
-    overflow-y: hidden;
+    max-height: 400px;
+    overflow-x: hidden;
+    display: block;
+    li {
+        display: block;
+        width: 940px;
+        margin: auto;
+    }
 }
 
 .lichtrinh {

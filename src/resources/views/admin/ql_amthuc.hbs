@@ -34,7 +34,7 @@
                                                       <th scope="col"></th>
                                                 </tr>
                                           </thead>
-                                          <tbody id="filter">
+                                          <tbody id="myfilter">
                                                 {{#each amthucs}}
                                                 <tr>
                                                       <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
@@ -66,12 +66,12 @@
                                                 </div>
                                                 <div class="modal-body">
                                                       <div>
-                                                            <section class="vh-100" style="background-color: #eee; color:black">
+                                                            <section style="background-color: #eee; color:black">
 
                                                                   <div class="row px-5">
                                                                         <div class="col">
                                                                               <div class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="name" id="form3Example1c" class="form-control" required />
+                                                                                    <input type="text" name="title" id="form3Example1c" class="form-control" required />
                                                                                     <label class="form-label" for="form3Example1c">Tên Quán</label>
                                                                               </div>
                                                                               <div class="form-outline flex-fill mb-0 py-2">
@@ -86,11 +86,11 @@
                                                                         <div class="col">
                                                                               <div class="row">
                                                                                     <div class="col-6 form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text" name="morning" id="form3Example1c" class="form-control" />
+                                                                                          <input type="text" name="open" id="form3Example1c" class="form-control" />
                                                                                           <label class="form-label" for="form3Example1c">Giờ mở cửa</label>
                                                                                     </div>
                                                                                     <div class="col-6 form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text" name="afternoon" id="form3Example1c" class="form-control" />
+                                                                                          <input type="text" name="close" id="form3Example1c" class="form-control" />
                                                                                           <label class="form-label" for="form3Example1c">Giờ đóng cửa</label>
                                                                                     </div>
                                                                               </div>
