@@ -9,8 +9,8 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                               <h1 class="h3 mb-0 text-gray-800">Quản lý Ẩm Thực</h1>
-                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                              <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="saveAsExcel" onclick="exportExcelFile()"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
                         </div>
 
                         <div id="change">
@@ -24,7 +24,7 @@
                         <div id="amthuc">
 
                               <div>
-                                    <table class="table table-hover" id="dtBasicExample">
+                                    <table class="table table-hover exportable" id="mytable">
                                           <thead style="text-align: center;">
                                                 <tr>
                                                       <th scope="col">STT</th>
@@ -186,3 +186,16 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script src="/js/deleteAmThuc.js"></script>
 
+<script>
+      function exportExcelFile() {
+            var workbook = XLSX.utils.book_new();
+            
+            var worksheet_data  = document.getElementById("mytable");
+            var worksheet = XLSX.utils.table_to_sheet(worksheet_data);
+            
+            workbook.SheetNames.push("Test");
+            workbook.Sheets["Test"] = worksheet;
+
+            return XLSX.writeFile(workbook, "DSAT.xlsx");
+      }
+</script>

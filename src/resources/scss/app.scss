@@ -404,7 +404,7 @@ body a {
     display: block;
     li {
         display: block;
-        width: 940px;
+        width: 800px;
         margin: auto;
     }
 }
@@ -413,4 +413,9 @@ body a {
     .carousel-item {
         height: auto;
     }
+}
+
+.comment {
+    border: 1px solid;
+    background-color: rgb(251, 248, 245);
 }

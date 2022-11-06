@@ -32,6 +32,7 @@ let sendSimpleEmail = async (dataSend) => {
                 <li><b>Từ 10 tuổi trở lên: </b>${dataSend.patientLG10}</li>
             </ul>
         </ul>
+        <p><b>Ngày khởi hành là: </b> ${dataSend.departureDay}.</p>
         <p><b>Giá của Tour là: </b> ${dataSend.priceTour}.</p>
         <p><b>Tổng giá của Tour là: </b> ${dataSend.total} VNĐ.</p>
         <p>Nếu thông tin có sai sót hoặc có thắc mắc, xin vui lòng liên hệ qua email này hoặc qua số điện thoại <b>0774814684</b>.</p>

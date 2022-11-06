@@ -322,8 +322,12 @@ body a {
   display: block; }
   .scrollable-menu li {
     display: block;
-    width: 940px;
+    width: 800px;
     margin: auto; }
 
 .lichtrinh .carousel-item {
   height: auto; }
+
+.comment {
+  border: 1px solid;
+  background-color: #fbf8f5; }

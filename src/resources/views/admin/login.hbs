@@ -18,13 +18,15 @@
             </a>
             <div class="row">
               <span class="form-outline">
-                <input type="email" name="email" id="form2Example18" class="form-control form-control-lg gate" placeholder="Nhập vào email của bạn . . ." onblur="return t1()" required/>
-                <label class="form-label" for="form2Example18">Email <span id="email"></span></label>
+                <input type="email" name="email" id="email" class="form-control form-control-lg gate" placeholder="Nhập vào email của bạn . . ." onblur="return t1()" required/>
+                <label class="form-label" for="email">Email </label>
+                <p id="mail" class="mt-1" style="text-align: center; color: red">{{mess}}</p>
               </span>
 
               <span class="form-outline">
-                <input type="password" name="password" id="form2Example28" class="form-control form-control-lg gate" placeholder="Nhập vào mật khẩu của bạn . . ." onblur="return t2()" required/>
-                <label class="form-label" for="form2Example28">Mật khẩu <p id="mk"></p></label>
+                <input type="password" name="password" id="password" class="form-control form-control-lg gate" placeholder="Nhập vào mật khẩu của bạn . . ." onblur="return t2()" required/>
+                <label class="form-label" for="password">Mật khẩu</label>
+                <p id="mk" class="mt-1" style="text-align: center; color: red">{{message}}</p>
               </span>
             </div>
 
@@ -44,48 +46,4 @@
     </div>
   </div>
 </section>
-<script>
-		function test(){
-			var check=true;
-			if(document.getElementById("form2Example18").value==""){
-				document.getElementById("email").innerHTML="Bạn phải nhập email!";
-				document.getElementById("email").style.color="red";
-				check=false;
-			}
-			 if(document.getElementById("form2Example28").value==""){
-				document.getElementById("mk").innerHTML="Bạn phải nhập mật khẩu!";
-				document.getElementById("mk").style.color="red";
-				check=false;
-			}
-			return check;
-		}
-
-		function t1(){
-			var email= document.getElementById("form2Example18").value;
-			if(email!=""){
-				document.getElementById("email").innerHTML = "";
-				return true;
-			}
-		}
-		function t2(){
-			var mk= document.getElementById("form2Example28").value;
-			if(mk!=""){
-				document.getElementById("mk").innerHTML = "";
-				return true;
-			}
-      if
-		}
-</script>
-<script>
-  $('form').on('submit',makeRequest);
-      function makeRequest(e){
-        e.preventDefault();
-        $.ajax({
-          url:'//localhost:3000/admins/login',
-          type : 'POST',
-          success: function(data){
-            $('#mk').html('<span class="alert alert-danger">'+data.message+'</span>');
-          }
-      });
-    }
-</script>
+<script src="/js/login.js"></script>

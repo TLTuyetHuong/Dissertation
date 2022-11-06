@@ -49,6 +49,7 @@ class TourController {
             nameTour: formData.nametour,
             priceTour: formData.pricetour,
             total: dattours.total,
+            departureDay: formData.day,
         })
         dattours
             .save()

@@ -9,7 +9,6 @@ const Tour = new Schema({
     image: { type: String, require: true},
     price: { type: String, require: true},
     time: { type: String},
-    contact: { type: String},
     slug: { type: String, slug: 'name', unique: true }
 },{
     timestamps: true,

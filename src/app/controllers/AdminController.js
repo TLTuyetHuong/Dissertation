@@ -54,15 +54,17 @@ class AdminController {
                 if(year.getFullYear() == today.getFullYear())
                     sum = sum + docs[i].total;
             }
+            let S = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
             for(i=0;i<docs.length;i++){
                 const date = docs[i].createdAt;
                 if(date.getMonth()+1 == today.getMonth()+1)
                     sumM = sumM + docs[i].total;
             }
+            let s = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
             res.render("admin", {
                 title: "Admin",
-                total: sum,
-                Sum: sumM,
+                total: S,
+                Sum: s,
                 admins: mongooseToObject(admins),
                 dattours: multipleMongooseToObject(dattours),
             });
@@ -90,7 +92,9 @@ class AdminController {
                 receiverEmail: req.body.email,
                 id: admins._id,
             })
-            res.render('admin/warning');
+            res.render('admin/warning',{
+                title: 'Xác minh Email',
+            });
         }
         else {
             res.render('error404');
@@ -225,32 +229,39 @@ class AdminController {
                         if(year.getFullYear() == today.getFullYear())
                             sum = sum + docs[i].total;
                     }
+                    let S = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
                     for(i=0;i<docs.length;i++){
                         const date = docs[i].createdAt;
                         if(date.getMonth()+1 == today.getMonth()+1)
                             sumM = sumM + docs[i].total;
                     }
+                    let s = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
                     res.render("admin", {
                         title: "Admin",
-                        total: sum,
-                        Sum: sumM,
+                        total: S,
+                        Sum: s,
                         admins: mongooseToObject(admins),
                         dattours: multipleMongooseToObject(dattours),
                     });
                 }
             } else {
-                res.send({ message: "Sai mật khẩu !" });
+                res.render('admin/login',{ 
+                    title: "Đăng nhập",
+                    message: "Sai mật khẩu !  Xin vui lòng nhập lại !!" ,
+                });
             }
         } else {
-            res.render("admin/login", { title: "Đăng nhập" });
-            alert('Tài khoản chưa được tạo!');
+            res.render("admin/login", { 
+                title: "Đăng nhập",
+                mess: "Email của bạn không đúng ! Xin vui lòng nhập lại !!",
+            });
         }
     }
 
     logout(req, res) {
         req.session.destroy((err) => {
             if (err) res.redirect("error500");
-            res.redirect("/");
+            res.redirect("/admin/login");
         });
     }
 
