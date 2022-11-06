@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const Comment = new Schema({
 	posts: { type: String, require: true},
 	comment: { type: String, require: true},
-    like: { type: Number},
-	date: { type: String}
+    like: { type: Number, default: 0},
+	date: { type: String},
+	subcomment: { type: String},
 }, {
     timestamps: true,
 });

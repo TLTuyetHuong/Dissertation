@@ -17,7 +17,7 @@ class TinTucController {
 
     // [GET] /tin-tuc/:slug
     async show(req, res, next) {
-        let comments = await Comment.find({posts: req.params.slug}).sort({updatedAt: -1});
+        let comments = await Comment.find({posts: req.params.slug}).sort({createdAt: -1});
         TinTuc.findOne({slug: req.params.slug})
             .then((tintucs) => {
                 if(req.params.slug==tintucs.slug){
@@ -49,7 +49,28 @@ class TinTucController {
             .then(() => res.redirect("back"))
             .catch((error) => {});
     }
+
+    // [PUT] /tin-tuc/like/:id
+    async like(req, res, next) {
+        let comments = await Comment.findById(req.params.id).catch(next);
+        const like1 = comments.like;
+        Comment.updateOne({ _id: req.params.id }, {like: like1+1})
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
     
+    // [GET] /tin-tuc/sub-comment
+    subcomment(req, res, next) {
+        res.render('baiviets/sub-comment');
+    }
+
+    // [PUT] /tin-tuc/sub-comment/:id
+    async sub_comment(req, res, next) {
+        let comments = await Comment.findById(req.params.id).catch(next);
+        Comment.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
 }
 
 module.exports = new TinTucController();

@@ -17,6 +17,30 @@
                 <p class="pt-2"><i>{{this.date}}</i></p>
                 <p><b>{{this.comment}}</b></p>
             </div>
+            <div class="row" style="line-height: 10px;">
+                <div class="col-1"></div>
+                <div class="col">
+                    <span id="like" style="float: left;">
+                        <form action="/tin-tuc/like/{{this._id}}?_method=PUT" method="post">
+                            <button type="submit"><a type="submit">Thích</a></button>
+                        </form>
+                    </span>
+                    <span style="float: left;"><a type="button" style="padding-left: 3px;">{{this.like}}</a></span>
+                    <span ><a type="button" style="padding-left: 10px;" onclick="loadDoc()">Bình luận</a></span>
+                </div>
+            </div>
+            <p id="demo"></p>
     </div>
     {{/each}}
 </div>
+<script>
+function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+    }
+    xhttp.open("GET", "/tin-tuc/sub-comment");
+    xhttp.send();
+}
+</script>
