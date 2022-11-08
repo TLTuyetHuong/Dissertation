@@ -1,0 +1,124 @@
+
+<div id="page-top">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+            {{>admin}}
+            <div id="filter">
+                  <!-- Begin Page Content -->
+                  <div class="container-fluid" id="demo">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                              <h1 class="h3 mb-0 text-gray-800">Quản lý Đặt Tour</h1>
+                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        </div>
+
+                        <div id="change">
+                        <!-- Button trigger modal -->
+                        {{!-- <div style="text-align: right;">
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
+                                    Thêm điểm đến
+                              </button>
+                        </div> --}}
+
+                        <div id="dattour">
+
+                              <div>
+                                    <table class="table table-hover" id="dtBasicExample">
+                                          <thead style="text-align: center;">
+                                          <tr>
+                                                      <th scope="col">STT</th>
+                                                      <th scope="col">Thông tin Khách hàng</th>
+                                                      <th scope="col">Thông tin Tour</th>
+                                                      <th scope="col">Tổng</th>
+                                                      <th scope="col">Trạng thái</th>
+                                                      <th scope="col"></th>
+                                          </tr>
+                                          </thead>
+                                          <tbody id="myfilter">
+                                          {{#each dattours}}
+                                          <tr>
+                                                      <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                      <td>
+                                                            <b>Họ và tên: </b>{{this.name}}<br>
+                                                            <b>Số điện thoại: </b>{{this.phone}}<br>
+                                                            <b>Địa chỉ: </b>{{this.address}}<br>
+                                                            <hr>
+                                                            <b>Trẻ em dưới 6 tuổi: </b>{{this.sm6}}<br>
+                                                            <b>Trẻ em từ 6 - 9 tuổi: </b>{{this.f69}}<br>
+                                                            <b>Từ 10 tuổi trở lên: </b>{{this.lg9}}<br>
+                                                      </td>
+                                                      <td>
+                                                            <b>Tên tour: </b>{{this.nametour}}<br>
+                                                            <b>Giá tour: </b>{{this.pricetour}}<br>
+                                                            <b>Ngày dự kiến: </b>{{this.day}}
+                                                      </td>
+                                                      <td>
+                                                            <b>Tổng số người: </b>{{total this.sm6 this.f69 this.lg9}}<br>
+                                                            <b>Tổng số tiền: </b>{{this.total}}
+                                                      </td>
+                                                      <td>{{this.status}}</td>
+                                                      <td>
+                                                      <a href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}" class="btn btn-warning">Xem chi tiết</a>
+                                                      <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
+                                                      </td>
+                                          </tr>
+                                          {{/each}}
+                                          </tbody>
+                              </table>
+                              </div>
+                        </div>
+                  
+                        <!-- Modal Xoá -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Điểm Đến?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xoá điểm đến này?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button id="btn-delete" type="button"
+                                                      class="btn btn-danger">Xoá</button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Modal Xoá -->
+
+                        {{!-- Form hidden delete --}}
+                        <form name="form-dd-delete" method="POST"></form>
+                        {{!-- Form hidden delete --}}
+                        </div>
+                  </div>
+
+            </div>
+      </div>
+      <!-- End of Page Wrapper -->
+      <!-- End of Content Wrapper -->
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                        <span>Copyright &copy;2022</span>
+                  </div>
+            </div>
+      </footer>
+      <!-- End of Footer -->
+
+      </div>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="/js/deleteTour.js"></script>

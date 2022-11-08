@@ -30,19 +30,22 @@ body a {
 
 .sub-button-circle {
   margin-left: 17%; }
-  .sub-button-circle a:hover {
-    box-shadow: 1px 1px 1px 1px #AAA; }
-  .sub-button-circle a div {
+  .sub-button-circle a {
     background-color: white;
     width: 150px;
     height: 150px;
     border-radius: 100%;
     padding-top: 20%;
-    text-align: center; }
+    text-align: center;
+    color: #AAA; }
+    .sub-button-circle a:hover {
+      border-color: black;
+      color: gray;
+      box-shadow: 1px 1px 1px 1px #AAA; }
   .sub-button-circle button {
     border-radius: 100%;
     height: 175px;
-    box-shadow: 1px 1px 1px 1px #AAA; }
+    box-shadow: 2px 2px 2px 2px #AAA; }
 
 .dropdown ul {
   padding-left: 0;
@@ -96,7 +99,7 @@ body a {
   text-decoration: none; }
 
 .tour a:hover {
-  color: red; }
+  color: #ff0000; }
 
 .img-fluid a {
   text-decoration: none; }

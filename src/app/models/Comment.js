@@ -6,7 +6,6 @@ const Comment = new Schema({
 	comment: { type: String, require: true},
     like: { type: Number, default: 0},
 	date: { type: String},
-	subcomment: { type: String},
 }, {
     timestamps: true,
 });

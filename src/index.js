@@ -60,6 +60,7 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
+            total: (a, b, c) => a + b +c,
         }
     }),
 );

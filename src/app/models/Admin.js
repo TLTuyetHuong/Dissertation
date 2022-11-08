@@ -8,6 +8,9 @@ const Admin = new Schema({
 	image: { type: String},
 	phone: { type: String},
 	birthday: { type: String},
+	roles: {
+		Admin: { type: String, default: 'ADM'},
+	}
 }, {
     timestamps: true,
 });

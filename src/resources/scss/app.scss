@@ -42,23 +42,25 @@ body a {
 .sub-button-circle {
     margin-left: 17%;
     a {
+        background-color: white;
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+        padding-top: 20%;
+        text-align: center;
+        color: #AAA;
         &:hover {
-            // box-shadow: 2px 2px black;
+            border-color: black;
+            color: lighten(black, 50%);
+            // color:  black;
+            // background-color: rgb(241, 241, 241);
             box-shadow: 1px 1px 1px 1px #AAA;
-        }
-        div {
-            background-color: white;
-            width: 150px;
-            height: 150px;
-            border-radius: 100%;
-            padding-top: 20%;
-            text-align: center;
         }
     }
     button {
         border-radius: 100%;
         height: 175px;
-        box-shadow: 1px 1px 1px 1px #AAA;
+        box-shadow: 2px 2px 2px 2px #AAA;
     }
 }
 
@@ -130,7 +132,7 @@ body a {
 }
 
 .tour a:hover {
-    color: red;
+    color: #ff0000;
 }
 
 .img-fluid a {

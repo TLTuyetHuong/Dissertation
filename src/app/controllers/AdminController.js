@@ -4,6 +4,7 @@ const AmThuc = require("../models/AmThuc");
 const TinTuc = require("../models/TinTuc");
 const Tour = require("../models/Tour");
 const DatTour = require("../models/DatTour");
+const Comment = require("../models/Comment");
 const emailService = require('../services/verifyEmail');
 const path = require("path");
 const fs = require("fs");
@@ -63,7 +64,7 @@ class AdminController {
             let s = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
             res.render("admin", {
                 title: "Admin",
-                total: S,
+                Total: S,
                 Sum: s,
                 admins: mongooseToObject(admins),
                 dattours: multipleMongooseToObject(dattours),
@@ -238,7 +239,7 @@ class AdminController {
                     let s = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
                     res.render("admin", {
                         title: "Admin",
-                        total: S,
+                        Total: S,
                         Sum: s,
                         admins: mongooseToObject(admins),
                         dattours: multipleMongooseToObject(dattours),
@@ -264,6 +265,8 @@ class AdminController {
             res.redirect("/admin/login");
         });
     }
+
+    // Quan Ly Dia Diem //
 
     // [GET] /admin/quan-ly-dia-diem
     async ql_diadiem(req, res, next) {
@@ -483,6 +486,8 @@ class AdminController {
             .catch(next);
     }
 
+    // Quan Ly Tour //
+
     // [GET] /admin/quan-ly-tour
     async ql_tour(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
@@ -494,6 +499,24 @@ class AdminController {
                 title: "Quản lý Tours",
                 admins: mongooseToObject(admins),
                 tours: multipleMongooseToObject(tours),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-tour"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [GET] /admin/quan-ly-dat-tour
+    async ql_dattour(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_dattour", {
+                title: "Quản lý Tours",
+                admins: mongooseToObject(admins),
                 dattours: multipleMongooseToObject(dattours),
             });
         }
@@ -590,7 +613,94 @@ class AdminController {
     // [PUT] /admin/quan-ly-tour/xem-chi-tiet/:id
     updateDatTour(req, res, next) {
         DatTour.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect("/admin/quan-ly-tour"))
+            .then(() => res.redirect("/admin/quan-ly-dat-tour"))
+            .catch(next);
+    }
+
+    // Quan Ly Comment //
+
+    // [GET] /admin/quan-ly-comment
+    async ql_comment(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let comment = await Comment.find({}).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_comment", {
+                title: "Quản lý Comment",
+                admins: mongooseToObject(admins),
+                comment: multipleMongooseToObject(comment),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [GET] /admin/quan-ly-comment/danh-sach-khach-dat-tour
+    async ds_comment(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let dattours = await DatTour.find({}).catch(next); 
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/danh-sach-khach-dat-tour", {
+                title: "Quản lý Tours",
+                admins: mongooseToObject(admins),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [POST] /admin/quan-ly-comment
+    async addComment(req, res, next) {
+        const formData = req.body;
+        const tours = new Tour(formData);
+        tours
+            .save()
+            .then(() => res.redirect("back"))
+            .catch((error) => {});
+    }
+
+    // [GET] /admin/quan-ly-comment/:id
+    async editComment(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let tours = await Tour.findById(req.params.id).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/edit-tour", {
+                title: "Quản lý Tours",
+                admins: mongooseToObject(admins),
+                tours: mongooseToObject(tours),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [DELETE] /admin/quan-ly-comment/:id
+    async deleteComment(req, res, next) {
+        await Tour.deleteOne({ _id: req.params.id }).catch(next);
+        await DatTour.deleteOne({ _id: req.params.id }).catch(next);
+        res.redirect("back")
+    }
+
+    // [PUT] /admin/quan-ly-comment/:id
+    updateComment(req, res, next) {
+        Tour.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-comment"))
             .catch(next);
     }
 }

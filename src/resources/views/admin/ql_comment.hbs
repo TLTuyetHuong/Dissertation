@@ -1,0 +1,179 @@
+
+<div id="page-top">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+            {{>admin}}
+            <div id="filter">
+                  <!-- Begin Page Content -->
+                  <div class="container-fluid" id="demo">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                              <h1 class="h3 mb-0 text-gray-800">Quản lý Bình Luận</h1>
+                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        </div>
+
+                        <div id="change">
+                        <!-- Button trigger modal -->
+
+                        <div id="comment">
+
+                              <div>
+                                    <table class="table table-hover" id="dtBasicExample">
+                                          <thead style="text-align: center;">
+                                                <tr>
+                                                      <th scope="col">STT</th>
+                                                      <th scope="col">ID</th>
+                                                      <th scope="col">Nội Dung</th>
+                                                      <th scope="col">Thời gian Cmt</th>
+                                                      <th scope="col">Số lượt thích</th>
+                                                      <th scope="col">Cmt của Bài Viết</th>
+                                                      <th scope="col"></th>
+                                                </tr>
+                                          </thead>
+                                          <tbody id="myfilter">
+                                                {{#each comment}}
+                                                <tr>
+                                                      <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                      <td>{{this._id}}</td>
+                                                      <td>{{this.comment}}</td>
+                                                      <td>{{this.date}}</td>
+                                                      <td style="text-align: center;">{{this.like}}</td>
+                                                      <td>{{this.posts}}</td>
+                                                      <td>
+                                                            <a href="/admin/quan-ly-dia-diem/{{this._id}}/sua-dia-diem" class="btn btn-warning">Sửa</a>
+                                                            <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
+                                                      </td>
+                                                </tr>
+                                                {{/each}}
+                                          </tbody>
+                                    </table>
+                              </div>
+                        </div>
+
+                        <!-- Form Thêm -->
+                        <div class="modal fade" id="formCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                          <form action="/admin/quan-ly-dia-diem" method="POST">
+                                                <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">THÊM ĐIỂM ĐẾN
+                                                            MỚI</h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                      <div>
+                                                            <section class="vh-100" style="background-color: #eee; color:black">
+
+                                                                  <div class="row px-5">
+                                                                        <div class="col">
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="name" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Tên điểm đến</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="address" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Địa chỉ</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="price" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">Giá</label>
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                              <div class="row">
+                                                                                    <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="morning" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Khoảng thời gian mở cửa buổi sáng</label>
+                                                                                    </div>
+                                                                                    <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                                                          <input type="text" name="afternoon" id="form3Example1c" class="form-control" />
+                                                                                          <label class="form-label" for="form3Example1c">Khoảng thời gian mở cửa buổi chiều</label>
+                                                                                    </div>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="place" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">URL vị trí</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="image" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <input type="text" name="map" id="form3Example1c" class="form-control" required />
+                                                                              <label class="form-label" for="form3Example1c">Map</label>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <textarea class="ckeditor form-control" rows="10" name="description" id="editor" required></textarea>
+                                                                              <label class="form-label" for="form3Example1c">Mô tả</label>
+                                                                        </div>
+                                                                  </div>
+                                                            </section>
+                                                      </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                                      <button type="submit" class="btn btn-success">Thêm</button>
+                                                </div>
+                                          </form>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Form Thêm -->
+                  
+                        <!-- Modal Xoá -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Điểm Đến?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xoá điểm đến này?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button id="btn-delete" type="button"
+                                                      class="btn btn-danger">Xoá</button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Modal Xoá -->
+
+                        {{!-- Form hidden delete --}}
+                        <form name="form-dd-delete" method="POST"></form>
+                        {{!-- Form hidden delete --}}
+                        </div>
+                  </div>
+
+            </div>
+      </div>
+      <!-- End of Page Wrapper -->
+      <!-- End of Content Wrapper -->
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                        <span>Copyright &copy;2022</span>
+                  </div>
+            </div>
+      </footer>
+      <!-- End of Footer -->
+
+      </div>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="/js/deleteDiaDiem.js"></script>

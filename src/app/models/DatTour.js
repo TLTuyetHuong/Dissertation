@@ -12,11 +12,11 @@ const DatTour = new Schema({
     nametour: { type: String},
     pricetour: { type: String},
     status: { type: String, default: 'Chưa duyệt'},
-    departureday: { type: Date},
-    sm6: { type: Number},
-    f69: { type: Number},
-    lg9: { type: Number},
+    sm6: { type: Number, default: 0},
+    f69: { type: Number, default: 0},
+    lg9: { type: Number, default: 0},
     total: { type: Number},
+    day: { type: String},
     slug: { type: String, slug: 'name', unique: true }
 },{
     timestamps: true,

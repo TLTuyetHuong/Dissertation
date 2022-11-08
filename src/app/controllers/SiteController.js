@@ -129,6 +129,7 @@ class SiteController {
         res.render('lienhe', {title: 'Liên Hệ'});
     }
 
+
 }
 
 module.exports = new SiteController();

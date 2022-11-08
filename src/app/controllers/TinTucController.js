@@ -17,7 +17,9 @@ class TinTucController {
 
     // [GET] /tin-tuc/:slug
     async show(req, res, next) {
-        let comments = await Comment.find({posts: req.params.slug}).sort({createdAt: -1});
+        let tintuc = await TinTuc.findOne({slug: req.params.slug}).catch(next);
+        let title = tintuc.title;
+        let comments = await Comment.find({posts: title}).sort({createdAt: -1});
         TinTuc.findOne({slug: req.params.slug})
             .then((tintucs) => {
                 if(req.params.slug==tintucs.slug){
@@ -32,7 +34,9 @@ class TinTucController {
     }
 
     // [POST] /tin-tuc/:slug
-    comment(req, res, next) {
+    async comment(req, res, next) {
+        let tintucs = await TinTuc.findOne({slug: req.params.slug}).catch(next);
+        const title = tintucs.title;
         const today = new Date();
         const month = today.getMonth()+1;
         const date = today.getDate()+'/'+month+'/'+today.getFullYear();
@@ -41,12 +45,12 @@ class TinTucController {
         const comments = new Comment({
             comment: formData.comment,
             like: formData.like,
-            posts: req.params.slug, 
+            posts: title, 
             date: date+' '+time,
         });
         comments
             .save()
-            .then(() => res.redirect("back"))
+            .then(() => res.status(403).end())
             .catch((error) => {});
     }
 
@@ -55,19 +59,6 @@ class TinTucController {
         let comments = await Comment.findById(req.params.id).catch(next);
         const like1 = comments.like;
         Comment.updateOne({ _id: req.params.id }, {like: like1+1})
-            .then(() => res.redirect("back"))
-            .catch(next);
-    }
-    
-    // [GET] /tin-tuc/sub-comment
-    subcomment(req, res, next) {
-        res.render('baiviets/sub-comment');
-    }
-
-    // [PUT] /tin-tuc/sub-comment/:id
-    async sub_comment(req, res, next) {
-        let comments = await Comment.findById(req.params.id).catch(next);
-        Comment.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect("back"))
             .catch(next);
     }

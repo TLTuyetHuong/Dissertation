@@ -8,9 +8,9 @@
             <thead style="text-align: center;">
                 <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Họ và Tên</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Thông tin Khách hàng</th>
+                        <th scope="col">Thông tin Tour</th>
+                        <th scope="col">Dữ liệu</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col"></th>
                 </tr>
@@ -19,9 +19,20 @@
                 {{#each dattours}}
                 <tr>
                         <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
-                        <td>{{this.name}}</td>
-                        <td style="text-align: center;">{{this.phone}}</td>
-                        <td>{{this.address}}</td>
+                        <td>
+                            <b>Họ và tên: </b>{{this.name}}<br>
+                            <b>Số điện thoại: </b>{{this.phone}}<br>
+                            <b>Địa chỉ: </b>{{this.address}}
+                        </td>
+                        <td>
+                            <b>Tên tour: </b>{{this.nametour}}<br>
+                            <b>Giá tour: </b>{{this.pricetour}}<br>
+                            <b>Ngày dự kiến: </b>{{this.pricetour}}
+                        </td>
+                        <td>
+                            <b>Tổng số người: </b>{{total this.sm6 this.f69 this.lg9}}<br>
+                            <b>Tổng số tiền: </b>{{this.total}}
+                        </td>
                         <td>{{this.status}}</td>
                         <td>
                             <a href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}" class="btn btn-warning">Xem chi tiết</a>

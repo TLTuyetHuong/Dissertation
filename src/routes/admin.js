@@ -4,7 +4,8 @@ const adminController = require('../app/controllers/AdminController');
 const authController = require('../app/controllers/AuthController');
 const { verifySignUp } = require("../app/middlewares/verifySignUp");
 
-
+// Quan ly Comment
+router.get('/quan-ly-comment', adminController.ql_comment);
 
 // Quan ly Tour
 router.put('/quan-ly-tour/xem-chi-tiet/:id', adminController.updateDatTour);
@@ -14,6 +15,7 @@ router.post('/quan-ly-tin-tuc', adminController.addTour);
 router.get('/quan-ly-tour/:id/sua-tour', adminController.editTour);
 router.get('/quan-ly-tour/xem-chi-tiet/:id', adminController.editDatTour);
 router.get('/quan-ly-tour/danh-sach-khach-dat-tour', adminController.ds_tour);
+router.get('/quan-ly-dat-tour', adminController.ql_dattour);
 router.get('/quan-ly-tour', adminController.ql_tour);
 
 // Quan ly Tin Tuc

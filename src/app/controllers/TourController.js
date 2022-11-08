@@ -39,6 +39,7 @@ class TourController {
         const price75 = str * (75/100);
         const dattours = new DatTour(formData);
         dattours.total = (formData.f69 * price75) + (formData.lg9 * str);
+        dattours.day = formData.day.slice(8,10) +'-'+ formData.day.slice(5,7) +'-'+ formData.day.slice(0,4);
         emailService.sendSimpleEmail({
             receiverEmail: formData.email,
             patientName: formData.name,
@@ -48,9 +49,9 @@ class TourController {
             patientLG10: formData.lg9,
             nameTour: formData.nametour,
             priceTour: formData.pricetour,
-            total: dattours.total,
-            departureDay: formData.day,
-        })
+            total: dattours.total.toLocaleString('vi', {style: 'currency', currency: 'VND' }),
+            departureDay: dattours.day,
+        });
         dattours
             .save()
             .then(() => res.redirect("back"))
