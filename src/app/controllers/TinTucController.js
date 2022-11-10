@@ -23,7 +23,7 @@ class TinTucController {
         TinTuc.findOne({slug: req.params.slug})
             .then((tintucs) => {
                 if(req.params.slug==tintucs.slug){
-                    res.render('baiviets/'+req.params.slug, {
+                    res.render('baiviets/tintuc/'+req.params.slug, {
                         title: tintucs.title,
                         slug: tintucs.slug,
                         comments: multipleMongooseToObject(comments),

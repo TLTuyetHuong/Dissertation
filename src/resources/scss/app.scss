@@ -24,6 +24,8 @@ body a {
 
 .nav-item li a {
     text-decoration: none;
+    padding: 10px 0;
+    
 }
    
 .carousel-item {
@@ -418,12 +420,16 @@ body a {
     background-color: rgb(251, 248, 245);
 }
 
-#like form button{
-    border: none;
-    a {
-        color: #404040;
-        &:visited{
-            color: blue;
+.like span{
+    float: left;
+    form {
+        button {
+            border: none;
+        }
+        a {
+            &:visited {
+                color: blue;
+            }
         }
     }
 }
@@ -437,4 +443,29 @@ body a {
     background-size: 100%;
     background-repeat: no-repeat;
     height: auto;
+}
+
+.chartbar {
+    width: 100%;
+    height: auto;
+    border-color: rgb(255, 255, 255);
+}
+
+.khachsan h5{
+    height: 54px; 
+    line-height: 54px;
+    margin-top: 88%;
+    transition: all .3s ease;
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 3px 3px;
+    &:hover {
+        height: 54px;
+        line-height: 54px;
+        margin-top: 83%;
+        color: aliceblue;
+        text-shadow: 1px 1px black;
+        // background-color: rgba(255, 255, 255, 0);
+        background-color: rgba(0, 0, 0, 0.195);
+    }
 }

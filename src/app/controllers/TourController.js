@@ -2,6 +2,7 @@ const emailService = require('../services/emailSevice');
 const Tour = require('../models/Tour');
 const DatTour = require('../models/DatTour');
 const TraiNghiem = require('../models/TraiNghiem');
+const Comment = require('../models/Comment');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { mongooseToObject } = require('../../until/mongoose');
 
@@ -19,12 +20,17 @@ class TourController {
     }
 
     // [GET] /tour/:slug
-    chiTiet(req, res, next) {
+    async chiTiet(req, res, next) {
+        let tour = await Tour.findOne({slug: req.params.slug}).catch(next);
+        let title = tour.title;
+        let comments = await Comment.find({posts: title}).sort({createdAt: -1});
         Tour.findOne({slug: req.params.slug})
             .then((tours) => {
                 if(req.params.slug==tours.slug){
                     res.render('tour/'+req.params.slug, {
                         title: tours.name,
+                        slug: tours.slug,
+                        comments: multipleMongooseToObject(comments),
                         tours: mongooseToObject(tours)
                     });
                 }
@@ -71,11 +77,18 @@ class TourController {
     }
 
     // [GET] /tour/trai-nghiem/:slug
-    show(req, res, next) {
+    async show(req, res, next) {
+        let trainghiem = await TraiNghiem.findOne({slug: req.params.slug}).catch(next);
+        let title = trainghiem.title;
+        let comments = await Comment.find({posts: title}).sort({createdAt: -1});
         TraiNghiem.findOne({slug: req.params.slug})
             .then((trainghiems) => {
                 if(req.params.slug==trainghiems.slug){
-                    res.render('baiviets/'+req.params.slug, {title: trainghiems.name})
+                    res.render('baiviets/review/'+req.params.slug, {
+                        title: trainghiems.name,
+                        comments: multipleMongooseToObject(comments),
+                        slug: trainghiems.slug,
+                    })
                 }
             })
             .catch(next);
@@ -88,7 +101,44 @@ class TourController {
 
     // [GET] /tour/lich-trinh-goi-y/:slug
     lichTrinhGY(req, res, next) {
-        res.render('tour/'+req.params.slug, {title: 'Lịch trình gợi ý'})
+        res.render('tour/lichtrinhgoiy/'+req.params.slug, {title: 'Lịch trình gợi ý'})
+    }
+
+    // [POST] /tour/:slug
+    async comment(req, res, next) {
+        let tours = await Tour.findOne({slug: req.params.slug}).catch(next);
+        let trainghiems = await TraiNghiem.findOne({slug: req.params.slug}).catch(next);
+        const title = '';
+        if(tours){
+            title = tours.title;
+        }
+        if(trainghiems){
+            title = tours.title;
+        }
+        const today = new Date();
+        const month = today.getMonth()+1;
+        const date = today.getDate()+'/'+month+'/'+today.getFullYear();
+        const time = today.getHours() + ":" + today.getMinutes();
+        const formData = req.body;
+        const comments = new Comment({
+            comment: formData.comment,
+            like: formData.like,
+            posts: title, 
+            date: date+' '+time,
+        });
+        comments
+            .save()
+            .then(() => res.redirect('back'))
+            .catch((error) => {});
+    }
+
+    // [PUT] /tour/like/:id
+    async like(req, res, next) {
+        let comments = await Comment.findById(req.params.id).catch(next);
+        const like1 = comments.like;
+        Comment.updateOne({ _id: req.params.id }, {like: like1+1})
+            .then(() => res.redirect("back"))
+            .catch(next);
     }
 }
 

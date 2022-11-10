@@ -139,4 +139,46 @@ p {
     transition: all 0.3s ease-in-out;
 }
 
+.carreaux_presentation_light
+{
+  display:table-cell;
+  width:210px; height:210px;
+  background-size:210px;
+  background-repeat:no-repeat;
+  overflow: hidden;
+  position: relative;
+}
+.carreaux_presentation_light .shadow_swhow_mini
+{
+  /* background-color:rgba(19,30,33,0.4); */
+  position: absolute;
+  z-index: 1000;
+  top:0;left:0;right:0;bottom:0;
+  
+}
+.carreaux_presentation_light:hover .shadow_swhow_mini
+{
+  background-color:rgba(16,23,41,0);
+}
+.carreaux_presentation_light .deroul_titre
+{
+  position: absolute;
+  text-transform: uppercase;
+  font-family: 'Roboto';
+  padding: 7px;
+  z-index: 1000;
+  top:60%;left:-80%;
+  color:#ffffff;
+  font-weight: 300;
+  font-size: 13px; width: 80%;
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  -ms-transition: all 0.7s;
+  transition: all 0.7s;
 
+}
+.carreaux_presentation_light:hover .deroul_titre
+{
+  background-color:#1e4944; left:0px;
+  
+}

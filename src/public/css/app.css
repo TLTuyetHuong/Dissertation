@@ -15,7 +15,8 @@ body a {
   padding: 0 10px; }
 
 .nav-item li a {
-  text-decoration: none; }
+  text-decoration: none;
+  padding: 10px 0; }
 
 .carousel-item {
   height: 715px;
@@ -329,12 +330,12 @@ body a {
   border: 1px solid;
   background-color: #fbf8f5; }
 
-#like form button {
-  border: none; }
-  #like form button a {
-    color: #404040; }
-    #like form button a:visited {
-      color: blue; }
+.like span {
+  float: left; }
+  .like span form button {
+    border: none; }
+  .like span form a:visited {
+    color: blue; }
 
 #carouselExampleSlidesOnly {
   pointer-events: none; }
@@ -344,3 +345,24 @@ body a {
   background-size: 100%;
   background-repeat: no-repeat;
   height: auto; }
+
+.chartbar {
+  width: 100%;
+  height: auto;
+  border-color: white; }
+
+.khachsan h5 {
+  height: 54px;
+  line-height: 54px;
+  margin-top: 88%;
+  transition: all .3s ease;
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 3px 3px; }
+  .khachsan h5:hover {
+    height: 54px;
+    line-height: 54px;
+    margin-top: 83%;
+    color: aliceblue;
+    text-shadow: 1px 1px black;
+    background-color: rgba(0, 0, 0, 0.195); }

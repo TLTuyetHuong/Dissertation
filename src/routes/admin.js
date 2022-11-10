@@ -4,6 +4,13 @@ const adminController = require('../app/controllers/AdminController');
 const authController = require('../app/controllers/AuthController');
 const { verifySignUp } = require("../app/middlewares/verifySignUp");
 
+// Quan ly Khach San
+router.put('/quan-ly-khach-san/:id', adminController.updateKhachSan);
+router.delete('/quan-ly-khach-san/:id', adminController.deleteKhachSan);
+router.post('/quan-ly-khach-san', adminController.addKhachSan);
+router.get('/quan-ly-khach-san/:id/sua-khach-san', adminController.editKhachSan);
+router.get('/quan-ly-khach-san', adminController.ql_khachsan);
+
 // Quan ly Comment
 router.get('/quan-ly-comment', adminController.ql_comment);
 
@@ -40,6 +47,7 @@ router.get('/quan-ly-am-thuc/:id/sua-am-thuc', adminController.editAmThuc); // H
 router.get('/quan-ly-am-thuc', adminController.ql_amthuc)   // Trang Quản lý Ẩm thực
 
 // Admin
+router.put('/avatar/:id', adminController.updateAvatar); 
 router.put('/:id', adminController.updateAdmin);    // Cập nhật thông tin Admin
 router.put('/doi-mat-khau/:id', adminController.changePassword); 
 router.delete('/danh-sach-admin/:id', adminController.deleteAdmin);

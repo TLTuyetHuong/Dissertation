@@ -1,0 +1,149 @@
+<div id="page-top">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+            {{>admin}}
+            <div id="filter">
+                  <!-- Begin Page Content -->
+                  <div class="container-fluid" id="demo">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                              <h1 class="h3 mb-0 text-gray-800">Quản lý Nơi Ở</h1>
+                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        </div>
+
+                        <div id="change">
+                        <!-- Button trigger modal -->
+                        <div style="text-align: right;">
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
+                                    Thêm Nơi Ở
+                              </button>
+                        </div>
+
+                        <div id="khachsan">
+
+                              <div>
+                                    <table class="table table-hover" id="dtBasicExample">
+                                          <thead style="text-align: center;">
+                                                <tr>
+                                                      <th scope="col">STT</th>
+                                                      <th scope="col">Hình ảnh</th>
+                                                      <th scope="col">Tiêu đề</th>
+                                                      <th scope="col"></th>
+                                                </tr>
+                                          </thead>
+                                          <tbody id="myfilter">
+                                                {{#each khachsan}}
+                                                <tr>
+                                                      <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                      <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
+                                                      <td>{{this.title}}</td>
+                                                      <td>
+                                                            <a href="/admin/quan-ly-khach-san/{{this._id}}/sua-khach-san" class="btn btn-warning">Sửa</a>
+                                                            <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
+                                                      </td>
+                                                </tr>
+                                                {{/each}}
+                                          </tbody>
+                                    </table>
+                              </div>
+                        </div>
+
+                        <!-- Form Thêm -->
+                        <div class="modal fade" id="formCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                          <form action="/admin/quan-ly-khach-san" method="POST">
+                                                <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">THÊM BÀI VIẾT MỚI</h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                      <div>
+                                                            <section style="background-color: #eee; color:black">
+
+                                                                  <div class="row px-5">
+                                                                        <div class="col">
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="title" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Tiêu đề</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="image" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                                                              </div>
+                                                                              {{!-- <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="color" name="color" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Màu sắc đường viền</label>
+                                                                              </div> --}}
+                                                                        </div>
+                                                                  </div>
+                                                            </section>
+                                                      </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                                      <button type="submit" class="btn btn-success">Thêm</button>
+                                                </div>
+                                          </form>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Form Thêm -->
+
+                        <!-- Modal Xoá -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Bài Viết?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xoá bài viết này?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button id="btn-delete" type="button"
+                                                      class="btn btn-danger">Xoá</button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Modal Xoá -->
+
+                        {{!-- Form hidden delete --}}
+                        <form name="form-dd-delete" method="POST"></form>
+                        {{!-- Form hidden delete --}}
+                        </div>
+                  </div>
+
+            </div>
+      </div>
+      <!-- End of Page Wrapper -->
+      <!-- End of Content Wrapper -->
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                        <span>Copyright &copy;2022</span>
+                  </div>
+            </div>
+      </footer>
+      <!-- End of Footer -->
+
+      </div>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="/js/deleteKhachSan.js"></script>
+

@@ -5,6 +5,7 @@ const tourRouter = require('./tour');
 const adminRouter = require('./admin');
 const khamPhaRouter = require('./khampha');
 const leHoiRouter = require('./lehoi');
+const hotelRouter = require('./hotel');
 
 function route(app) {
     app.use('/le-hoi', leHoiRouter);
@@ -12,6 +13,7 @@ function route(app) {
     app.use('/tin-tuc', tinTucRouter);
     app.use('/kham-pha', khamPhaRouter);
     app.use('/tour', tourRouter);
+    app.use('/khach-san', hotelRouter);
     app.use('/admin', adminRouter);
     app.use('/', siteRouter);
 }

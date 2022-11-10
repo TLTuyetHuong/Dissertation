@@ -19,6 +19,7 @@ const { timeStamp } = require("console");
 //multer
 const multer  = require('multer');
 const { countDocuments } = require("../models/DatTour");
+const KhachSan = require("../models/KhachSan");
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'src/public/img')
@@ -49,23 +50,41 @@ class AdminController {
             let docs = await DatTour.aggregate([
                 { $match: { status: 'Đã duyệt'} }
             ]);
-            let sum = 0, sumM = 0, i;
-            for(i=0;i<docs.length;i++){
-                const year = docs[i].createdAt;
-                if(year.getFullYear() == today.getFullYear())
-                    sum = sum + docs[i].total;
-            }
-            let S = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
+            let sum = 0, sumM = 0, i, j, sumPeople = 0;
             for(i=0;i<docs.length;i++){
                 const date = docs[i].createdAt;
-                if(date.getMonth()+1 == today.getMonth()+1)
+                if(date.getFullYear() == today.getFullYear()){
+                    sum = sum + docs[i].total;
+                }
+                if(date.getMonth()+1 == today.getMonth()+1){
                     sumM = sumM + docs[i].total;
+                }
+                sumPeople = sumPeople + (docs[i].sm6 + docs[i].f69 + docs[i].lg9);
+                
             }
-            let s = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
+            let sumYear = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
+            let sumMonth = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
+            let nameTour = await DatTour.aggregate([
+                {
+                    $match: { status: 'Đã duyệt'}
+                },
+                {
+                    $group: {_id: "$nametour"}
+                }
+            ]);
+            for(i=0;i<nameTour.length;i++){
+                let count = await DatTour.find({nametour: nameTour[i]._id}).countDocuments();
+                // console.log(count);
+                // console.log(Math.max(count));
+            }
+            // let dt = await DatTour.findOne({total: max[0].total}).catch(next);
+            // const maxPriceTour = dt.nametour;
             res.render("admin", {
                 title: "Admin",
-                Total: S,
-                Sum: s,
+                Total: sumYear,
+                Sum: sumMonth,
+                sumPeople: sumPeople,
+                totalVisit: docs.length,
                 admins: mongooseToObject(admins),
                 dattours: multipleMongooseToObject(dattours),
             });
@@ -149,6 +168,13 @@ class AdminController {
             .catch(next);
     }
 
+    // [PUT] /admin/avatar/:id
+    updateAvatar(req, res, next) {
+        Admin.updateOne({ _id: req.params.id }, {image: req.body.avatar})
+            .then(() => res.redirect("/admin"))
+            .catch(next);
+    }
+
     // [DELETE] /admin/:id
     deleteAdmin(req, res, next) {
         Admin.deleteOne({ _id: req.params.id })
@@ -224,23 +250,35 @@ class AdminController {
                     let docs = await DatTour.aggregate([
                         { $match: { status: 'Đã duyệt'} }
                     ]);
-                    let sum = 0, sumM = 0, i;
-                    for(i=0;i<docs.length;i++){
-                        const year = docs[i].createdAt;
-                        if(year.getFullYear() == today.getFullYear())
-                            sum = sum + docs[i].total;
-                    }
-                    let S = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
+                    let sum = 0, sumM = 0, i, j, sumPeople = 0;
                     for(i=0;i<docs.length;i++){
                         const date = docs[i].createdAt;
-                        if(date.getMonth()+1 == today.getMonth()+1)
+                        if(date.getFullYear() == today.getFullYear()){
+                            sum = sum + docs[i].total;
+                        }
+                        if(date.getMonth()+1 == today.getMonth()+1){
                             sumM = sumM + docs[i].total;
+                        }
+                        sumPeople = sumPeople + (docs[i].sm6 + docs[i].f69 + docs[i].lg9);
+                        
                     }
-                    let s = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' })
+                    let sumYear = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
+                    let sumMonth = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' });
+                    let nameTour = await DatTour.aggregate([
+                        {
+                            $match: { status: 'Đã duyệt'}
+                        },
+                        {$group: {
+                            _id: "$nametour"
+                        }}
+                    ]);
                     res.render("admin", {
                         title: "Admin",
-                        Total: S,
-                        Sum: s,
+                        Total: sumYear,
+                        Sum: sumMonth,
+                        sumPeople: sumPeople,
+                        nameTour: nameTour,
+                        totalVisit: docs.length,
                         admins: mongooseToObject(admins),
                         dattours: multipleMongooseToObject(dattours),
                     });
@@ -412,6 +450,8 @@ class AdminController {
             .then(() => res.redirect("/admin/quan-ly-am-thuc"))
             .catch(next);
     }
+
+    // Quan Ly Tin Tuc //
 
     // [GET] /admin/quan-ly-tin-tuc
     async ql_tintuc(req, res, next) {
@@ -701,6 +741,81 @@ class AdminController {
     updateComment(req, res, next) {
         Tour.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect("/admin/quan-ly-comment"))
+            .catch(next);
+    }
+
+    // Quan Ly Khach San
+
+    // [GET] /admin/quan-ly-khach-san
+    async ql_khachsan(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let khachsan = await KhachSan.find({}).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_khachsan", {
+                title: "Quản lý Khách Sạn",
+                admins: mongooseToObject(admins),
+                khachsan: multipleMongooseToObject(khachsan),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-khach-san"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [POST] /admin/quan-ly-khach-san
+    async addKhachSan(req, res, next) {
+        const formData = req.body;
+        const khachsan = await KhachSan.findOne({
+            title: formData.title,
+        });
+        if (!khachsan) {
+            const khachsans = new KhachSan(formData);
+            khachsans
+                .save()
+                .then(() => res.redirect("back"))
+                .catch((error) => {});
+        } else {
+            res.send("Đã có tài khoản này rồi!!!");
+        }
+    }
+
+    // [GET] /admin/quan-ly-khach-san/:id
+    async editKhachSan (req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let khachsans = await KhachSan.findById(req.params.id).catch(next); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+
+        if (req.session.daDangNhap) {
+            res.render("admin/edit-khach-san", {
+                title: "Quản lý Tin tức",
+                admins: mongooseToObject(admins),
+                khachsans: mongooseToObject(khachsans),
+                dattours: multipleMongooseToObject(dattours),
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-khach-san"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [DELETE] /admin/quan-ly-khach-san/:id
+    deleteKhachSan(req, res, next) {
+        KhachSan.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-khach-san/:id
+    updateKhachSan(req, res, next) {
+        KhachSan.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-khach-san"))
             .catch(next);
     }
 }

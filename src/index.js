@@ -10,6 +10,7 @@ const multer = require('multer');
 const bcrypt = require('bcrypt');
 const { expressjwt: jwt } = require("express-jwt");
 const hbs = require('express-handlebars');
+const fetch = require('node-fetch');
 const app = express();
 const port = 5000;
 
