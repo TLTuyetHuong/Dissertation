@@ -309,7 +309,7 @@ class AdminController {
     // [GET] /admin/quan-ly-dia-diem
     async ql_diadiem(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let diadiems = await DiaDiem.find({}).catch(next); 
+        let diadiems = await DiaDiem.find({}).sort({updatedAt: -1}).catch(next); 
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         if (req.session.daDangNhap) {
             res.render("admin/ql_diadiem", {
@@ -383,7 +383,7 @@ class AdminController {
     async ql_amthuc(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
         const dattours = await DatTour.find({}).sort({createdAt: -1});
-        const amthucs = await AmThuc.find({}).catch(next);
+        const amthucs = await AmThuc.find({}).sort({updatedAt: -1}).catch(next);
 
         if (req.session.daDangNhap) {
             res.render("admin/ql_amthuc", {
@@ -456,7 +456,7 @@ class AdminController {
     // [GET] /admin/quan-ly-tin-tuc
     async ql_tintuc(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let tintucs = await TinTuc.find({}).catch(next); 
+        let tintucs = await TinTuc.find({}).sort({updatedAt: -1}).catch(next); 
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         if (req.session.daDangNhap) {
@@ -531,7 +531,7 @@ class AdminController {
     // [GET] /admin/quan-ly-tour
     async ql_tour(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let tours = await Tour.find({}).catch(next); 
+        let tours = await Tour.find({}).sort({updatedAt: -1}).catch(next); 
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         if (req.session.daDangNhap) {
@@ -680,25 +680,6 @@ class AdminController {
         
     }
 
-    // [GET] /admin/quan-ly-comment/danh-sach-khach-dat-tour
-    async ds_comment(req, res, next) {
-        let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let dattours = await DatTour.find({}).catch(next); 
-        
-        if (req.session.daDangNhap) {
-            res.render("admin/danh-sach-khach-dat-tour", {
-                title: "Quản lý Tours",
-                admins: mongooseToObject(admins),
-                dattours: multipleMongooseToObject(dattours),
-            });
-        }
-        else { 
-            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
-            res.redirect("/admin/login");
-        }
-        
-    }
-
     // [POST] /admin/quan-ly-comment
     async addComment(req, res, next) {
         const formData = req.body;
@@ -749,7 +730,7 @@ class AdminController {
     // [GET] /admin/quan-ly-khach-san
     async ql_khachsan(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let khachsan = await KhachSan.find({}).catch(next); 
+        let khachsan = await KhachSan.find({}).sort({updatedAt: -1}).catch(next); 
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         
         if (req.session.daDangNhap) {

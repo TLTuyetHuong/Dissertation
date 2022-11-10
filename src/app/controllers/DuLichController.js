@@ -20,7 +20,7 @@ class DuLichController {
     // [GET] /du-lich/dia-diem/:slug
     async show(req, res, next) {
         let diadiem = await DiaDiem.findOne({slug: req.params.slug}).catch(next);
-        let title = diadiem.title;
+        let title = diadiem.name;
         let comments = await Comment.find({posts: title}).sort({createdAt: -1});
         DiaDiem.findOne({slug: req.params.slug})
             .then(diadiems => {
@@ -78,7 +78,7 @@ class DuLichController {
     // [POST] /dia-diem/comment/:slug
     async commentDD(req, res, next) {
         let diadiems = await DiaDiem.findOne({slug: req.params.slug}).catch(next);
-        const title = diadiems.title;
+        const title = diadiems.name;
         const today = new Date();
         const month = today.getMonth()+1;
         const date = today.getDate()+'/'+month+'/'+today.getFullYear();

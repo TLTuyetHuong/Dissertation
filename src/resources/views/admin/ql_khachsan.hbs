@@ -30,6 +30,7 @@
                                                       <th scope="col">STT</th>
                                                       <th scope="col">Hình ảnh</th>
                                                       <th scope="col">Tiêu đề</th>
+                                                      <th scope="col">Loại</th>
                                                       <th scope="col"></th>
                                                 </tr>
                                           </thead>
@@ -39,6 +40,7 @@
                                                       <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                       <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
                                                       <td>{{this.title}}</td>
+                                                      <td style="text-align: center;">{{this.type}}</td>
                                                       <td>
                                                             <a href="/admin/quan-ly-khach-san/{{this._id}}/sua-khach-san" class="btn btn-warning">Sửa</a>
                                                             <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
@@ -74,6 +76,14 @@
                                                                               <div class="form-outline flex-fill mb-0 py-2">
                                                                                     <input type="text" name="image" id="form3Example1c" class="form-control" required />
                                                                                     <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <select name="type" class="form-select" aria-label="Default select example">
+                                                                                          <option selected>Chọn type</option>
+                                                                                          <option value="synthetic">Tổng hợp</option>
+                                                                                          <option value="hotel">Khách sạn</option>
+                                                                                          <option value="homestay">Homestay</option>
+                                                                                    </select>
                                                                               </div>
                                                                               {{!-- <div class="form-outline flex-fill mb-0 py-2">
                                                                                     <input type="color" name="color" id="form3Example1c" class="form-control" required />
