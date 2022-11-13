@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
+const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
-
-mongoose.plugin(slug);
 
 const AmThuc = new Schema({
     title: { type: String, require: true},
@@ -18,6 +17,13 @@ const AmThuc = new Schema({
     slug: { type: String, slug: 'title', unique: true }
 },{
     timestamps: true,
+});
+
+// Add slugins
+mongoose.plugin(slug);
+AmThuc.plugin(mongooseDelete, { 
+    deletedAt : true ,
+    overrideMethods: 'all' ,
 });
 
 module.exports = mongoose.model('AmThuc', AmThuc, 'amthucs');

@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', function(){
       var ddID;
       var deleteForm = document.forms['form-dd-delete'];
+      var containerForm = $('form[name="container-form"]');
+
+      var checkboxAll = $('#checkbox-all');
+      var itemCheckbox = $('input[name="khachsanIds[]"]');
+      var checkAllSubmitBtn = $('.check-all-submit-btn');
+      var deleteForm = document.forms['form-dd-delete'];
+      var restoreForm = document.forms['form-dd-restore'];
+
       var btnDelete = document.getElementById('btn-delete');
+
+      var restoreBtn = $('.btn-restore');
 
       $('#modalDelete').on('show.bs.modal', event => {
             // Button that triggered the modal
@@ -11,7 +21,38 @@ document.addEventListener('DOMContentLoaded', function(){
       });
 
       btnDelete.onclick = function () {
-            deleteForm.action = '/admin/quan-ly-khach-san/' + ddID + '?_method=DELETE'; 
+            deleteForm.action = '/admin/quan-ly-khach-san/' + ddID + '/force?_method=DELETE'; 
             deleteForm.submit();
-    }
+      }
+
+      // Restore btn clicked
+      restoreBtn.click( function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            restoreForm.action = '/admin/quan-ly-khach-san/' + id + '/khoi-phuc?_method=PATCH'; 
+            restoreForm.submit();
+      });
+
+      // Checkbox all click
+      checkboxAll.change(function () {
+            var isCheckedAll = $(this).prop('checked');
+            itemCheckbox.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn();
+      });
+
+      // item checkbox changed
+      itemCheckbox.change( function () {
+            var isCheckedAll = itemCheckbox.length === $('input[name="khachsanIds[]"]:checked').length;
+            checkboxAll.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn();
+      });
+
+      function renderCheckAllSubmitBtn() {
+            var checkedCount = $('input[name="khachsanIds[]"]:checked').length;
+            if(checkedCount > 0){
+                  checkAllSubmitBtn.attr('disabled', false);
+            } else {
+                  checkAllSubmitBtn.attr('disabled', true);
+            }
+      }
 })

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
+const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
-
-mongoose.plugin(slug);
 
 const Tour = new Schema({
     name: { type: String, require: true},
@@ -12,6 +11,13 @@ const Tour = new Schema({
     slug: { type: String, slug: 'name', unique: true }
 },{
     timestamps: true,
+});
+
+// Add slugins
+mongoose.plugin(slug);
+Tour.plugin(mongooseDelete, { 
+    deletedAt : true ,
+    overrideMethods: 'all' ,
 });
 
 module.exports = mongoose.model('Tour', Tour, 'tours');

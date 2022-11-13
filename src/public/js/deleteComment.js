@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
       var containerForm = $('form[name="container-form"]');
 
       var checkboxAll = $('#checkbox-all');
-      var itemCheckbox = $('input[name="diadiemIds[]"]');
+      var itemCheckbox = $('input[name="commentIds[]"]');
       var checkAllSubmitBtn = $('.check-all-submit-btn');
       var deleteForm = document.forms['form-dd-delete'];
       var restoreForm = document.forms['form-dd-restore'];
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
       });
 
       btnDelete.onclick = function () {
-            deleteForm.action = '/admin/quan-ly-dia-diem/' + ddID + '/force?_method=DELETE'; 
+            deleteForm.action = '/admin/quan-ly-comment/' + ddID + '/force?_method=DELETE'; 
             deleteForm.submit();
       }
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function(){
       restoreBtn.click( function (e) {
             e.preventDefault();
             var id = $(this).data('id');
-            restoreForm.action = '/admin/quan-ly-dia-diem/' + id + '/khoi-phuc?_method=PATCH'; 
+            restoreForm.action = '/admin/quan-ly-comment/' + id + '/khoi-phuc?_method=PATCH'; 
             restoreForm.submit();
       });
 
@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
       // item checkbox changed
       itemCheckbox.change( function () {
-            var isCheckedAll = itemCheckbox.length === $('input[name="diadiemIds[]"]:checked').length;
+            var isCheckedAll = itemCheckbox.length === $('input[name="commentIds[]"]:checked').length;
             checkboxAll.prop('checked', isCheckedAll);
             renderCheckAllSubmitBtn();
       });
 
       function renderCheckAllSubmitBtn() {
-            var checkedCount = $('input[name="diadiemIds[]"]:checked').length;
+            var checkedCount = $('input[name="commentIds[]"]:checked').length;
             if(checkedCount > 0){
                   checkAllSubmitBtn.attr('disabled', false);
             } else {

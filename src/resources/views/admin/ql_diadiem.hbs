@@ -10,24 +10,43 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                               <h1 class="h3 mb-0 text-gray-800">Quản lý Điểm Đến</h1>
-                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                              <div style="float: right;">
+                                    <a class="nav-link" href="/admin/quan-ly-dia-diem/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
+                                          <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
+                                          <span class="badge badge-danger badge-counter">{{deletedCount}}</span>
+                                    </a>
+                              </div>
+                              {{!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
                         </div>
-
-                        <div id="change">
-                        <!-- Button trigger modal -->
-                        <div style="text-align: right;">
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
-                                    Thêm điểm đến
-                              </button>
+                        <div class="m-3">
+                              <div style="text-align: right;">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
+                                          Thêm điểm đến
+                                    </button>
+                              </div>
+                              
                         </div>
-
+                        <form name="container-form" method="POST" action="/admin/quan-ly-dia-diem/handle-form-action">
+                        
+                        <div class="d-flex align-items-center mb-3">
+                              <div class="form-check" style="padding-right: 10px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+                                    <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
+                              </div>
+                              <select name="action" class="form-select" aria-label="Default select example" style="width: 200px" required>
+                                    <option selected>-- Chọn hành động --</option>
+                                    <option value="delete">Xoá</option>
+                              </select>
+                              <button class="btn btn-primary check-all-submit-btn" disabled>Thực hiện</button>
+                        </div>
                         <div id="diemden">
 
                               <div>
                                     <table class="table table-hover" id="dtBasicExample">
                                           <thead style="text-align: center;">
                                                 <tr>
+                                                      <th></th>
                                                       <th scope="col">STT</th>
                                                       <th scope="col">Hình ảnh</th>
                                                       <th scope="col">Tên điểm đến</th>
@@ -37,7 +56,12 @@
                                           </thead>
                                           <tbody id="myfilter">
                                                 {{#each diadiems}}
-                                                <tr>
+                                                <tr>  
+                                                      <th>
+                                                            <div class="form-check" style="padding-right: 10px;">
+                                                                  <input class="form-check-input" type="checkbox" name="diadiemIds[]" value="{{this._id}}">
+                                                            </div>
+                                                      </th>
                                                       <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                       <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
                                                       <td>{{this.name}}</td>
@@ -47,12 +71,16 @@
                                                             <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
                                                       </td>
                                                 </tr>
+                                                {{else}}
+                                                <tr class="text-center">
+                                                      <td colspan="6">Chưa có điểm đến nào. <a type="button" data-bs-toggle="modal" data-bs-target="#formCreate">Thêm điểm đến</a></td>
+                                                </tr>
                                                 {{/each}}
                                           </tbody>
                                     </table>
                               </div>
                         </div>
-
+                        </form>
                         <!-- Form Thêm -->
                         <div class="modal fade" id="formCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
                               aria-hidden="true">
@@ -153,7 +181,7 @@
                         {{!-- Form hidden delete --}}
                         <form name="form-dd-delete" method="POST"></form>
                         {{!-- Form hidden delete --}}
-                        </div>
+                        
                   </div>
 
             </div>
@@ -177,4 +205,50 @@
 
 <!-- Page level custom scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="/js/deleteDiaDiem.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', function(){
+            var ddID;
+            var deleteForm = document.forms['form-dd-delete'];
+            var containerForm = $('form[name="container-form"]');
+
+            var btnDelete = document.getElementById('btn-delete');
+            var checkboxAll = $('#checkbox-all');
+            var itemCheckbox = $('input[name="diadiemIds[]"]');
+            var checkAllSubmitBtn = $('.check-all-submit-btn');
+
+            $('#modalDelete').on('show.bs.modal', event => {
+                  // Button that triggered the modal
+                  var button = event.relatedTarget
+                  // Extract info from data-bs-* attributes
+                  ddID = button.getAttribute('data-bs-id')
+            });
+
+            btnDelete.onclick = function () {
+                  deleteForm.action = '/admin/quan-ly-dia-diem/' + ddID + '?_method=DELETE'; 
+                  deleteForm.submit();
+            }
+
+            // Checkbox all click
+            checkboxAll.change(function () {
+                  var isCheckedAll = $(this).prop('checked');
+                  itemCheckbox.prop('checked', isCheckedAll);
+                  renderCheckAllSubmitBtn();
+            });
+
+            // item checkbox changed
+            itemCheckbox.change( function () {
+                  var isCheckedAll = itemCheckbox.length === $('input[name="diadiemIds[]"]:checked').length;
+                  checkboxAll.prop('checked', isCheckedAll);
+                  renderCheckAllSubmitBtn();
+            });
+
+            function renderCheckAllSubmitBtn() {
+                  var checkedCount = $('input[name="diadiemIds[]"]:checked').length;
+                  if(checkedCount > 0){
+                        checkAllSubmitBtn.attr('disabled', false);
+                  } else {
+                        checkAllSubmitBtn.attr('disabled', true);
+                  }
+            }
+      });
+</script>

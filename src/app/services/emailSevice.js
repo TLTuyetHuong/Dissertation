@@ -21,7 +21,7 @@ let sendSimpleEmail = async (dataSend) => {
         html:  `
         <h3>Xin chào ${dataSend.patientName}!</h3>
         <p>Bạn nhận được email này vì đã đặt tour <b>${dataSend.nameTour} </b> trên website Quảng bá Du lịch và Ẩm thực TP Cần Thơ của chúng tôi!</p>
-        <p>Bạn hãy vui lòng xác nhận lại đầy đủ thông tin: </p>
+        <p>Cảm ơn bạn rất nhiều vì đã đặt tour bên mình bạn nhé! Bạn hãy vui lòng xác nhận lại đầy đủ thông tin: </p>
         <ul>
             <li><b>Họ và Tên: </b>${dataSend.patientName}.</li>
             <li><b>Số điện thoại: </b>${dataSend.patientPhone}.</li>

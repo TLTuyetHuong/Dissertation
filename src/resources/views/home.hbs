@@ -216,34 +216,84 @@
 {{!-- button --}}
 {{!-- Dia diem --}}
 <div style="background-color: #ebebeb;">
-<div class="p-5 container">
-    <div class="row">
-        {{#each places}}
-        <div class="col-sm-6 col-lg-4 py-2">
-            <div class="card img-fluid zoomin">
-                <a href="/du-lich/dia-diem/{{this.slug}}">
-                    <img style="height: 360px;" class="card-img-top" src="{{this.image}}"
-                        alt="Card image">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title text-white title1 text-center p-1"><b>{{this.name}}</b></h4>
+    <div class="p-5 container">
+        <div class="row">
+            <div class="col">
+                <div class="card img-fluid news-home">
+                    <a href="/tin-tuc/non-la-thu-phap-khong-lo-o-ben-ninh-kieu">
+                        <img style="height: 320px;" class="card-img-top" src="https://baocantho.com.vn/image/news/2022/20221018/thumbnail/510x286/1666058210.jpg"
+                            alt="Card image">
+                        <div class="card-img-overlay">
+                            <h5 class="p-1"><b>Nón lá thư pháp khổng lồ ở Bến Ninh Kiều</b></h5>
+                            <p>(CTO) - Mấy ngày gần đây, sự xuất hiện của chiếc nón lá khổng lồ được tạo nên từ hàng trăm chiếc nón lá được viết thư pháp khiến người dân và du khách thích thú.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card img-fluid news-home">
+                            <a href="/tin-tuc/am-thuc-tu-de-mat-mia">
+                                <div class="title-news">
+                                    <h5 class="p-1"><b>Ẩm thực từ dế mật mía </b></h5>
+                                    <p>Ở Tây Nam Bộ có nhiều món ngon dân dã được làm từ những nguyên liệu sẵn có trong cuộc sống thường ngày. Tại đây cũng có nhiều đặc sản với những nguyên liệu ít ai ngờ tới, mà một trong những ví dụ là dế. Dế gắn liền với tuổi thơ của nhiều người và cũng là món ăn giàu chất dinh dưỡng với những cách chế biến đa dạng.</p>
+                                </div>
+                                <img style="height: 320px;" class="card-img-top" src="https://baocantho.com.vn/imagetsdt/tsdt/2022/20221012/images/banh%20khot.jpg"
+                                    alt="Card image">
+                            </a>
+                        </div>
                     </div>
-                </a>
-                <div class="card-img-overlay text-center p-2 place" style="background: linear-gradient(90deg,  rgb(5, 0, 92) 0%, rgb(13, 30, 156) 35%, rgb(5, 234, 255) 100%);">
-                    <a href="{{this.place}}" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        {{this.address}}
+                    <div class="col">
+                        <div class="card img-fluid news-home">
+                            <a href="/tin-tuc/khu-nghi-duong-gan-gui-thien-nhien-o-can-tho">
+                                <div class="title-news">
+                                    <h5><b>Khu nghỉ dưỡng gần gũi thiên nhiên ở Cần Thơ</b></h5>
+                                    <br>
+                                    <p>Tọa lạc tại Cồn Ấu, quận Cái Răng, Azerai Cần Thơ ghi điểm với khung cảnh xanh mát, yên bình, là điểm đến cho du khách trải nghiệm, thư giãn. Khu nghỉ dưỡng chỉ cách TP Cần Thơ chỉ vài phút di chuyển bằng thuyền, được xây dựng trên một cồn đảo riêng biệt, bao bọc bởi sông Hậu, với các hồ nước, kênh rạch, vườn cây xanh mát.</p>
+                                </div>
+                                <img style="height: 320px;" class="card-img-top" src="https://pix8.agoda.net/hotelImages/9350793/-1/110cf471f3961463b41697f683746175.jpg?ca=13&ce=1&s=1024x768"
+                                    alt="Card image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col">
+                <div class="card img-fluid news-home">
+                    <a href="/tin-tuc/cam-nang-du-lich-can-tho">
+                        <img style="height: 320px;" class="card-img-top" src="https://i1-dulich.vnecdn.net/2022/04/08/CanThoVnExpress-1649418901-9461-1649419070.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=7xM6eJkbNu9Klud9rt7DWA"
+                            alt="Card image">
+                        <div class="card-img-overlay">
+                            <h5 class="p-1"><b>Cẩm nang du lịch Cần Thơ</b></h5>
+                            <p>Vốn được mệnh danh là Tây Đô – Thủ phủ của miền Tây Nam bộ từ hơn trăm năm trước, Cần Thơ là một trong những điểm đến hấp dẫn bậc nhất phía Nam. Cần Thơ nằm ở trung tâm của đồng bằng sông Cửu Long, thuộc vùng hạ lưu sông Mekong. Mặc cho tốc độ kinh tế phát triển nhanh, "Tây Đô" vẫn giữ lại những nét văn hoá đặc trưng của miền sông nước. Dưới đây là những gợi ý để du khách có thể thoải mái khám phá hết những điểm đến nổi tiếng của thủ phủ miền Tây.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card img-fluid news-home">
+                    <a href="/tin-tuc/cac-diem-vui-choi-o-phong-dien">
+                        <img style="height: 320px;" class="card-img-top" src="https://baocantho.com.vn/image/fckeditor/upload/2022/20220924/images/IMG_3071.jpg"
+                            alt="Card image">
+                        <div class="card-img-overlay">
+                            <h5 class="p-1"><b>Các điểm vui chơi ở Phong Điền</b></h5>
+                            <p>Với 65 điểm du lịch sinh thái, di tích văn hóa - lịch sử, du lịch huyện Phong Ðiền mang đến cho du khách nhiều trải nghiệm, từ các hoạt động lễ hội đến tham quan vui chơi giải trí ở các điểm đến, vườn cây ăn trái... Những ngày này, các điểm đến trên địa bàn huyện chuẩn bị chu đáo đón du khách nhân Ngày hội Du lịch sinh thái Phong Ðiền.</p>
+                        </div>
                     </a>
                 </div>
             </div>
         </div>
-        {{/each}}
     </div>
 </div>
-</div>
 {{!-- Dia diem --}}
-
+{{!-- -------Can Tho----------------- --}}
+<div class="container">
+    <img src="/img/Can-Tho .jpg" width="100%" alt="">
+</div>
 {{!-- ---------Le-Hoi---------------- --}}
 <div class="container">
     <h2 style="text-align: center; font-size: 50px; margin-top: 50px;"><b>Sắc màu Lễ Hội</b></h2>
@@ -282,6 +332,7 @@
     <div class="btn1"><a style="color:aliceblue; padding: 4px" href="/le-hoi"><b>Xem tất cả</b></a></div>
     <br>
 </div>
+
 {{!-- -------Ban-Do----------------- --}}
 <div class="mt-5" style="background-color: #ebebeb;">
 <div class="container text-center py-3 mt-5">

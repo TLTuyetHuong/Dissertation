@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/css/snip1547.css">
+
 {{>header}}
 <div style="background-image: url('https://dean2020.edu.vn/wp-content/uploads/2019/03/anh-thien-nhien-dep-3.jpeg')" class="background-news"></div>
 <div class="container" id="filter">
@@ -11,6 +13,9 @@
         <img style="width: 50px; height: 50px;" src="https://img.icons8.com/external-soft-fill-juicy-fish/344/external-travel-digital-nomad-soft-fill-soft-fill-juicy-fish-3.png" alt="">
     </h1>
     <hr>
+    <div style="text-align: right;">
+        <button class="snip1547"data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Hãy gợi ý thêm địa điểm cho chúng tôi bạn nhé!</span></button>
+    </div>
     <div style="text-align: center; color:darkgrey; line-height: 0px;">
         <p>Điểm tham quan tại</p>
         <h3 style="font-size: 35px;"><b>CẦN THƠ</b></h3>
@@ -40,6 +45,36 @@
             </div>
             {{/each}}
         </div>
+    </div>
+    <!-- Modal Gợi Ý-->
+    <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form class="modal-dialog" method="POST" action="/du-lich/dia-diem/goi-y" enctype="multipart/form-data">
+        <div class="modal-content" style="background-image: url('https://haycafe.vn/wp-content/uploads/2022/03/Hinh-nen-mau-nau-nhanh-hoa-trang.jpg'); background-size: 100%">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Hãy gửi cho chúng tôi gợi ý của bạn nhé !!!</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>(Lưu ý: Dấu * là bắt buộc nhập)</p>
+            <label for="email"><b>* Hãy nhập email của bạn</b></label>
+            <input type="email" name="email" id="email" class="form-control" required>
+            <br>
+            <label for="name"><b>* Nhập tên địa điểm</b></label>
+            <input type="text" name="name" id="name" class="form-control" required>
+            <br>
+            <label for="address"><b>* Nhập địa chỉ của địa điểm</b></label>
+            <input type="text" name="address" id="address" class="form-control" required>
+            <br>
+            <label for="image"><b>Hãy gửi thêm cả hình ảnh của địa điểm bạn nhé! (Nếu có)</b></label>
+            <input type="file" name="image" id="image" class="form-control">
+            <br>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+            <button type="submit" class="btn btn-danger">Gửi</button>
+        </div>
+        </div>
+    </form>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>

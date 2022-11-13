@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
 
 const Admin = new Schema({
@@ -13,6 +14,12 @@ const Admin = new Schema({
 	}
 }, {
     timestamps: true,
+});
+
+// Add slugins
+Admin.plugin(mongooseDelete, { 
+    deletedAt : true ,
+    overrideMethods: 'all' ,
 });
 
 module.exports = mongoose.model('Admin', Admin, 'admins');

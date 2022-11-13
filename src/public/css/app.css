@@ -391,8 +391,50 @@ body a {
   border-radius: 3px 3px; }
   .khachsan h5:hover {
     height: auto;
-    line-height: 50px;
+    line-height: 30px;
     margin-top: 43%;
     color: aliceblue;
     text-shadow: 1px 1px black;
     background-color: rgba(0, 0, 0, 0.195); }
+
+.news-home .card-img-overlay {
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 43%;
+  transition: all .3s ease;
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.6); }
+  .news-home .card-img-overlay:hover {
+    height: auto;
+    line-height: 20px;
+    margin-top: 30%;
+    color: aliceblue;
+    text-shadow: 1px 1px black;
+    background-color: rgba(0, 0, 0, 0.195); }
+
+.news-home .title-news {
+  padding: 15px;
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  margin-top: 90%;
+  transition: all .3s ease;
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.6); }
+  .news-home .title-news:hover {
+    height: 180px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 47%;
+    color: aliceblue;
+    text-shadow: 1px 1px black;
+    background-color: rgba(0, 0, 0, 0.195); }
+
+.quaylai {
+  color: gray; }
+  .quaylai:hover {
+    color: #4e73df;
+    text-decoration: none; }

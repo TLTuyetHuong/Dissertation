@@ -9,28 +9,42 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                               <h1 class="h3 mb-0 text-gray-800">Quản lý Tour</h1>
-                              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                              <div style="float: right;">
+                                    <a class="nav-link" href="/admin/quan-ly-tour/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
+                                          <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
+                                          <span class="badge badge-danger badge-counter">{{deletedCount}}</span>
+                                    </a>
+                              </div>
                         </div>
-
-                        <div id="change">
-
+                        <div class="d-lex my-3" style="text-align: right;">
+                              <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-le-hoi">
+                                    Quản lý Lịch Trình Gợi Ý
+                              </a>
+                              <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-dat-tour">
+                                    Danh sách các tour đã đặt
+                              </a>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
+                                    Thêm Tour
+                              </button>
+                        </div>
+                        <form name="container-form" method="POST" action="/admin/quan-ly-tour/handle-form-action">
+                              <div class="d-flex align-items-center mb-3">
+                                    <div class="form-check" style="padding-right: 10px;">
+                                          <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+                                          <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
+                                    </div>
+                                    <select name="action" class="form-select" aria-label="Default select example" style="width: 200px" required>
+                                          <option selected>-- Chọn hành động --</option>
+                                          <option value="delete">Xoá</option>
+                                    </select>
+                                    <button class="btn btn-primary check-all-submit-btn" disabled>Thực hiện</button>
+                              </div>
                               <div id="tour">
-                                    <div style="text-align: left;">
-                                          <button type="button" class="btn btn-primary" onclick="loadDoc()">
-                                                Danh sách các tour đã đặt
-                                          </button>
-                                    </div>
-                                    <!-- Button trigger modal -->
-                                    <div style="text-align: right;" class="mb-2">
-                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
-                                                Thêm Tour
-                                          </button>
-                                    </div>
                                     <div>
                                           <table class="table table-hover" id="dtBasicExample">
                                                 <thead style="text-align: center;">
                                                       <tr>
+                                                            <th></th>
                                                             <th scope="col">STT</th>
                                                             <th scope="col">Hình ảnh</th>
                                                             <th scope="col">Tour</th>
@@ -42,6 +56,11 @@
                                                 <tbody id="myfilter">
                                                       {{#each tours}}
                                                       <tr>
+                                                            <th>
+                                                                  <div class="form-check" style="padding-right: 10px;">
+                                                                        <input class="form-check-input" type="checkbox" name="tourIds[]" value="{{this._id}}">
+                                                                  </div>
+                                                            </th>
                                                             <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                             <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
                                                             <td>{{this.name}}</td>
@@ -52,88 +71,92 @@
                                                                   <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
                                                             </td>
                                                       </tr>
+                                                      {{else}}
+                                                      <tr class="text-center">
+                                                            <td colspan="7">Chưa có tour nào. <a type="button" data-bs-toggle="modal" data-bs-target="#formCreate">Thêm tour</a></td>
+                                                      </tr>
                                                       {{/each}}
                                                 </tbody>
                                           </table>
                                     </div>
                               </div>
-
-                              <!-- Form Thêm -->
-                              <div class="modal fade" id="formCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                          <div class="modal-content">
-                                                <form action="/admin/quan-ly-am-thuc" method="POST">
-                                                      <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">THÊM TOUR MỚI</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                  aria-label="Close"></button>
-                                                      </div>
-                                                      <div class="modal-body">
-                                                            <div>
-                                                                  <section class="vh-100" style="background-color: #eee; color:black">
-
-                                                                        <div class="row px-5">
-                                                                              <div class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="name" id="form3Example1c" class="form-control" required />
-                                                                                    <label class="form-label" for="form3Example1c">Tên Tour</label>
-                                                                              </div>
-                                                                              <div class="col">
-                                                                                    <div class="form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text" name="time" id="form3Example1c" class="form-control" required />
-                                                                                          <label class="form-label" for="form3Example1c">Thời gian Tour</label>
-                                                                                    </div>
-                                                                                    <div class="form-outline flex-fill mb-0 py-2">
-                                                                                          <input type="text" name="price" id="form3Example1c" class="form-control" />
-                                                                                          <label class="form-label" for="form3Example1c">Giá</label>
-                                                                                    </div>
-                                                                              </div>
-                                                                              <div class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="image" id="form3Example1c" class="form-control" required />
-                                                                                    <label class="form-label" for="form3Example1c">URL hình ảnh</label>
-                                                                              </div>
-                                                                        </div>
-                                                                  </section>
-                                                            </div>
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
-                                                            <button type="submit" class="btn btn-success">Thêm</button>
-                                                      </div>
-                                                </form>
-                                          </div>
-                                    </div>
-                              </div>
-                              <!-- Form Thêm -->
-
-                              <!-- Modal Xoá -->
-                              <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                          <div class="modal-content">
+                        </form>
+                        <!-- Form Thêm -->
+                        <div class="modal fade" id="formCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                          <form action="/admin/quan-ly-am-thuc" method="POST">
                                                 <div class="modal-header">
-                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Tour?</h1>
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">THÊM TOUR MỚI</h1>
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                      <p>Bạn có chắc chắn muốn xoá tour này?</p>
+                                                      <div>
+                                                            <section class="vh-100" style="background-color: #eee; color:black">
+
+                                                                  <div class="row px-5">
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <input type="text" name="name" id="form3Example1c" class="form-control" required />
+                                                                              <label class="form-label" for="form3Example1c">Tên Tour</label>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="time" id="form3Example1c" class="form-control" required />
+                                                                                    <label class="form-label" for="form3Example1c">Thời gian Tour</label>
+                                                                              </div>
+                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="text" name="price" id="form3Example1c" class="form-control" />
+                                                                                    <label class="form-label" for="form3Example1c">Giá</label>
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <input type="text" name="image" id="form3Example1c" class="form-control" required />
+                                                                              <label class="form-label" for="form3Example1c">URL hình ảnh</label>
+                                                                        </div>
+                                                                  </div>
+                                                            </section>
+                                                      </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Huỷ</button>
-                                                      <button id="btn-delete" type="button"
-                                                            class="btn btn-danger">Xoá</button>
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                                      <button type="submit" class="btn btn-success">Thêm</button>
                                                 </div>
+                                          </form>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Form Thêm -->
+
+                        <!-- Modal Xoá -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Tour?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xoá tour này?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button id="btn-delete" type="button"
+                                                      class="btn btn-danger">Xoá</button>
                                           </div>
                                     </div>
                               </div>
-                              <!-- Modal Xoá -->
-
-                              {{!-- Form hidden delete --}}
-                              <form name="form-dd-delete" method="POST"></form>
-                              {{!-- Form hidden delete --}}
                         </div>
+                        <!-- Modal Xoá -->
+
+                        {{!-- Form hidden delete --}}
+                        <form name="form-dd-delete" method="POST"></form>
+                        {{!-- Form hidden delete --}}
+                        
                   </div>
 
             </div>
@@ -157,16 +180,52 @@
 
 <!-- Page level custom scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="/js/deleteTour.js"></script>
+
 
 <script>
-      function loadDoc() {
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
-                  document.getElementById("tour").innerHTML =
-                  this.responseText;
+      document.addEventListener('DOMContentLoaded', function(){
+            var ddID;
+            var deleteForm = document.forms['form-dd-delete'];
+            var containerForm = $('form[name="container-form"]');
+
+            var btnDelete = document.getElementById('btn-delete');
+            var checkboxAll = $('#checkbox-all');
+            var itemCheckbox = $('input[name="tourIds[]"]');
+            var checkAllSubmitBtn = $('.check-all-submit-btn');
+
+            $('#modalDelete').on('show.bs.modal', event => {
+                  // Button that triggered the modal
+                  var button = event.relatedTarget
+                  // Extract info from data-bs-* attributes
+                  ddID = button.getAttribute('data-bs-id')
+            });
+
+            btnDelete.onclick = function () {
+                  deleteForm.action = '/admin/quan-ly-tour/' + ddID + '?_method=DELETE'; 
+                  deleteForm.submit();
             }
-            xhttp.open("GET", "/admin/quan-ly-tour/danh-sach-khach-dat-tour");
-            xhttp.send();
-      }
+
+            // Checkbox all click
+            checkboxAll.change(function () {
+                  var isCheckedAll = $(this).prop('checked');
+                  itemCheckbox.prop('checked', isCheckedAll);
+                  renderCheckAllSubmitBtn();
+            });
+
+            // item checkbox changed
+            itemCheckbox.change( function () {
+                  var isCheckedAll = itemCheckbox.length === $('input[name="tourIds[]"]:checked').length;
+                  checkboxAll.prop('checked', isCheckedAll);
+                  renderCheckAllSubmitBtn();
+            });
+
+            function renderCheckAllSubmitBtn() {
+                  var checkedCount = $('input[name="tourIds[]"]:checked').length;
+                  if(checkedCount > 0){
+                        checkAllSubmitBtn.attr('disabled', false);
+                  } else {
+                        checkAllSubmitBtn.attr('disabled', true);
+                  }
+            }
+      });
 </script>

@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="/css/snip1547.css">
 {{>header}}
 <div style="background-image: url('https://mocquan.vn/wp-content/uploads/2018/10/lau-tieu-cua-bap-bo.jpg')" class="background-news"></div>
 <div class="container" id="filter">
@@ -9,6 +9,9 @@
         <img style="width: 50px; height: 50px;" src="https://img.icons8.com/fluency/344/kawaii-noodle.png" alt="">
     </h1>
     <hr>
+    <div style="text-align: right;">
+        <button class="snip1547"data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Hãy gợi ý thêm ẩm thực cho chúng tôi bạn nhé!</span></button>
+    </div>
     <ul class="nav mb-2 mb-md-0">
         <a href="/du-lich/am-thuc">
             <img style="width: 40px; height: 40px;" src="https://img.icons8.com/doodle/2x/home.png" alt="">
@@ -56,6 +59,36 @@
             </div>
             {{/each}}
         </div>
+    </div>
+    <!-- Modal Gợi Ý-->
+    <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form class="modal-dialog" method="POST" action="/du-lich/am-thuc/goi-y" enctype="multipart/form-data">
+        <div class="modal-content" style="background-image: url('https://demoda.vn/wp-content/uploads/2022/03/hinh-nen-nau.jpg'); background-size: 100%;">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Hãy gửi cho chúng tôi gợi ý của bạn nhé !!!</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>(Lưu ý: Dấu * là bắt buộc nhập)</p>
+            <label for="email"><b>* Hãy nhập email của bạn</b></label>
+            <input type="email" name="email" id="email" class="form-control" required>
+            <br>
+            <label for="name"><b>* Nhập tên Nhà hàng/Quán/Tiệm</b></label>
+            <input type="text" name="name" id="name" class="form-control" required>
+            <br>
+            <label for="address"><b>* Nhập địa chỉ của Nhà hàng/Quán/Tiệm</b></label>
+            <input type="text" name="address" id="address" class="form-control" required>
+            <br>
+            <label for="image"><b>Hãy gửi thêm cả hình ảnh bạn nhé! (Nếu có)</b></label>
+            <input type="file" name="image" id="image" class="form-control">
+            <br>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+            <button type="submit" class="btn btn-danger">Gửi</button>
+        </div>
+        </div>
+    </form>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
 
 const Comment = new Schema({
@@ -8,6 +9,12 @@ const Comment = new Schema({
 	date: { type: String},
 }, {
     timestamps: true,
+});
+
+// Add slugins
+Comment.plugin(mongooseDelete, { 
+    deletedAt : true ,
+    overrideMethods: 'all' ,
 });
 
 module.exports = mongoose.model('Comment', Comment, 'comments');

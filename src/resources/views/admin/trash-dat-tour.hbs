@@ -9,17 +9,18 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                              <h1 class="h3 mb-0 text-gray-800">Quản lý Đặt Tour</h1>
-                              <div style="float: right;">
-                                    <a class="nav-link" href="/admin/quan-ly-dat-tour/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
-                                          <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
-                                          <span class="badge badge-danger badge-counter">{{deletedCount}}</span>
-                                    </a>
-                                    
-                              </div>
+                              <h1 class="h3 mb-0 text-gray-800">Danh sách đặt tour đã xoá</h1>
+                              {{!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
                         </div>
-
-                        <form name="container-form" method="POST" action="/admin/quan-ly-dat-tour/handle-form-action">
+                        <div class="m-3" style="text-align: right;">
+                              <a href="/admin/quan-ly-dat-tour" class="quaylai">
+                              Quay lại <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                    </svg>
+                              </a>
+                        </div>
+                        <form name="container-form" method="POST" action="/admin/quan-ly-dat-tour/trash-form-action">
                         <div class="d-flex align-items-center mb-3">
                               <div class="form-check" style="padding-right: 10px;">
                                     <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
@@ -27,7 +28,8 @@
                               </div>
                               <select name="action" class="form-select" aria-label="Default select example" style="width: 200px" required>
                                     <option selected>-- Chọn hành động --</option>
-                                    <option value="delete">Xoá</option>
+                                    <option value="restore">Khôi phục</option>
+                                    <option value="delete">Xoá vĩnh viễn</option>
                               </select>
                               <button class="btn btn-primary check-all-submit-btn" disabled>Thực hiện</button>
                         </div>
@@ -76,13 +78,13 @@
                                                 </td>
                                                 <td>{{this.status}}</td>
                                                 <td>
-                                                <a href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}" class="btn btn-warning">Xem chi tiết</a>
-                                                <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
+                                                      <a href="" class="btn btn-warning btn-restore" data-id="{{this._id}}">Khôi phục</a>
+                                                      <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá vĩnh viễn</a>
                                                 </td>
                                           </tr>
                                           {{else}}
                                                 <tr class="text-center">
-                                                      <td colspan="7">Chưa có tour nào được đặt.</td>
+                                                      <td colspan="7">Chưa có tour nào được xoá. <a href="/admin/quan-ly-dat-tour">Quay lại</a></td>
                                                 </tr>
                                           {{/each}}
                                           </tbody>
@@ -90,24 +92,25 @@
                               </div>
                         </div>
                         </form>
+                  
                         <!-- Modal Xoá -->
                         <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
                               aria-hidden="true">
                               <div class="modal-dialog">
                                     <div class="modal-content">
                                           <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Tour?</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá đơn đặt tour?</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                       aria-label="Close"></button>
                                           </div>
                                           <div class="modal-body">
-                                                <p>Bạn có chắc chắn muốn xoá tour này?</p>
+                                                <p>Hành động này không thể khôi phục. Bạn có chắc chắn muốn xoá đơn đặt tour này?</p>
                                           </div>
                                           <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                       data-bs-dismiss="modal">Huỷ</button>
                                                 <button id="btn-delete" type="button"
-                                                      class="btn btn-danger">Xoá</button>
+                                                      class="btn btn-danger">Xoá vĩnh viễn</button>
                                           </div>
                                     </div>
                               </div>
@@ -116,7 +119,8 @@
 
                         {{!-- Form hidden delete --}}
                         <form name="form-dd-delete" method="POST"></form>
-                        {{!-- Form hidden delete --}}
+                        {{!-- Form hidden restore --}}
+                        <form name="form-dd-restore" method="POST"></form>
                         
                   </div>
 
@@ -141,51 +145,4 @@
 
 <!-- Page level custom scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script>
-      document.addEventListener('DOMContentLoaded', function(){
-            var ddID;
-            var deleteForm = document.forms['form-dd-delete'];
-            var containerForm = $('form[name="container-form"]');
-
-            var btnDelete = document.getElementById('btn-delete');
-            var checkboxAll = $('#checkbox-all');
-            var itemCheckbox = $('input[name="dattourIds[]"]');
-            var checkAllSubmitBtn = $('.check-all-submit-btn');
-
-            $('#modalDelete').on('show.bs.modal', event => {
-                  // Button that triggered the modal
-                  var button = event.relatedTarget
-                  // Extract info from data-bs-* attributes
-                  ddID = button.getAttribute('data-bs-id')
-            });
-
-            btnDelete.onclick = function () {
-                  deleteForm.action = '/admin/quan-ly-dat-tour/' + ddID + '?_method=DELETE'; 
-                  deleteForm.submit();
-            }
-
-            // Checkbox all click
-            checkboxAll.change(function () {
-                  var isCheckedAll = $(this).prop('checked');
-                  itemCheckbox.prop('checked', isCheckedAll);
-                  renderCheckAllSubmitBtn();
-            });
-
-            // item checkbox changed
-            itemCheckbox.change( function () {
-                  var isCheckedAll = itemCheckbox.length === $('input[name="dattourIds[]"]:checked').length;
-                  checkboxAll.prop('checked', isCheckedAll);
-                  renderCheckAllSubmitBtn();
-            });
-
-            function renderCheckAllSubmitBtn() {
-                  var checkedCount = $('input[name="dattourIds[]"]:checked').length;
-                  if(checkedCount > 0){
-                        checkAllSubmitBtn.attr('disabled', false);
-                  } else {
-                        checkAllSubmitBtn.attr('disabled', true);
-                  }
-            }
-      });
-</script>
-
+<script src="/js/deleteDatTour.js"></script>

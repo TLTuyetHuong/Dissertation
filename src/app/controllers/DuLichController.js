@@ -1,8 +1,30 @@
 const DiaDiem = require('../models/DiaDiem');
 const AmThuc = require('../models/AmThuc');
 const Comment = require('../models/Comment');
+const GoiY = require('../models/GoiY');
+const emailThanks = require('../services/emailThanks');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { mongooseToObject } = require('../../until/mongoose');
+const multer  = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'src/public/img')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()  + "-" + file.originalname)
+    }
+});  
+const upload = multer({ 
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        console.log(file);
+        if(file.mimetype=="image/bmp" || file.mimetype=="image/png" || file.mimetype=="image/jpeg" || file.mimetype=="image/jpg" || file.mimetype=="image/gif"){
+            cb(null, true)
+        }else{
+            return cb(new Error('Only image are allowed!'))
+        }
+    }
+}).single("image");
 
 class DuLichController {
     // [GET] /du-lich/dia-diem
@@ -124,6 +146,34 @@ class DuLichController {
         Comment.updateOne({ _id: req.params.id }, {like: like1+1})
             .then(() => res.redirect("back"))
             .catch(next);
+    }
+
+    // [POST] /du-lich/goi-y
+    goiY(req, res) {
+        upload(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+              console.log("A Multer error occurred when uploading."); 
+            } else if (err) {
+              console.log("An unknown error occurred when uploading." + err);
+            }else{
+                emailThanks.sendSimpleEmail({
+                    receiverEmail: req.body.email,
+                });
+                console.log(req.file);
+                const image = '/img/'+req.file.filename;
+                const goiy = new GoiY({
+                    name: req.body.name,
+                    address: req.body.address,
+                    image: image,
+                    email: req.body.email
+                });
+                goiy
+                    .save()
+                    .then(() => res.redirect("back"))
+                    .catch((error) => {});
+            }
+    
+        });
     }
 
 }
