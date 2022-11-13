@@ -45,8 +45,9 @@
                                                       <th></th>
                                                       <th scope="col">STT</th>
                                                       <th scope="col">Hình ảnh</th>
-                                                      <th scope="col">Tên Quán</th>
-                                                      <th scope="col">Địa chỉ</th>
+                                                      <th scope="col">Thông tin</th>
+                                                      <th scope="col">Thời gian làm việc</th>
+                                                      <th scope="col">Tag</th>
                                                       <th scope="col"></th>
                                                 </tr>
                                           </thead>
@@ -60,8 +61,16 @@
                                                       </th>
                                                       <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                       <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
-                                                      <td>{{this.title}}</td>
-                                                      <td>{{this.address}}</td>
+                                                      <td>
+                                                            <b>Tên quán: </b>{{this.title}}<br>
+                                                            <b>Giá: </b>{{this.price}}<br>
+                                                            <b>Địa chỉ: </b>{{this.address}}
+                                                      </td>
+                                                      <td>
+                                                            <b>Mở cửa: </b>{{this.open}}<br>
+                                                            <b>Đóng cửa: </b>{{this.close}}
+                                                      </td>
+                                                      <td>{{this.tag}}</td>
                                                       <td>
                                                             <a href="/admin/quan-ly-am-thuc/{{this._id}}/sua-am-thuc" class="btn btn-warning">Sửa</a>
                                                             <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>

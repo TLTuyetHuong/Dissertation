@@ -33,6 +33,7 @@ let sendSimpleEmail = async (dataSend) => {
             </ul>
         </ul>
         <p><b>Ngày dự kiến khởi hành là: </b> ${dataSend.departureDay}.</p>
+        <p><b>Nơi khởi hành là: </b> ${dataSend.startingGate}.</p>
         <p><b>Giá của Tour là: </b> ${dataSend.priceTour}.</p>
         <p><b>Tổng giá của Tour là: </b> ${dataSend.total} VNĐ.</p>
         <p>Chúng tôi sẽ liên hệ với bạn trong vòng 24h tới. Chúc bạn có một ngày thật vui vẻ 😊</p>

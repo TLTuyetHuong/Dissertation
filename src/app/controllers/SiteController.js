@@ -2,7 +2,6 @@ const DiaDiem = require('../models/DiaDiem');
 const Tour = require('../models/Tour');
 const TinTuc = require('../models/TinTuc');
 const AmThuc = require('../models/AmThuc');
-const TraiNghiem = require('../models/TraiNghiem');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { validationResult } = require('express-validator');
 const passport = require('passport');
@@ -95,22 +94,12 @@ class SiteController {
         };
         const amthucs = amthuc.filter(fillterAmThucByKey);
 
-        // Trai Nghiem
-        let trainghiem = await TraiNghiem.find({});
-        const fillterTraiNghiemByKey = (trainghiems) => {
-            return removeVietnameseTones(trainghiems.name)
-            .toLowerCase()
-            .includes(convertKey.toLowerCase());
-        };
-        const trainghiems = trainghiem.filter(fillterTraiNghiemByKey);
-
         res.render('search', {
             title: 'Quảng bá du lịch và ẩm thực Thành phố Cần Thơ 😋',
             tours: multipleMongooseToObject(tours),
             tintucs: multipleMongooseToObject(tintucs),
             diadiems: multipleMongooseToObject(diadiems),
             amthucs: multipleMongooseToObject(amthucs),
-            trainghiems: multipleMongooseToObject(trainghiems),
         });
     }
 

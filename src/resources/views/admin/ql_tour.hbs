@@ -17,9 +17,6 @@
                               </div>
                         </div>
                         <div class="d-lex my-3" style="text-align: right;">
-                              <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-le-hoi">
-                                    Quản lý Lịch Trình Gợi Ý
-                              </a>
                               <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-dat-tour">
                                     Danh sách các tour đã đặt
                               </a>
@@ -50,6 +47,7 @@
                                                             <th scope="col">Tour</th>
                                                             <th scope="col">Thời gian Tour</th>
                                                             <th scope="col">Giá</th>
+                                                            <th scope="col">Nơi khởi hành</th>
                                                             <th scope="col"></th>
                                                       </tr>
                                                 </thead>
@@ -66,6 +64,7 @@
                                                             <td>{{this.name}}</td>
                                                             <td style="text-align: center;">{{this.time}}</td>
                                                             <td style="text-align: center;">{{this.price}}</td>
+                                                            <td>{{this.startingGate}}</td>
                                                             <td>
                                                                   <a href="/admin/quan-ly-tour/{{this._id}}/sua-tour" class="btn btn-warning">Sửa</a>
                                                                   <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
@@ -110,6 +109,10 @@
                                                                                     <input type="text" name="price" id="form3Example1c" class="form-control" />
                                                                                     <label class="form-label" for="form3Example1c">Giá</label>
                                                                               </div>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <input type="text" name="startingGate" id="form3Example1c" class="form-control" />
+                                                                              <label class="form-label" for="form3Example1c">Nơi khởi hành</label>
                                                                         </div>
                                                                         <div class="form-outline flex-fill mb-0 py-2">
                                                                               <input type="text" name="image" id="form3Example1c" class="form-control" required />

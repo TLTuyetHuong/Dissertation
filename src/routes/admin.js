@@ -1,27 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../app/controllers/AdminController');
+const khachSanController = require('../app/controllers/KhachSanController');
+const tinTucController = require('../app/controllers/TinTucController');
 const authController = require('../app/controllers/AuthController');
 const { verifySignUp } = require("../app/middlewares/verifySignUp");
 
 // Quan ly Khach San
-router.post('/quan-ly-khach-san/handle-form-action', adminController.handleFormActionsKS);
-router.post('/quan-ly-khach-san/trash-form-action', adminController.trashFormActionsKS);
-router.patch('/quan-ly-khach-san/:id/khoi-phuc', adminController.restoreKhachSan);
-router.put('/quan-ly-khach-san/:id', adminController.updateKhachSan);
-router.delete('/quan-ly-khach-san/:id/force', adminController.forceKhachSan);
-router.delete('/quan-ly-khach-san/:id', adminController.deleteKhachSan);
-router.post('/quan-ly-khach-san', adminController.addKhachSan);
-router.get('/quan-ly-khach-san/:id/sua-khach-san', adminController.editKhachSan);
-router.get('/quan-ly-khach-san/thung-rac', adminController.trashKhachSan);
-router.get('/quan-ly-khach-san', adminController.ql_khachsan);
+router.post('/quan-ly-khach-san/handle-form-action', khachSanController.handleFormActionsKS);
+router.post('/quan-ly-khach-san/trash-form-action', khachSanController.trashFormActionsKS);
+router.patch('/quan-ly-khach-san/:id/khoi-phuc', khachSanController.restoreKhachSan);
+router.put('/quan-ly-khach-san/:id', khachSanController.updateKhachSan);
+router.delete('/quan-ly-khach-san/:id/force', khachSanController.forceKhachSan);
+router.delete('/quan-ly-khach-san/:id', khachSanController.deleteKhachSan);
+router.post('/quan-ly-khach-san', khachSanController.addKhachSan);
+router.get('/quan-ly-khach-san/:id/sua-khach-san', khachSanController.editKhachSan);
+router.get('/quan-ly-khach-san/thung-rac', khachSanController.trashKhachSan);
+router.get('/quan-ly-khach-san', khachSanController.ql_khachsan);
 
 // Quan ly Comment
 router.post('/quan-ly-comment/handle-form-action', adminController.handleFormActionsCmt);
 router.post('/quan-ly-comment/trash-form-action', adminController.trashFormActionsCmt);
 router.patch('/quan-ly-comment/:id/khoi-phuc', adminController.restoreComment);
 router.delete('/quan-ly-comment/:id/force', adminController.forceComment);
-router.delete('/quan-ly-comment/:id', adminController.deleteTour);
+router.delete('/quan-ly-comment/:id', adminController.deleteComment);
 router.get('/quan-ly-comment/thung-rac', adminController.trashComment);
 router.get('/quan-ly-comment', adminController.ql_comment);
 
@@ -47,16 +49,20 @@ router.get('/quan-ly-dat-tour', adminController.ql_dattour);
 router.get('/quan-ly-tour', adminController.ql_tour);
 
 // Quan ly Tin Tuc
-router.post('/quan-ly-tin-tuc/handle-form-action', adminController.handleFormActionsTT);
-router.post('/quan-ly-tin-tuc/trash-form-action', adminController.trashFormActionsTT);
-router.patch('/quan-ly-tin-tuc/:id/khoi-phuc', adminController.restoreTinTuc);
-router.put('/quan-ly-tin-tuc/:id', adminController.updateTinTuc);
-router.delete('/quan-ly-tin-tuc/:id/force', adminController.forceTinTuc);
-router.delete('/quan-ly-tin-tuc/:id', adminController.deleteTinTuc);
-router.post('/quan-ly-tin-tuc', adminController.addTinTuc);
-router.get('/quan-ly-tin-tuc/:id/sua-tin-tuc', adminController.editTinTuc);
-router.get('/quan-ly-tin-tuc/thung-rac', adminController.trashTinTuc);
-router.get('/quan-ly-tin-tuc', adminController.ql_tintuc);
+router.get('/quan-ly-lich-trinh-goi-y', tinTucController.ql_lichtrinh);
+router.get('/quan-ly-trai-nghiem', tinTucController.ql_trainghiem);
+router.get('/quan-ly-le-hoi', tinTucController.ql_lehoi);
+
+router.post('/quan-ly-tin-tuc/handle-form-action', tinTucController.handleFormActionsTT);
+router.post('/quan-ly-tin-tuc/trash-form-action', tinTucController.trashFormActionsTT);
+router.patch('/quan-ly-tin-tuc/:id/khoi-phuc', tinTucController.restoreTinTuc);
+router.put('/quan-ly-tin-tuc/:id', tinTucController.updateTinTuc);
+router.delete('/quan-ly-tin-tuc/:id/force', tinTucController.forceTinTuc);
+router.delete('/quan-ly-tin-tuc/:id', tinTucController.deleteTinTuc);
+router.post('/quan-ly-tin-tuc', tinTucController.addTinTuc);
+router.get('/quan-ly-tin-tuc/:id/sua-tin-tuc', tinTucController.editTinTuc);
+router.get('/quan-ly-tin-tuc/thung-rac', tinTucController.trashTinTuc);
+router.get('/quan-ly-tin-tuc', tinTucController.ql_tintuc);
 
 // Quan ly Dia Diem
 router.post('/quan-ly-dia-diem/handle-form-action', adminController.handleFormActionsDD);

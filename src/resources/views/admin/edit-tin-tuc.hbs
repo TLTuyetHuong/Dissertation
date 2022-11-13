@@ -32,9 +32,26 @@
                                                         <label class="form-label" for="form3Example1c">URL hình ảnh</label>
                                                 </div>
                                                 <div class="form-outline flex-fill mb-0 py-2">
-                                                        <textarea name="description" class="form-control" value="{{tintucs.description}}" id="" cols="30" rows="5" placeholder="Mô tả ..." required></textarea>
-                                                                <label class="form-label" for="form3Example1c">Mô tả</label>
+                                                        <textarea class="form-control" name="description" id="form3Example1c" cols="30" rows="5" placeholder="Mô tả ..." required>{{tintucs.description}}</textarea>
+                                                        <label class="form-label" for="form3Example1c">Mô tả</label>
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <br>
+                                                        <label class="form-label" for="form3Example1c">Chọn tag:</label>
+                                                        <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="tin-tuc">
+                                                                <label class="form-check-label" for="flexRadioDefault1">Tin Tức</label><br>
+
+                                                                <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="le-hoi">
+                                                                <label class="form-check-label" for="flexRadioDefault1">Lễ Hội</label><br>
+
+                                                                <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="trai-nghiem">
+                                                                <label class="form-check-label" for="flexRadioDefault1">Trải Nghiệm</label><br>
+
+                                                                <input class="form-check-input" type="radio" name="tag" id="flexRadioDefault1" value="lich-trinh-goi-y">
+                                                                <label class="form-check-label" for="flexRadioDefault1">Lịch Trình Gợi Ý</label>
                                                         </div>
+                                                </div>
                                                 <div class="form-outline flex-fill mb-0 py-2">
                                                         <input type="color" value="{{tintucs.color}}" name="color" id="form3Example1c" class="form-control" />
                                                         <label class="form-label" for="form3Example1c">Màu sắc đường viền</label>

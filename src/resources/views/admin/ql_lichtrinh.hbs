@@ -8,7 +8,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                              <h1 class="h3 mb-0 text-gray-800">Quản lý Tin Tức</h1>
+                              <h1 class="h3 mb-0 text-gray-800">Quản lý Lịch Trình Gợi Ý</h1>
                               <div style="float: right;">
                                     <a class="nav-link" href="/admin/quan-ly-tin-tuc/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
                                           <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
@@ -25,11 +25,11 @@
                               <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-trai-nghiem">
                                     Quản lý Trải Nghiệm
                               </a>
-                              <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-lich-trinh-goi-y">
-                                    Quản lý Lịch Trình Gợi Ý
+                              <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-tin-tuc">
+                                    Quản lý Tin Tức
                               </a>
                               <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#formCreate">
-                                    Thêm Tin Tức
+                                    Thêm Lịch Trình Gợi Ý
                               </button>
                         </div>
                         <form name="container-form" method="POST" action="/admin/quan-ly-tin-tuc/handle-form-action">
@@ -59,7 +59,7 @@
                                                 </tr>
                                           </thead>
                                           <tbody id="myfilter">
-                                                {{#each tintucs}}
+                                                {{#each lichtrinhs}}
                                                 <tr>
                                                       <th>
                                                             <div class="form-check" style="padding-right: 10px;">
@@ -77,7 +77,7 @@
                                                 </tr>
                                                 {{else}}
                                                 <tr class="text-center">
-                                                      <td colspan="5">Chưa có tin tức nào. <a type="button" data-bs-toggle="modal" data-bs-target="#formCreate">Thêm tin tức</a></td>
+                                                      <td colspan="5">Chưa có lịch trình nào. <a type="button" data-bs-toggle="modal" data-bs-target="#formCreate">Thêm lịch trình gợi ý</a></td>
                                                 </tr>
                                                 {{/each}}
                                           </tbody>

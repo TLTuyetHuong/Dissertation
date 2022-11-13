@@ -1,7 +1,7 @@
 const emailService = require('../services/emailSevice');
 const Tour = require('../models/Tour');
+const TinTuc = require('../models/TinTuc');
 const DatTour = require('../models/DatTour');
-const TraiNghiem = require('../models/TraiNghiem');
 const Comment = require('../models/Comment');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { mongooseToObject } = require('../../until/mongoose');
@@ -39,8 +39,10 @@ class TourController {
     }
 
     // [POST] /tour/:slug
-    datTour(req, res, next) {
+    async datTour(req, res, next) {
         const formData = req.body;
+        const tour = await Tour.findOne({name: formData.nametour}).catch(next);
+        const startingGate = tour.startingGate;
         const str = formData.pricetour.slice(0,3) * 1000;
         const price75 = str * (75/100);
         const dattours = new DatTour(formData);
@@ -57,16 +59,17 @@ class TourController {
             priceTour: formData.pricetour,
             total: dattours.total.toLocaleString('vi', {style: 'currency', currency: 'VND' }),
             departureDay: dattours.day,
+            startingGate: startingGate,
         });
         dattours
             .save()
-            .then(() => res.redirect("back"))
+            .then(() => res.render('tour/thong-bao'))
             .catch((error) => {});
     }
 
     // [GET] /tour/trai-nghiem/
     traiNghiem(req, res, next) {
-        TraiNghiem.find({})
+        TinTuc.find({tag: 'trai-nghiem'})
             .then(trainghiems => {
                 res.render('tour/trainghiem', {
                     title: 'Trải nghiệm',
@@ -78,14 +81,14 @@ class TourController {
 
     // [GET] /tour/trai-nghiem/:slug
     async show(req, res, next) {
-        let trainghiem = await TraiNghiem.findOne({slug: req.params.slug}).catch(next);
+        let trainghiem = await TinTuc.findOne({slug: req.params.slug}).catch(next);
         let title = trainghiem.title;
         let comments = await Comment.find({posts: title}).sort({createdAt: -1});
-        TraiNghiem.findOne({slug: req.params.slug})
+        TinTuc.findOne({slug: req.params.slug})
             .then((trainghiems) => {
                 if(req.params.slug==trainghiems.slug){
                     res.render('baiviets/review/'+req.params.slug, {
-                        title: trainghiems.name,
+                        title: trainghiems.title,
                         comments: multipleMongooseToObject(comments),
                         slug: trainghiems.slug,
                     })
@@ -95,19 +98,27 @@ class TourController {
     }
 
     // [GET] /tour/lich-trinh-goi-y/
-    lichTrinh(req, res, next) {
-        res.render('tour/lichtrinhgoiy', {title: 'Lịch trình gợi ý'})
+    async lichTrinh(req, res, next) {
+        let lichtrinhs = await TinTuc.find({tag: 'lich-trinh-goi-y'}).catch(next);
+
+        res.render('tour/lichtrinhgoiy', {
+            title: 'Lịch trình gợi ý',
+            lichtrinhs: multipleMongooseToObject(lichtrinhs),
+        });
     }
 
     // [GET] /tour/lich-trinh-goi-y/:slug
-    lichTrinhGY(req, res, next) {
-        res.render('tour/lichtrinhgoiy/'+req.params.slug, {title: 'Lịch trình gợi ý'})
+    async lichTrinhGY(req, res, next) {
+        let lichtrinhs = await TinTuc.findOne({slug: req.params.slug}).catch(next);
+        const title = lichtrinhs.title;
+
+        res.render('tour/lichtrinhgoiy/'+req.params.slug, {title: title})
     }
 
     // [POST] /tour/:slug
     async comment(req, res, next) {
         let tours = await Tour.findOne({slug: req.params.slug}).catch(next);
-        let trainghiems = await TraiNghiem.findOne({slug: req.params.slug}).catch(next);
+        let trainghiems = await TinTuc.findOne({slug: req.params.slug}).catch(next);
         const title = '';
         if(tours){
             title = tours.title;
@@ -140,6 +151,7 @@ class TourController {
             .then(() => res.redirect("back"))
             .catch(next);
     }
+    
 }
 
 module.exports = new TourController();

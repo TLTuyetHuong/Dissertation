@@ -39,6 +39,20 @@
                                                         <input type="date" value="{{admins.birthday}}" name="birthday" id="form3Example1c" class="form-control" required />
                                                 </div>
                                                 <div class="form-outline flex-fill mb-0 py-2">
+                                                <br>
+                                                <label class="form-label" for="form3Example1c">Phân quyền:</label>
+                                                <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="roles" id="flexRadioDefault1" value="ADMIN">
+                                                        <label class="form-check-label" for="flexRadioDefault1">Admin</label><br>
+
+                                                        <input class="form-check-input" type="radio" name="roles" id="flexRadioDefault1" value="USER">
+                                                        <label class="form-check-label" for="flexRadioDefault1">User</label><br>
+
+                                                        <input class="form-check-input" type="radio" name="roles" id="flexRadioDefault1" value="STAFF">
+                                                        <label class="form-check-label" for="flexRadioDefault1">Nhân viên</label>
+                                                </div>
+                                        </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
                                                         <a href="/admin/doi-mat-khau/{{admins._id}}">Đổi mật khẩu ?</a>
                                                 </div>
                                         </div>

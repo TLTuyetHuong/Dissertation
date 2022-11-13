@@ -7,6 +7,7 @@ const TinTuc = new Schema({
     image: { type: String},
     title: { type: String},
     color: { type: String},
+    tag: { type: String},
     description: { type: String},
     slug: { type: String, slug: 'title', unique: true },
 },{

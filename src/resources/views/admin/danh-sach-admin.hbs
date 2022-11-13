@@ -34,7 +34,9 @@
                                             <tr>
                                                 <th></th>
                                                 <th scope="col">STT</th>
-                                                <th scope="col">Tên Admin</th>
+                                                <th scope="col">Avatar</th>
+                                                <th scope="col">Tên User</th>
+                                                <th scope="col">Quyền</th>
                                                 <th scope="col" colspan="2">Email</th>
                                             </tr>
                                         </thead>
@@ -49,6 +51,7 @@
                                                 <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                 <td><img src="/img/{{this.image}}" width="70px" alt=""></td>
                                                 <td>{{this.name}}</td>
+                                                <td>{{this.roles}}</td>
                                                 <td>{{this.email}}</td>
                                                 <td>
                                                       <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"

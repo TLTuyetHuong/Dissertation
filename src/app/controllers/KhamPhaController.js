@@ -1,11 +1,11 @@
-const TraiNghiem = require('../models/TraiNghiem');
+
 const TinTuc = require('../models/TinTuc');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 
 class GioiThieuController {
     // [GET] /kham-pha
     async index(req, res, next) {
-        let trainghiems = await TraiNghiem.find({}).limit(9).catch(next);
+        let trainghiems = await TinTuc.find({tag: 'trai-nghiem'}).limit(9).catch(next);
         let tintucs = await TinTuc.find({}).limit(8).catch(next); 
 
         res.render('khampha', {
