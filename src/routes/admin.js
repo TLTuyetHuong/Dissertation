@@ -3,6 +3,8 @@ const router = express.Router();
 const adminController = require('../app/controllers/AdminController');
 const khachSanController = require('../app/controllers/KhachSanController');
 const tinTucController = require('../app/controllers/TinTucController');
+const tourController = require('../app/controllers/TourController');
+const duLichController = require('../app/controllers/DuLichController');
 const authController = require('../app/controllers/AuthController');
 const { verifySignUp } = require("../app/middlewares/verifySignUp");
 
@@ -28,25 +30,25 @@ router.get('/quan-ly-comment/thung-rac', adminController.trashComment);
 router.get('/quan-ly-comment', adminController.ql_comment);
 
 // Quan ly Tour
-router.post('/quan-ly-tour/handle-form-action', adminController.handleFormActionsTour);
-router.post('/quan-ly-tour/trash-form-action', adminController.trashFormActionsTour);
-router.patch('/quan-ly-tour/:id/khoi-phuc', adminController.restoreTour);
-router.patch('/quan-ly-dat-tour/:id/khoi-phuc', adminController.restoreDatTour);
-router.post('/quan-ly-dat-tour/handle-form-action', adminController.handleFormActionsDT);
-router.post('/quan-ly-dat-tour/trash-form-action', adminController.trashFormActionsDT);
-router.put('/quan-ly-tour/xem-chi-tiet/:id', adminController.updateDatTour);
-router.put('/quan-ly-tour/:id', adminController.updateTour);
-router.delete('/quan-ly-tour:id/force', adminController.forceTour);
-router.delete('/quan-ly-dat-tour:id/force', adminController.forceDatTour);
-router.delete('/quan-ly-tour/:id', adminController.deleteTour);
-router.post('/quan-ly-tour', adminController.addTour);
-router.get('/quan-ly-tour/:id/sua-tour', adminController.editTour);
-router.get('/quan-ly-tour/xem-chi-tiet/:id', adminController.editDatTour);
-router.get('/quan-ly-tour/danh-sach-khach-dat-tour', adminController.ds_tour);
-router.get('/quan-ly-tour/thung-rac', adminController.trashTour);
-router.get('/quan-ly-dat-tour/thung-rac', adminController.trashDatTour);
-router.get('/quan-ly-dat-tour', adminController.ql_dattour);
-router.get('/quan-ly-tour', adminController.ql_tour);
+router.post('/quan-ly-tour/handle-form-action', tourController.handleFormActionsTour);
+router.post('/quan-ly-tour/trash-form-action', tourController.trashFormActionsTour);
+router.patch('/quan-ly-tour/:id/khoi-phuc', tourController.restoreTour);
+router.patch('/quan-ly-dat-tour/:id/khoi-phuc', tourController.restoreDatTour);
+router.post('/quan-ly-dat-tour/handle-form-action', tourController.handleFormActionsDT);
+router.post('/quan-ly-dat-tour/trash-form-action', tourController.trashFormActionsDT);
+router.put('/quan-ly-tour/xem-chi-tiet/:id', tourController.updateDatTour);
+router.put('/quan-ly-tour/:id', tourController.updateTour);
+router.delete('/quan-ly-tour:id/force', tourController.forceTour);
+router.delete('/quan-ly-dat-tour:id/force', tourController.forceDatTour);
+router.delete('/quan-ly-tour/:id', tourController.deleteTour);
+router.post('/quan-ly-tour', tourController.addTour);
+router.get('/quan-ly-tour/:id/sua-tour', tourController.editTour);
+router.get('/quan-ly-tour/xem-chi-tiet/:id', tourController.editDatTour);
+router.get('/quan-ly-tour/danh-sach-khach-dat-tour', tourController.ds_tour);
+router.get('/quan-ly-tour/thung-rac', tourController.trashTour);
+router.get('/quan-ly-dat-tour/thung-rac', tourController.trashDatTour);
+router.get('/quan-ly-dat-tour', tourController.ql_dattour);
+router.get('/quan-ly-tour', tourController.ql_tour);
 
 // Quan ly Tin Tuc
 router.get('/quan-ly-lich-trinh-goi-y', tinTucController.ql_lichtrinh);
@@ -65,28 +67,28 @@ router.get('/quan-ly-tin-tuc/thung-rac', tinTucController.trashTinTuc);
 router.get('/quan-ly-tin-tuc', tinTucController.ql_tintuc);
 
 // Quan ly Dia Diem
-router.post('/quan-ly-dia-diem/handle-form-action', adminController.handleFormActionsDD);
-router.post('/quan-ly-dia-diem/trash-form-action', adminController.trashFormActionsDD);
-router.patch('/quan-ly-dia-diem/:id/khoi-phuc', adminController.restoreDiaDiem);
-router.put('/quan-ly-dia-diem/:id', adminController.updateDiaDiem);
-router.delete('/quan-ly-dia-diem/:id/force', adminController.forceDiaDiem);
-router.delete('/quan-ly-dia-diem/:id', adminController.deleteDiaDiem);
-router.post('/quan-ly-dia-diem', adminController.addDiaDiem);
-router.get('/quan-ly-dia-diem/:id/sua-dia-diem', adminController.editDiaDiem);
-router.get('/quan-ly-dia-diem/thung-rac', adminController.trashDiaDiem);
-router.get('/quan-ly-dia-diem', adminController.ql_diadiem);
+router.post('/quan-ly-dia-diem/handle-form-action', duLichController.handleFormActionsDD);
+router.post('/quan-ly-dia-diem/trash-form-action', duLichController.trashFormActionsDD);
+router.patch('/quan-ly-dia-diem/:id/khoi-phuc', duLichController.restoreDiaDiem);
+router.put('/quan-ly-dia-diem/:id', duLichController.updateDiaDiem);
+router.delete('/quan-ly-dia-diem/:id/force', duLichController.forceDiaDiem);
+router.delete('/quan-ly-dia-diem/:id', duLichController.deleteDiaDiem);
+router.post('/quan-ly-dia-diem', duLichController.addDiaDiem);
+router.get('/quan-ly-dia-diem/:id/sua-dia-diem', duLichController.editDiaDiem);
+router.get('/quan-ly-dia-diem/thung-rac', duLichController.trashDiaDiem);
+router.get('/quan-ly-dia-diem', duLichController.ql_diadiem);
 
 // Quan ly Am Thuc
-router.post('/quan-ly-am-thuc/handle-form-action', adminController.handleFormActionsAT);
-router.post('/quan-ly-am-thuc/trash-form-action', adminController.trashFormActionsAT);
-router.patch('/quan-ly-am-thuc/:id/khoi-phuc', adminController.restoreAmThuc);
-router.put('/quan-ly-am-thuc/:id', adminController.updateAmThuc);   // Sửa
-router.delete('/quan-ly-am-thuc/:id/force', adminController.forceAmThuc);
-router.delete('/quan-ly-am-thuc/:id', adminController.deleteAmThuc);    // Xoá
-router.post('/quan-ly-am-thuc', adminController.addAmThuc); // Thêm
-router.get('/quan-ly-am-thuc/:id/sua-am-thuc', adminController.editAmThuc); // Hiện trang Sửa
-router.get('/quan-ly-am-thuc/thung-rac', adminController.trashAmThuc);
-router.get('/quan-ly-am-thuc', adminController.ql_amthuc)   // Trang Quản lý Ẩm thực
+router.post('/quan-ly-am-thuc/handle-form-action', duLichController.handleFormActionsAT);
+router.post('/quan-ly-am-thuc/trash-form-action', duLichController.trashFormActionsAT);
+router.patch('/quan-ly-am-thuc/:id/khoi-phuc', duLichController.restoreAmThuc);
+router.put('/quan-ly-am-thuc/:id', duLichController.updateAmThuc);   // Sửa
+router.delete('/quan-ly-am-thuc/:id/force', duLichController.forceAmThuc);
+router.delete('/quan-ly-am-thuc/:id', duLichController.deleteAmThuc);    // Xoá
+router.post('/quan-ly-am-thuc', duLichController.addAmThuc); // Thêm
+router.get('/quan-ly-am-thuc/:id/sua-am-thuc', duLichController.editAmThuc); // Hiện trang Sửa
+router.get('/quan-ly-am-thuc/thung-rac', duLichController.trashAmThuc);
+router.get('/quan-ly-am-thuc', duLichController.ql_amthuc)   // Trang Quản lý Ẩm thực
 
 // Admin
 router.put('/avatar/:id', adminController.updateAvatar); 
@@ -108,6 +110,7 @@ router.get('/danh-sach-admin/thung-rac', adminController.trashAdmin);
 router.get('/danh-sach-admin', adminController.ds_admin);  
 router.get('/doi-mat-khau/:id', adminController.changePass); 
 router.get('/quen-mat-khau', adminController.forgotPass);   // Quên mật khẩu
+router.get('/quan-ly-thung-rac', adminController.ql_thungrac);
 router.get('/', adminController.index);
 
 module.exports = router;

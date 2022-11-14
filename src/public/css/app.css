@@ -438,3 +438,7 @@ body a {
   .quaylai:hover {
     color: #4e73df;
     text-decoration: none; }
+
+#accordionSidebar {
+  top: 0;
+  margin-top: 0; }

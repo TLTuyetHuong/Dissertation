@@ -98,8 +98,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Pending Requests</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{nameTour}}</div>
+                                            Tổng lượt bình luận</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{cmt}} lượt</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -109,6 +109,18 @@
                         </div>
                     </div>
                 </div>
+                <a id="Thang1" type="button" data-bs-id="{{thang1}}" hidden></a>
+                <a id="Thang2" type="button" data-bs-id="{{thang2}}" hidden></a>
+                <a id="Thang3" type="button" data-bs-id="{{thang3}}" hidden></a>
+                <a id="Thang4" type="button" data-bs-id="{{thang4}}" hidden></a>
+                <a id="Thang5" type="button" data-bs-id="{{thang5}}" hidden></a>
+                <a id="Thang6" type="button" data-bs-id="{{thang6}}" hidden></a>
+                <a id="Thang7" type="button" data-bs-id="{{thang7}}" hidden></a>
+                <a id="Thang8" type="button" data-bs-id="{{thang8}}" hidden></a>
+                <a id="Thang9" type="button" data-bs-id="{{thang9}}" hidden></a>
+                <a id="Thang10" type="button" data-bs-id="{{thang10}}" hidden></a>
+                <a id="Thang11" type="button" data-bs-id="{{thang11}}" hidden></a>
+                <a id="Thang12" type="button" data-bs-id="{{thang12}}" hidden></a>
                 <div class="row card">
                     <div class="chartbar">
                         <canvas id="myChart"></canvas>
@@ -134,19 +146,8 @@
             </div>
         </footer>
         <!-- End of Footer -->
-        <script>
-            fetch("http://localhost:5000/admin")
-                .then((response) => {
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(function (err) {
-                    console.log("Unable to fetch -", err);
-                });
-            
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+        <script src="/js/chart.js"></script>
 </body>
 
 </html>
