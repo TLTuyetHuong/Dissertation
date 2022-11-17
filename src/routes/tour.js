@@ -5,7 +5,7 @@ const tourController = require('../app/controllers/TourController');
 
 router.put('/trai-nghiem/like/:id', tourController.like);
 router.put('/like/:id', tourController.like);
-router.post('/trai-nghiem/comment/:slug',tourController.comment);
+// router.post('/trai-nghiem/comment/:slug',tourController.comment);
 router.post('/comment/:slug',tourController.comment);
 router.post('/:slug',tourController.datTour);
 router.get('/trai-nghiem/:slug', tourController.show);

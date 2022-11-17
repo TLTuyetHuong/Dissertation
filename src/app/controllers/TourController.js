@@ -23,7 +23,7 @@ class TourController {
     // [GET] /tour/:slug
     async chiTiet(req, res, next) {
         let tour = await Tour.findOne({slug: req.params.slug}).catch(next);
-        let title = tour.title;
+        let title = tour.name;
         let comments = await Comment.find({posts: title}).sort({createdAt: -1});
         Tour.findOne({slug: req.params.slug})
             .then((tours) => {

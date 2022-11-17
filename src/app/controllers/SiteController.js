@@ -114,8 +114,18 @@ class SiteController {
     }
 
     // [GET] /lien-he
-    lienhe(req, res){
+    lienHe(req, res){
         res.render('lienhe', {title: 'Liên Hệ'});
+    }
+
+    // [GET] /tien-ich
+    tienIch(req, res){
+        res.render('tienich/index', {title: 'Tiện Ích'});
+    }
+
+    // [GET] /tien-ich/:slug
+    tienIchInfo(req, res){
+        res.render('tienich/'+req.params.slug, {title: 'Liên hệ khẩn cấp!!!'});
     }
 
 
