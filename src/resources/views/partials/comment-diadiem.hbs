@@ -48,19 +48,3 @@
     </div>
     {{/each}}
 </div>
-<script>
-    $(document).ready(function() {
-        $('form').submit(function(event) {
-            $.ajax({
-                method: $(this).attr('method'),
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                // other AJAX settings goes here
-                // ..
-            }).done(function(response) {
-                // Process the response here
-            });
-            event.preventDefault(); // <- avoid reloading
-    });
-    });
-</script>
