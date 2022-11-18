@@ -9,6 +9,7 @@ const GoiY = new Schema({
     address: { type: String, require: true},
     email: { type: String, require: true},
     image: { type: String},
+    status: { type: String, default: 'Mới'},
     slug: { type: String, slug: 'name', unique: true }
 },{
     timestamps: true,

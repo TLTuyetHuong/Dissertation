@@ -5,6 +5,7 @@ const TinTuc = require("../models/TinTuc");
 const Tour = require("../models/Tour");
 const DatTour = require("../models/DatTour");
 const Comment = require("../models/Comment");
+const GoiY = require("../models/GoiY");
 const emailService = require('../services/verifyEmail');
 const path = require("path");
 const fs = require("fs");
@@ -555,6 +556,111 @@ class AdminController {
     restoreComment(req, res, next) {
         Comment.restore({ _id: req.params.id })
             .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // Quan Ly Goi Y //
+
+    // [GET] /admin/quan-ly-goi-y
+    async ql_goiy(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        const goiys = await GoiY.find({}).sort({createdAt: -1});
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let deletedCount = await GoiY.countDocumentsDeleted({}); 
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_goiy", {
+                title: "Quản lý Gợi Ý",
+                admins: mongooseToObject(admins),
+                goiys: multipleMongooseToObject(goiys),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-goi-y"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [GET] /admin/quan-ly-goi-y/thung-rac
+    async trashGoiY(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        if (req.session.daDangNhap) {
+            GoiY.findDeleted({})
+                .then((goiys) =>
+                    res.render('admin/trash-goi-y',{
+                        title: 'Danh sách gợi ý đã xoá',
+                        admins: mongooseToObject(admins),
+                        goiys: multipleMongooseToObject(goiys),
+                        dattours: multipleMongooseToObject(dattours),
+                    })
+                ).catch(next);
+        }
+        else { 
+            req.session.back="/admin/quan-ly-goi-y"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+    }
+
+    // [POST] /admin/quan-ly-goi-y/handle-form-action
+    handleFormActionsGoiY(req, res, next){
+        switch(req.body.action) {
+            case 'delete':
+                GoiY.delete({_id: {$in: req.body.goiyIds}})
+                    .then(()=> res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({message: 'Action is invalid!'});
+        }
+    }
+
+    // [POST] /admin/quan-ly-goi-y/trash-form-action
+    trashFormActionsGoiY(req, res, next){
+        switch(req.body.action) {
+            case 'delete':
+                GoiY.deleteMany({_id: {$in: req.body.goiyIds}})
+                    .then(()=> res.redirect('back'))
+                    .catch(next);
+                break;
+            case 'restore':
+                GoiY.restore({_id: {$in: req.body.goiyIds}})
+                    .then(() => res.redirect("back"))
+                    .catch(next);
+                break;
+            default:
+                res.json({message: 'Action is invalid!'});
+        }
+    }
+
+    // [DELETE] /admin/quan-ly-goi-y/:id
+    async deleteGoiY(req, res, next) {
+        await GoiY.delete({ _id: req.params.id }).catch(next);
+        res.redirect("back")
+    }
+
+    // [DELETE] /admin/quan-ly-goi-y/:id/force
+    forceGoiY(req, res, next) {
+        GoiY.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+
+    // [PATCH] /admin/quan-ly-goi-y/:id/khoi-phuc
+    restoreGoiY(req, res, next) {
+        GoiY.restore({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-goi-y/:id
+    updateGoiY(req, res, next) {
+        GoiY.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-goi-y"))
             .catch(next);
     }
 

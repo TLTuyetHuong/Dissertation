@@ -1,0 +1,235 @@
+
+<div id="page-top">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+            {{>admin}}
+            <div id="filter">
+                  <!-- Begin Page Content -->
+                  <div class="container-fluid" id="demo">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                              <h1 class="h3 mb-0 text-gray-800">Quản lý Gợi ý</h1>
+                              <div style="float: right;">
+                                    <a class="nav-link" href="/admin/quan-ly-goi-y/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
+                                          <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
+                                          <span class="badge badge-danger badge-counter">{{deletedCount}}</span>
+                                    </a>
+                                    
+                              </div>
+                        </div>
+
+                        <form name="container-form" method="POST" action="/admin/quan-ly-goi-y/handle-form-action">
+                        <div class="d-flex align-items-center mb-3">
+                              <div class="form-check" style="padding-right: 10px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+                                    <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
+                              </div>
+                              <select name="action" class="form-select" aria-label="Default select example" style="width: 200px" required>
+                                    <option selected>-- Chọn hành động --</option>
+                                    <option value="delete">Xoá</option>
+                              </select>
+                              <button class="btn btn-primary check-all-submit-btn" disabled>Thực hiện</button>
+                        </div>
+
+                        <div id="dattour">
+
+                              <div>
+                                    <table class="table table-hover" id="dtBasicExample">
+                                          <thead style="text-align: center;">
+                                          <tr>
+                                                <th></th>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Hình ảnh</th>
+                                                <th scope="col">Thông tin người gợi ý</th>
+                                                <th scope="col">Tên nơi gợi ý</th>
+                                                <th scope="col">Địa chỉ nơi gợi ý</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col"></th>
+                                          </tr>
+                                          </thead>
+                                          <tbody id="myfilter" style="text-align: center;">
+                                          {{#each goiys}}
+                                          <tr>
+                                                <th>
+                                                      <div class="form-check" style="padding-right: 10px;">
+                                                            <input class="form-check-input" type="checkbox" name="goiyIds[]" value="{{this._id}}">
+                                                      </div>
+                                                </th>
+                                                <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
+                                                <td><img src="{{this.image}}" width="150px" alt=""></td>
+                                                <td>
+                                                      <b>Email: </b>{{this.email}}<br>
+                                                </td>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this.address}}</td>
+                                                <td><a type="button" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#modalStatus">{{this.status}}</a></td>
+                                                <td>
+                                                <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
+                                                </td>
+                                          </tr>
+                                          
+                                          {{else}}
+                                                <tr class="text-center">
+                                                      <td colspan="7">Chưa có gợi ý nào.</td>
+                                                </tr>
+                                          {{/each}}
+                                          </tbody>
+                              </table>
+                              </div>
+                        </div>
+                        </form>
+                        <!-- Modal Status -->
+                        <div class="modal fade" id="modalStatus" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <form name="form-dd-status" class="modal-dialog" method="POST">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Chuyển đổi trạng thái?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" value="Mới" id="flexRadioDefault1">
+                                                      <label class="form-check-label" for="flexRadioDefault1">
+                                                      Mới
+                                                      </label>
+                                                </div>
+                                                <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" value="Đã có" id="flexRadioDefault2">
+                                                      <label class="form-check-label" for="flexRadioDefault2">
+                                                      Đã có
+                                                      </label>
+                                                </div>
+                                                <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" value="Đã duyệt" id="flexRadioDefault3">
+                                                      <label class="form-check-label" for="flexRadioDefault3">
+                                                      Đã duyệt
+                                                      </label>
+                                                </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button type="button" id="btn-status"
+                                                      class="btn btn-danger">Đổi</button>
+                                          </div>
+                                    </div>
+                              </form>
+                        </div>
+                        <!-- Modal Xoá -->
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <div class="modal-dialog">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Gợi ý?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xoá gợi ý này?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button id="btn-delete" type="button"
+                                                      class="btn btn-danger">Xoá</button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- Modal Xoá -->
+
+                        {{!-- Form hidden delete --}}
+                        <form name="form-dd-delete" method="POST"></form>
+                  </div>
+
+            </div>
+      </div>
+      <!-- End of Page Wrapper -->
+      <!-- End of Content Wrapper -->
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                        <span>Copyright &copy;2022</span>
+                  </div>
+            </div>
+      </footer>
+      <!-- End of Footer -->
+
+      </div>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', function(){
+            var ddID;
+            var deleteForm = document.forms['form-dd-delete'];
+            var statusForm = document.forms['form-dd-status'];
+
+            var containerForm = $('form[name="container-form"]');
+
+            var btnDelete = document.getElementById('btn-delete');
+            var btnStatus = $('#btn-status');
+
+            var checkboxAll = $('#checkbox-all');
+            var itemCheckbox = $('input[name="goiyIds[]"]');
+            var checkAllSubmitBtn = $('.check-all-submit-btn');
+
+            $('#modalDelete').on('show.bs.modal', event => {
+                  // Button that triggered the modal
+                  var button = event.relatedTarget
+                  // Extract info from data-bs-* attributes
+                  ddID = button.getAttribute('data-bs-id')
+            });
+
+            btnDelete.onclick = function () {
+                  deleteForm.action = '/admin/quan-ly-goi-y/' + ddID + '?_method=DELETE'; 
+                  deleteForm.submit();
+            }
+
+            $('#modalStatus').on('show.bs.modal', event => {
+                  // Button that triggered the modal
+                  var button = event.relatedTarget
+                  // Extract info from data-bs-* attributes
+                  ddID = button.getAttribute('data-id')
+            });
+
+            btnStatus.click( function (e) {
+                  e.preventDefault();
+                  var id = ddID;
+                  statusForm.action = '/admin/quan-ly-goi-y/trang-thai/' + id + '?_method=PUT'; 
+                  statusForm.submit();
+            });
+
+            // Checkbox all click
+            checkboxAll.change(function () {
+                  var isCheckedAll = $(this).prop('checked');
+                  itemCheckbox.prop('checked', isCheckedAll);
+                  renderCheckAllSubmitBtn();
+            });
+
+            // item checkbox changed
+            itemCheckbox.change( function () {
+                  var isCheckedAll = itemCheckbox.length === $('input[name="goiyIds[]"]:checked').length;
+                  checkboxAll.prop('checked', isCheckedAll);
+                  renderCheckAllSubmitBtn();
+            });
+
+            function renderCheckAllSubmitBtn() {
+                  var checkedCount = $('input[name="goiyIds[]"]:checked').length;
+                  if(checkedCount > 0){
+                        checkAllSubmitBtn.attr('disabled', false);
+                  } else {
+                        checkAllSubmitBtn.attr('disabled', true);
+                  }
+            }
+      });
+</script>
+

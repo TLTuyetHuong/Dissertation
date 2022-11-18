@@ -8,6 +8,16 @@ const duLichController = require('../app/controllers/DuLichController');
 const authController = require('../app/controllers/AuthController');
 const { verifySignUp } = require("../app/middlewares/verifySignUp");
 
+// Quan ly Goi Y
+router.post('/quan-ly-goi-y/handle-form-action', adminController.handleFormActionsGoiY);
+router.post('/quan-ly-goi-y/trash-form-action', adminController.trashFormActionsGoiY);
+router.patch('/quan-ly-goi-y/:id/khoi-phuc', adminController.restoreGoiY);
+router.put('/quan-ly-goi-y/trang-thai/:id', adminController.updateGoiY);
+router.delete('/quan-ly-goi-y/:id/force', adminController.forceGoiY);
+router.delete('/quan-ly-goi-y/:id', adminController.deleteGoiY);
+router.get('/quan-ly-goi-y/thung-rac', adminController.trashGoiY);
+router.get('/quan-ly-goi-y', adminController.ql_goiy);
+
 // Quan ly Khach San
 router.post('/quan-ly-khach-san/handle-form-action', khachSanController.handleFormActionsKS);
 router.post('/quan-ly-khach-san/trash-form-action', khachSanController.trashFormActionsKS);

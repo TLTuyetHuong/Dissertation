@@ -120,9 +120,9 @@ class TourController {
     async comment(req, res, next) {
         let tours = await Tour.findOne({slug: req.params.slug}).catch(next);
         let trainghiems = await TinTuc.findOne({slug: req.params.slug}).catch(next);
-        const title = '';
+        let title = '';
         if(tours){
-            title = tours.title;
+            title = tours.name;
         }
         if(trainghiems){
             title = tours.title;

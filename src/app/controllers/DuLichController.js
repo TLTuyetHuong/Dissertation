@@ -151,8 +151,8 @@ class DuLichController {
     }
 
     // [POST] /du-lich/goi-y
-    goiY(req, res) {
-        upload(req, res, function (err) {
+    goiY(req, res, next) {
+        upload(req, res, async function (err) {
             if (err instanceof multer.MulterError) {
               console.log("A Multer error occurred when uploading."); 
             } else if (err) {
@@ -161,13 +161,20 @@ class DuLichController {
                 emailThanks.sendSimpleEmail({
                     receiverEmail: req.body.email,
                 });
-                console.log(req.file);
+                let status = '';
+                let diadiem = await DiaDiem.findOne({name: req.body.name}).catch(next);
+                let amthuc = await AmThuc.findOne({title: req.body.name}).catch(next);
+                if(diadiem || amthuc){
+                    status = 'Đã có';
+                }
+                else{ status = 'Mới'; }
                 const image = '/img/'+req.file.filename;
                 const goiy = new GoiY({
                     name: req.body.name,
                     address: req.body.address,
                     image: image,
-                    email: req.body.email
+                    email: req.body.email,
+                    status: status,
                 });
                 goiy
                     .save()
