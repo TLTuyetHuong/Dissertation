@@ -12,6 +12,8 @@ const { expressjwt: jwt } = require("express-jwt");
 const hbs = require('express-handlebars');
 const fetch = require('node-fetch');
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const port = 5000;
 
 const route = require('./routes');
@@ -45,6 +47,12 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( cors() );
+
+io.on('connection', function(socket){
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
+    });
+});
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))

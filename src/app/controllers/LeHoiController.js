@@ -44,6 +44,7 @@ class LeHoiController {
         const comments = new Comment({
             comment: formData.comment,
             like: formData.like,
+            rate: formData.rate,
             posts: title, 
             date: date+' '+time,
         });

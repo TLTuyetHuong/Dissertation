@@ -8,7 +8,7 @@ const { mongooseToObject } = require('../../until/mongoose');
 class TinTucController {
     // [GET] /tin-tuc
     index(req, res, next) {
-        TinTuc.find({})
+        TinTuc.find({tag: 'tin-tuc'})
             .then(tintucs => {
                 res.render('tintucs', {
                     title: 'Tin Tức',
@@ -36,7 +36,7 @@ class TinTucController {
             .catch(next);
     }
 
-    // [POST] /tin-tuc/:slug
+    // [POST] /tin-tuc/comment/:slug
     async comment(req, res, next) {
         let tintucs = await TinTuc.findOne({slug: req.params.slug}).catch(next);
         const title = tintucs.title;
@@ -48,6 +48,7 @@ class TinTucController {
         const comments = new Comment({
             comment: formData.comment,
             like: formData.like,
+            rate: formData.rate,
             posts: title, 
             date: date+' '+time,
         });
