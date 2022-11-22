@@ -1,8 +1,11 @@
 $(function() {
-  var rateyo = document.getElementById('rateYo').getAttribute('data-rateyo-rating');
-  $("#rateYo").rateYo({
-    rating    : rateyo,
-  });
+  var rateyo = document.getElementsByClassName('rate-yo');
+  var i;
+  for(i=0;i<rateyo.length;i++){
+    $(".rate-yo").rateYo({
+      rating    : rateyo[i],
+    });
+  }
   $(".rateYo").rateYo().on("rateyo.change", function(e, data) {
     var rating = data.rating;
     $(this).parent().find('.score').text('score :' + $(this).attr('data-rateyo-score'));

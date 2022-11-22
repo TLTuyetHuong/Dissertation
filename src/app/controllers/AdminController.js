@@ -466,7 +466,7 @@ class AdminController {
     // [GET] /admin/quan-ly-comment
     async ql_comment(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let comment = await Comment.find({}).catch(next); 
+        let comment = await Comment.find({}).sort({updatedAt: -1}); 
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         let deletedCount = await Comment.countDocumentsDeleted({}); 
         

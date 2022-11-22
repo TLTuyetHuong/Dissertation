@@ -390,9 +390,9 @@ body a {
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 3px 3px; }
   .khachsan h5:hover {
-    height: auto;
+    height: 150px;
     line-height: 30px;
-    margin-top: 43%;
+    margin-top: 45%;
     color: aliceblue;
     text-shadow: 1px 1px black;
     background-color: rgba(0, 0, 0, 0.195); }
@@ -442,3 +442,6 @@ body a {
 #accordionSidebar {
   top: 0;
   margin-top: 0; }
+
+.rate-yo {
+  margin-bottom: -10px; }

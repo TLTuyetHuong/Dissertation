@@ -6,7 +6,7 @@ const Comment = new Schema({
 	posts: { type: String, require: true},
 	comment: { type: String, require: true},
     like: { type: Number, default: 0},
-    rate: { type: String},
+    rate: { type: String, default: '3'},
 	date: { type: String},
 }, {
     timestamps: true,

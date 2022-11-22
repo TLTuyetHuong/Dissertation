@@ -41,7 +41,7 @@
                                                       <th scope="col">STT</th>
                                                       <th scope="col">ID</th>
                                                       <th scope="col">Nội Dung</th>
-                                                      <th scope="col">Thời gian Cmt</th>
+                                                      <th scope="col">Đánh giá sao</th>
                                                       <th scope="col">Số lượt thích</th>
                                                       <th scope="col">Cmt của Bài Viết</th>
                                                       <th scope="col"></th>
@@ -57,8 +57,11 @@
                                                       </th>
                                                       <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                       <td>{{this._id}}</td>
-                                                      <td>{{this.comment}}</td>
-                                                      <td>{{this.date}}</td>
+                                                      <td>
+                                                            <b>Nội dung: </b>{{this.comment}}<br>
+                                                            <b>Thời gian Cmt: </b>{{this.date}}
+                                                      </td>
+                                                      <td style="text-align: center;">{{this.rate}}</td>
                                                       <td style="text-align: center;">{{this.like}}</td>
                                                       <td>{{this.posts}}</td>
                                                       <td>
