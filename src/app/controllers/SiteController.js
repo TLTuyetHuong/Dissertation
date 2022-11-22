@@ -83,7 +83,13 @@ class SiteController {
             .toLowerCase()
             .includes(convertKey.toLowerCase());
         };
+        const fillterDiaDiemAddressByKey = (diadiems) => {
+            return removeVietnameseTones(diadiems.address)
+            .toLowerCase()
+            .includes(convertKey.toLowerCase());
+        };
         const diadiems = diadiem.filter(fillterDiaDiemByKey);
+        const diadiemsAddress = diadiem.filter(fillterDiaDiemAddressByKey);
 
         // Am Thuc
         let amthuc = await AmThuc.find({});
@@ -92,7 +98,13 @@ class SiteController {
             .toLowerCase()
             .includes(convertKey.toLowerCase());
         };
-        const amthucs = amthuc.filter(fillterAmThucByKey);
+        const fillterAmThucAddressByKey = (amthucs) => {
+            return removeVietnameseTones(amthucs.address)
+            .toLowerCase()
+            .includes(convertKey.toLowerCase());
+        };
+        let amthucs = amthuc.filter(fillterAmThucByKey);
+        let amthucsAddress = amthuc.filter(fillterAmThucAddressByKey);
 
         res.render('search', {
             title: 'Quảng bá du lịch và ẩm thực Thành phố Cần Thơ 😋',
@@ -100,6 +112,8 @@ class SiteController {
             tintucs: multipleMongooseToObject(tintucs),
             diadiems: multipleMongooseToObject(diadiems),
             amthucs: multipleMongooseToObject(amthucs),
+            diadiemsAddress: multipleMongooseToObject(diadiemsAddress),
+            amthucsAddress: multipleMongooseToObject(amthucsAddress),
         });
     }
 

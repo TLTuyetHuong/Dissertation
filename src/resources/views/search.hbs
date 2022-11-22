@@ -108,6 +108,28 @@
                         <h3><b>KHÔNG CÓ ĐỊA ĐIỂM NÀO ĐƯỢC TÌM THẤY</b></h3>
                   </div>
                   {{/each}}
+                  {{#each diadiemsAddress}}
+                  <div class="col-sm-6 col-lg-4 py-3">
+                  <div class="card img-fluid zoomin">
+                        <a href="/du-lich/dia-diem/{{this.slug}}">
+                              <img style="height: 360px;" class="card-img-top" src="{{this.image}}"
+                              alt="Card image">
+                              <div class="card-img-overlay">
+                              <h4 class="card-title text-white title1 text-center p-1">{{this.name}}</h4>
+                              </div>
+                        </a>
+                        <div class="card-img-overlay text-center p-2 place" style="background: linear-gradient(90deg,  rgb(5, 0, 92) 0%, rgb(13, 30, 156) 35%, rgb(5, 234, 255) 100%);">
+                              <a href="{{this.place}}" target="_blank">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                              </svg>
+                              {{this.address}}
+                              </a>
+                        </div>
+                  </div>
+                  
+                  </div>
+                  {{/each}}
             </div>
       </div>
       <h3 class="font-effect-shadow-multiple mt-3" style="font-size: 60px; text-align: center">Ẩ M T H Ự C</h3>
@@ -137,6 +159,28 @@
                   {{else}}
                   <div class="text-center" style="color: gray;">
                         <h3><b>KHÔNG CÓ ẨM THỰC NÀO ĐƯỢC TÌM THẤY</b></h3>
+                  </div>
+                  {{/each}}
+                  {{#each amthucsAddress}}
+                  <div class="col-sm-6 col-lg-4 py-3" id="{{this.tag}}">
+                  <div class="card img-fluid zoomin">
+                        <a href="/du-lich/am-thuc/{{this.slug}}">
+                              <img style="height: 360px;" class="card-img-top" src="{{this.image}}"
+                              alt="Card image">
+                              <div class="card-img-overlay">
+                              <h4 class="card-title text-white title1 text-center p-1">{{this.title}}</h4>
+                              </div>
+                        </a>
+                        <div class="card-img-overlay text-center p-2 place">
+                              <a href="{{this.place}}" target="_blank">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                              </svg>
+                              {{this.address}}
+                              </a>
+                        </div>
+                  </div>
+                  
                   </div>
                   {{/each}}
             </div>
