@@ -273,7 +273,6 @@ class AdminController {
             email: req.body.email,
         });
         if(admins){
-            console.log(admins._id);
             emailService.sendSimpleEmail({
                 receiverEmail: req.body.email,
                 id: admins._id,
@@ -345,9 +344,21 @@ class AdminController {
 
     // [PUT] /admin/avatar/:id
     updateAvatar(req, res, next) {
-        Admin.updateOne({ _id: req.params.id }, {image: req.body.avatar})
-            .then(() => res.redirect("/admin"))
-            .catch(next);
+        upload(req, res, async function (err) {
+            if (err instanceof multer.MulterError) {
+              console.log("A Multer error occurred when uploading."); 
+            } else if (err) {
+              console.log("An unknown error occurred when uploading." + err);
+            }else{
+                let avatar = '';
+                if(req.file){
+                    avatar = '/img/'+req.file.filename;
+                }else avatar = 'https://postgraduate.ias.unu.edu/upp/wp-content/uploads/2022/04/IAFOR-Blank-Avatar-Image-1.jpg';
+                Admin.updateOne({ _id: req.params.id }, {image: avatar})
+                    .then(() => res.redirect("/admin"))
+                    .catch(next);
+            }
+        });
     }
 
     // [DELETE] /admin/:id
@@ -375,10 +386,14 @@ class AdminController {
                 if (!admin) {
                     const salt = bcrypt.genSaltSync(10);
                     const password = req.body.password;
+                    let avatar = '';
+                    if(req.file){
+                        avatar = req.file.filename;
+                    }else avatar = 'https://postgraduate.ias.unu.edu/upp/wp-content/uploads/2022/04/IAFOR-Blank-Avatar-Image-1.jpg';
                     const admins = new Admin({
                         name: req.body.name,
                         email: req.body.email,
-                        image: req.file.filename,
+                        image: avatar,
                         phone: req.body.phone,
                         birthday: req.body.birthday,
                         password: bcrypt.hashSync(password, salt),

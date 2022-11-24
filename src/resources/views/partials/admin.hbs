@@ -467,7 +467,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{admins.name}}</span>
-                            <img class="img-profile rounded-circle" src="/img/{{admins.image}}" width="35px" height="35px">
+                            <img class="img-profile rounded-circle" src="{{admins.image}}" width="35px" height="35px">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -556,7 +556,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="doiAvatar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="/admin/avatar/{{admins._id}}?_method=PUT" method="post">
+                    <form action="/admin/avatar/{{admins._id}}?_method=PUT" method="post" enctype="multipart/form-data">
                         <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Đổi avatar?</h1>

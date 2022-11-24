@@ -170,7 +170,10 @@ class DuLichController {
                     status = 'Đã có';
                 }
                 else{ status = 'Mới'; }
-                const image = '/img/'+req.file.filename;
+                let image = '';
+                if(req.file){
+                    image = '/img/'+req.file.filename;
+                }else image = 'http://www.langem.org/wp-content/uploads/2018/04/placeholder.png';
                 const goiy = new GoiY({
                     name: req.body.name,
                     address: req.body.address,

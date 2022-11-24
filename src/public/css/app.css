@@ -38,15 +38,15 @@ body a {
     border-radius: 100%;
     padding-top: 20%;
     text-align: center;
-    color: #AAA; }
+    color: rgba(170, 170, 170, 0.078); }
     .sub-button-circle a:hover {
       border-color: black;
       color: gray;
-      box-shadow: 1px 1px 1px 1px #AAA; }
+      box-shadow: 1px 1px 1px 1px rgba(170, 170, 170, 0.219); }
   .sub-button-circle button {
     border-radius: 100%;
     height: 175px;
-    box-shadow: 2px 2px 2px 2px #AAA; }
+    box-shadow: 2px 2px 2px 2px rgba(170, 170, 170, 0.24); }
 
 .dropdown ul {
   padding-left: 0;
@@ -368,11 +368,11 @@ body a {
       .background-khampha .button-circle a:hover {
         border-color: black;
         color: black;
-        box-shadow: 1px 1px 1px 1px #AAA; }
+        box-shadow: 1px 1px 1px 1px rgba(170, 170, 170, 0.119); }
     .background-khampha .button-circle button {
       border-radius: 100%;
       height: 175px;
-      box-shadow: 2px 2px 2px 2px #AAA; }
+      box-shadow: 2px 2px 2px 2px rgba(170, 170, 170, 0.029); }
 
 .chartbar {
   width: 100%;
@@ -390,7 +390,7 @@ body a {
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 3px 3px; }
   .khachsan h5:hover {
-    height: 150px;
+    height: 80px;
     line-height: 30px;
     margin-top: 45%;
     color: aliceblue;

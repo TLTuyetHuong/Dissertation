@@ -50,19 +50,19 @@ body a {
         border-radius: 100%;
         padding-top: 20%;
         text-align: center;
-        color: #AAA;
+        color: rgba(170, 170, 170, 0.078);
         &:hover {
             border-color: black;
             color: lighten(black, 50%);
             // color:  black;
             // background-color: rgb(241, 241, 241);
-            box-shadow: 1px 1px 1px 1px #AAA;
+            box-shadow: 1px 1px 1px 1px rgba(170, 170, 170, 0.219);
         }
     }
     button {
         border-radius: 100%;
         height: 175px;
-        box-shadow: 2px 2px 2px 2px #AAA;
+        box-shadow: 2px 2px 2px 2px rgba(170, 170, 170, 0.24);
     }
 }
 
@@ -470,13 +470,13 @@ body a {
                 color: rgb(0, 0, 0);
                 // color:  black;
                 // background-color: rgb(241, 241, 241);
-                box-shadow: 1px 1px 1px 1px #AAA;
+                box-shadow: 1px 1px 1px 1px rgba(170, 170, 170, 0.119);
             }
         }
         button {
             border-radius: 100%;
             height: 175px;
-            box-shadow: 2px 2px 2px 2px #AAA;
+            box-shadow: 2px 2px 2px 2px rgba(170, 170, 170, 0.029);
         }
     }
 }
@@ -499,7 +499,7 @@ body a {
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 3px 3px;
     &:hover {
-        height: 150px;
+        height: 80px;
         line-height: 30px;
         margin-top: 45%;
         color: aliceblue;

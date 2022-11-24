@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/doiMK.css">
 <div class="overlay">
     <!-- LOGN IN FORM by Omar Dsoky -->
-    <form action="/admin/doi-mat-khau/{{admins._id}}?_method=PUT" method="POST">
+    <form name="form-pass" action="/admin/doi-mat-khau/{{admins._id}}?_method=PUT" method="POST" onsubmit="return test()">
         <!--   con = Container  for items in the form-->
         <div class="con">
             <!--     Start  header Content  -->
@@ -19,18 +19,19 @@
                     <i class="fa fa-key"></i>
                 </span>
                 <!--   Password Input-->
-                <input class="form-input" type="password" placeholder="Nhập mật khẩu" id="pwd" name="password" required>
+                <input class="form-input" type="password" placeholder="Nhập mật khẩu" id="pwd" name="password" onblur="t2()" required>
 
                 <!--      Show/hide password  -->
                 <span>
                     <i class="fa fa-eye" aria-hidden="true" type="button" id="eye"></i>
                 </span>
+                <p id="mkTB"></p>
 
 
                 <br>
                 <!--        buttons -->
                 <!--      button LogIn -->
-                <button class="log-in mt-5" type="submit">Xác nhận</button>
+                <button id="submit" class="log-in mt-5" type="submit">Xác nhận</button>
             </div>
 
             <!--   End Conrainer  -->
@@ -48,6 +49,29 @@
     function hide() {
         var p = document.getElementById('pwd');
         p.setAttribute('type', 'password');
+    }
+    function t2(){
+		var mkdn = document.getElementById("pwd").value;
+		var mkBTCQ = /^(?=.*\d)(?=.*[A-Za-z])(?!.*[!@#$%^&*()_+].{5,16$})/;
+		if(mkBTCQ .test(mkdn)!=true){
+			document.getElementById("mkTB").innerHTML="Mật khẩu phải có chữ và số!";
+			document.getElementById("mkTB").style.color="red";
+			return  false;
+		}else{
+			document.getElementById("mkTB").innerHTML="";
+            return true;
+		}
+	}
+    function test(){
+		var check= true;
+		var mk= document.getElementById("pwd").value;
+		if(mk==""){
+			document.getElementById("mkTB").innerHTML = "! Vui lòng nhập mật khẩu";
+			document.getElementById("mkTB").style.color="red";
+			check= false;
+		}else{
+			document.getElementById("mkTB").innerHTML = "";
+		}
     }
 
     var pwShown = 0;
