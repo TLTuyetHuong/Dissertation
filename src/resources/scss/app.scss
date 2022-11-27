@@ -50,10 +50,10 @@ body a {
         border-radius: 100%;
         padding-top: 20%;
         text-align: center;
-        color: rgba(170, 170, 170, 0.078);
+        color: rgba(112, 112, 112, 0.867);
         &:hover {
             border-color: black;
-            color: lighten(black, 50%);
+            color: black;
             // color:  black;
             // background-color: rgb(241, 241, 241);
             box-shadow: 1px 1px 1px 1px rgba(170, 170, 170, 0.219);
@@ -568,3 +568,4 @@ body a {
 .rate-yo {
     margin-bottom: -10px;
 }
+

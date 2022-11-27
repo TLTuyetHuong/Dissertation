@@ -15,6 +15,7 @@ router.patch('/quan-ly-goi-y/:id/khoi-phuc', adminController.restoreGoiY);
 router.put('/quan-ly-goi-y/trang-thai/:id', adminController.updateGoiY);
 router.delete('/quan-ly-goi-y/:id/force', adminController.forceGoiY);
 router.delete('/quan-ly-goi-y/:id', adminController.deleteGoiY);
+router.get('/quan-ly-goi-y/trang-thai/:slug', adminController.sortGoiY);
 router.get('/quan-ly-goi-y/thung-rac', adminController.trashGoiY);
 router.get('/quan-ly-goi-y', adminController.ql_goiy);
 
@@ -36,6 +37,8 @@ router.post('/quan-ly-comment/trash-form-action', adminController.trashFormActio
 router.patch('/quan-ly-comment/:id/khoi-phuc', adminController.restoreComment);
 router.delete('/quan-ly-comment/:id/force', adminController.forceComment);
 router.delete('/quan-ly-comment/:id', adminController.deleteComment);
+router.get('/quan-ly-comment/so-luot-thich/:slug', adminController.sortLike);
+router.get('/quan-ly-comment/danh-gia-sao/:slug', adminController.sortStar);
 router.get('/quan-ly-comment/thung-rac', adminController.trashComment);
 router.get('/quan-ly-comment', adminController.ql_comment);
 
@@ -54,6 +57,7 @@ router.delete('/quan-ly-tour/:id', tourController.deleteTour);
 router.post('/quan-ly-tour', tourController.addTour);
 router.get('/quan-ly-tour/:id/sua-tour', tourController.editTour);
 router.get('/quan-ly-tour/xem-chi-tiet/:id', tourController.editDatTour);
+router.get('/quan-ly-dat-tour/trang-thai/:slug', tourController.statusDatTour);
 router.get('/quan-ly-tour/danh-sach-khach-dat-tour', tourController.ds_tour);
 router.get('/quan-ly-tour/thung-rac', tourController.trashTour);
 router.get('/quan-ly-dat-tour/thung-rac', tourController.trashDatTour);
@@ -97,6 +101,7 @@ router.delete('/quan-ly-am-thuc/:id/force', duLichController.forceAmThuc);
 router.delete('/quan-ly-am-thuc/:id', duLichController.deleteAmThuc);    // Xoá
 router.post('/quan-ly-am-thuc', duLichController.addAmThuc); // Thêm
 router.get('/quan-ly-am-thuc/:id/sua-am-thuc', duLichController.editAmThuc); // Hiện trang Sửa
+router.get('/quan-ly-am-thuc/loai/:slug', duLichController.tagAmThuc)
 router.get('/quan-ly-am-thuc/thung-rac', duLichController.trashAmThuc);
 router.get('/quan-ly-am-thuc', duLichController.ql_amthuc)   // Trang Quản lý Ẩm thực
 

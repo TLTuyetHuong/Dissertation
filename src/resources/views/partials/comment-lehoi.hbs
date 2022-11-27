@@ -1,29 +1,29 @@
 <link rel="stylesheet" href="/css/notification.css">
 <div class="comment m-4">
-    <form class="p-4" action="/le-hoi/comment/{{slug}}" method="post">
+    <form name="comment-form" class="p-4" action="/le-hoi/comment/{{slug}}" method="POST">
         <h4><b>Viết bình luận <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/512/external-felt-pens-back-to-school-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png" width="20px" alt=""></b></h4>
         <textarea name="comment" id="comment" cols="30" rows="5" class="form-control" placeholder="Hãy chia sẻ cảm xúc của mình bạn nhé ... (*Lưu ý: Bình luận này không thể xoá)"></textarea>
         <div class="mt-3" id="productDataDetails">
             <div class='rateYo' data-rateyo-rating='3' data-rateyo-score='4'></div>
             <span class='result'></span>
-            <span id="rate"></span>
+            <span id="rating"></span>
         </div>
         <div style="text-align: right;" class="mt-3">
-            <button class="btn btn-primary cstm3" type="submit" onclick="custombg5()">Đăng</button>
+            <button name="submit-comment" data-id="{{slug}}" type="submit" class="btn btn-primary cstm3" onclick="custombg5()">Đăng</button>
         </div>
     </form>
 </div>
 <div class="my-5">
+    <div id="countComment"></div>
     {{#each comments}}
+    <div id="show-comment"></div>
     <div class="row">
-            <div class="col-1 mt-2" style="text-align: right;">
-                <img style="border-radius: 100%;" src="https://joeschmoe.io/api/v1/random" width="70px" alt="">
-            </div>
+            <div class="col-1 mt-2 avatar" style="text-align: right;"></div>
             <div class="col mt-3">
                 <span class="rate-yo" data-rateyo-rating="{{this.rate}}"></span>
                 <div class="p-2" style="background-color:rgb(237, 237, 237); border-radius: 10px 10px; line-height: 10px;">
                     <p class="pt-2"><i>{{this.date}}</i></p>
-                    <p><b>{{this.comment}}</b></p>
+                    <p class="commentLenght"><b>{{this.comment}}</b></p>
                 </div>
             </div>
     </div>
@@ -31,31 +31,52 @@
         <div class="col-1"></div>
         <div class="col like">
             <span>
-                <form action="/le-hoi/like/{{this._id}}?_method=PUT" method="post">
-                    <button type="submit"><a type="button">Thích</a></button>
+                <form name="like-form" action="/le-hoi/like/{{this._id}}?_method=PUT" method="post">
+                    <button name="like-submit" data-id="{{this._id}}" type="submit">Thích</button>
                 </form>
             </span>
             <span><a type="button" style="padding-left: 3px;">{{this.like}}</a></span>
-            {{!-- <span id="show"><a type="button" style="padding-left: 10px;">Bình luận</a></span> --}}
         </div>
     </div>
-    {{!-- <span onload="Load()" id="hide" class="row mt-1">
-        <div class="col-2"></div>
-        <div class="col">
-            <form action="/tin-tuc/sub-comment/id" method="post">
-                <textarea name="comment" id="" cols="30" rows="2" placeholder="Bình luận ..." class="form-control"></textarea>
-                <div style="text-align: right;">
-                    <button type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
-                            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
-                        </svg>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </span> --}}
     {{/each}}
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="/js/notification.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("form[name='comment-form']").submit(function (event) {
+            var formData = {
+                comment: $("#comment").val(),
+                rate: $("#rate").val()
+            };
+            var slug= $("button[name='submit-comment']").data('id');
+            console.log(slug);
+            $.ajax({
+                type: "POST",
+                url: "/le-hoi/comment/"+slug,
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                console.log(data);
+            });
+            window.location.reload();
+            event.preventDefault();
+        });
+        $("form[name='like-form']").submit(function (event) {
+            var id= $("button[name='like-submit']").data('id');
+            $.ajax({
+                type: "POST",
+                url: "/le-hoi/like/"+id+"?_method=PUT",
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                console.log(data);
+            });
+            window.location.reload();
+            event.preventDefault();
+        });
+    });
+</script>

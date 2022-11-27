@@ -481,7 +481,58 @@ class AdminController {
     // [GET] /admin/quan-ly-comment
     async ql_comment(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let comment = await Comment.find({}).sort({updatedAt: -1}); 
+        let comment = await Comment.find({}).sort({createdAt: -1}); 
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let deletedCount = await Comment.countDocumentsDeleted({}); 
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_comment", {
+                title: "Quản lý Comment",
+                admins: mongooseToObject(admins),
+                comment: multipleMongooseToObject(comment),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+        
+    }
+
+    // [GET] /admin/quan-ly-comment/danh-gia-sao/:slug
+    async sortStar(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let comment = await Comment.find({}); 
+        if(req.params.slug == 'giam-dan')
+            comment = await Comment.find({}).sort({rate: -1});
+        else comment = await Comment.find({}).sort({rate: 1});
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let deletedCount = await Comment.countDocumentsDeleted({}); 
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_comment", {
+                title: "Quản lý Comment",
+                admins: mongooseToObject(admins),
+                comment: multipleMongooseToObject(comment),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+    }
+
+    // [GET] /admin/quan-ly-comment/danh-gia-sao/slug
+    async sortLike(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let comment = await Comment.find({}); 
+        if(req.params.slug == 'giam-dan')
+            comment = await Comment.find({}).sort({like: -1});
+        else comment = await Comment.find({}).sort({like: 1});
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         let deletedCount = await Comment.countDocumentsDeleted({}); 
         
@@ -596,7 +647,33 @@ class AdminController {
             req.session.back="/admin/quan-ly-goi-y"; //req.originalUrl
             res.redirect("/admin/login");
         }
+    }
+
+    // [GET] /admin/quan-ly-goi-y/trang-thai/:slug
+    async sortGoiY(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let goiys = await GoiY.find({});
+        if(req.params.slug == 'moi'){
+            goiys = await GoiY.find({status: 'Mới'});
+        }else if (req.params.slug == 'da-duyet'){
+            goiys = await GoiY.find({status: 'Đã duyệt'});
+        }else goiys = await GoiY.find({status: 'Đã có'});
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let deletedCount = await GoiY.countDocumentsDeleted({}); 
         
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_goiy", {
+                title: "Quản lý Gợi Ý",
+                admins: mongooseToObject(admins),
+                goiys: multipleMongooseToObject(goiys),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-goi-y"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
     }
 
     // [GET] /admin/quan-ly-goi-y/thung-rac

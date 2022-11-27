@@ -1,4 +1,8 @@
 $(function() {
+  var countComment = document.getElementById('countComment');
+  var comment = document.getElementsByClassName('commentLenght');
+  countComment.innerHTML = '<ul class="nav nav-tabs"><li class="nav-item"><b>Bình luận ('+comment.length+')</b></li></ul>';
+
   var rateyo = document.getElementsByClassName('rate-yo');
   var showAvatar = document.getElementsByClassName('avatar');
   for(var i=0;i<rateyo.length;i++){
@@ -14,8 +18,8 @@ $(function() {
     var rating = data.rating;
     $(this).parent().find('.score').text('score :' + $(this).attr('data-rateyo-score'));
     $(this).parent().find('.result').text('rating: ' + rating);
-    var rate = "<input type='text' name='rate' value='"+ rating +"' hidden>"
-    var element = document.getElementById('rate');
+    var rate = "<input type='text' id='rate' name='rate' value='"+ rating +"' hidden>"
+    var element = document.getElementById('rating');
     element.innerHTML = rate;
   });
 });

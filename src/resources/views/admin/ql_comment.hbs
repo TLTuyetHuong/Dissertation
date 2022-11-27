@@ -17,9 +17,8 @@
                                     </a>
                               </div>
                         </div>
-
                         <form name="container-form" method="POST" action="/admin/quan-ly-comment/handle-form-action">
-                        <!-- Button trigger modal -->
+                        
                         <div class="d-flex align-items-center mb-3">
                               <div class="form-check" style="padding-right: 10px;">
                                     <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
@@ -41,8 +40,28 @@
                                                       <th scope="col">STT</th>
                                                       <th scope="col">ID</th>
                                                       <th scope="col">Nội Dung</th>
-                                                      <th scope="col">Đánh giá sao</th>
-                                                      <th scope="col">Số lượt thích</th>
+                                                      <th scope="col">Đánh giá sao
+                                                            <div class="btn-group">
+                                                                  <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="border: non;"></a>
+                                                                  <ul class="dropdown-menu">
+                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment/danh-gia-sao/giam-dan">Đánh giá sao giảm dần</a></li>
+                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment/danh-gia-sao/tang-dan">Đánh giá sao tăng dần</a></li>
+                                                                        <li><hr class="dropdown-divider"></li>
+                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment">Tất cả</a></li>
+                                                                  </ul>
+                                                            </div>
+                                                      </th>
+                                                      <th scope="col">Số lượt thích
+                                                            <div class="btn-group">
+                                                                  <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="border: non;"></a>
+                                                                  <ul class="dropdown-menu">
+                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment/so-luot-thich/giam-dan">Số lượt thích giảm dần</a></li>
+                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment/so-luot-thich/tang-dan">Số lượt thích tăng dần</a></li>
+                                                                        <li><hr class="dropdown-divider"></li>
+                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment">Tất cả</a></li>
+                                                                  </ul>
+                                                            </div>
+                                                      </th>
                                                       <th scope="col">Cmt của Bài Viết</th>
                                                       <th scope="col"></th>
                                                 </tr>

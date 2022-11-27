@@ -260,10 +260,37 @@ class TourController {
             });
         }
         else { 
-            req.session.back="/admin/quan-ly-tour"; //req.originalUrl
+            req.session.back="/admin/quan-ly-dat-tour"; //req.originalUrl
             res.redirect("/admin/login");
         }
-        
+    }
+
+    // [GET] /admin/quan-ly-dat-tour/trang-thai/:slug
+    async statusDatTour(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let dattours = await DatTour.find({}).sort({createdAt: -1});
+        if(req.params.slug == 'chua-duyet'){
+            dattours = await DatTour.find({status: 'Chưa duyệt'});
+        }else if (req.params.slug == 'da-duyet'){
+            dattours = await DatTour.find({status: 'Đã duyệt'});
+        }else if (req.params.slug == 'da-thanh-toan'){
+            dattours = await DatTour.find({status: 'Đã thanh toán'});
+        }else if (req.params.slug == 'da-ket-thuc'){
+            dattours = await DatTour.find({status: 'Đã kết thúc'});
+        }else dattours = await DatTour.find({status: 'Đã huỷ tour'});
+        let deletedCount = await DatTour.countDocumentsDeleted({}); 
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_dattour", {
+                title: "Quản lý Tours",
+                admins: mongooseToObject(admins),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-dat-tour"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
     }
 
     // [GET] /admin/quan-ly-tour/danh-sach-khach-dat-tour
@@ -279,7 +306,7 @@ class TourController {
             });
         }
         else { 
-            req.session.back="/admin/quan-ly-tour"; //req.originalUrl
+            req.session.back="/admin/quan-ly-dat-tour"; //req.originalUrl
             res.redirect("/admin/login");
         }
         

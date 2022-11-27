@@ -356,6 +356,33 @@ class DuLichController {
         }
     }
 
+    // [GET] /admin/quan-ly-am-thuc/loai/:slug
+    async tagAmThuc(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let amthucs = await AmThuc.find({}).sort({updatedAt: -1}).catch(next);
+        if(req.params.slug == 'dac-san'){
+            amthucs = await AmThuc.find({tag: 'dacsan'});
+        }else if (req.params.slug == 'banh-dan-gian'){
+            amthucs = await AmThuc.find({tag: 'banhdangian'});
+        }else amthucs = await AmThuc.find({tag: 'anvat'});
+        let deletedCount = await AmThuc.countDocumentsDeleted({}); 
+
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_amthuc", {
+                title: "Quản lý Ẩm thực",
+                admins: mongooseToObject(admins),
+                amthucs: multipleMongooseToObject(amthucs),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-am-thuc"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+    }
+
     // [GET] /admin/quan-ly-am-thuc/thung-rac
     async trashAmThuc(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
