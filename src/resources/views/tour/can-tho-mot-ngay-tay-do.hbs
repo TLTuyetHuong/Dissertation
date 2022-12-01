@@ -131,7 +131,7 @@
         <div class="modal fade mt-5" id="DatTour" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                <form action="/tour/{{tours.slug}}" method="POST">
+                <form action="/tour/{{tours.slug}}" method="POST" onsubmit="custombg5()">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel"><b>ĐIỀN THÔNG TIN LIÊN HỆ</b></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -187,4 +187,3 @@
 </div>
 {{>footer}}
 
-<script src="/js/notification.js"></script>
