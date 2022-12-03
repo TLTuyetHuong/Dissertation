@@ -51,8 +51,8 @@ router.post('/quan-ly-dat-tour/handle-form-action', tourController.handleFormAct
 router.post('/quan-ly-dat-tour/trash-form-action', tourController.trashFormActionsDT);
 router.put('/quan-ly-tour/xem-chi-tiet/:id', tourController.updateDatTour);
 router.put('/quan-ly-tour/:id', tourController.updateTour);
-router.delete('/quan-ly-tour:id/force', tourController.forceTour);
-router.delete('/quan-ly-dat-tour:id/force', tourController.forceDatTour);
+router.delete('/quan-ly-tour/:id/force', tourController.forceTour);
+router.delete('/quan-ly-dat-tour/:id/force', tourController.forceDatTour);
 router.delete('/quan-ly-tour/:id', tourController.deleteTour);
 router.post('/quan-ly-tour', tourController.addTour);
 router.get('/quan-ly-tour/:id/sua-tour', tourController.editTour);
@@ -125,7 +125,7 @@ router.get('/danh-sach-admin/thung-rac', adminController.trashAdmin);
 router.get('/danh-sach-admin', adminController.ds_admin);  
 router.get('/doi-mat-khau/:id', adminController.changePass); 
 router.get('/quen-mat-khau', adminController.forgotPass);   // Quên mật khẩu
-router.get('/quan-ly-thung-rac', adminController.ql_thungrac);
+router.get('/quan-ly-thung-rac', adminController.ql_thungrac); 
 router.get('/', adminController.index);
 
 module.exports = router;

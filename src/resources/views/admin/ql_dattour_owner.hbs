@@ -2,7 +2,7 @@
 <div id="page-top">
       <!-- Page Wrapper -->
       <div id="wrapper">
-            {{>admin}}
+            {{>admin-tour}}
             <div>
                   <!-- Begin Page Content -->
                   <div class="container-fluid" id="demo">
@@ -11,7 +11,7 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                               <h1 class="h3 mb-0 text-gray-800">Quản lý Đặt Tour</h1>
                               <div style="float: right;">
-                                    <a class="nav-link" href="/admin/quan-ly-dat-tour/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
+                                    <a class="nav-link" href="/chu-tour/quan-ly-dat-tour/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
                                           <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
                                           <span class="badge badge-danger badge-counter">{{deletedCount}}</span>
                                     </a>
@@ -19,7 +19,7 @@
                               </div>
                         </div>
 
-                        <form name="container-form" method="POST" action="/admin/quan-ly-dat-tour/handle-form-action">
+                        <form name="container-form" method="POST" action="/chu-tour/quan-ly-dat-tour/handle-form-action">
                         <div class="d-flex align-items-center mb-3">
                               <div class="form-check" style="padding-right: 10px;">
                                     <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
@@ -89,7 +89,7 @@
                                                 </td>
                                                 <td><a type="button" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#modalStatus">{{this.status}}</a></td>
                                                 <td>
-                                                <a href="/admin/quan-ly-tour/xem-chi-tiet/{{this._id}}" class="btn btn-warning">Xem chi tiết</a>
+                                                <a href="/chu-tour/quan-ly-tour/xem-chi-tiet/{{this._id}}" class="btn btn-warning">Xem chi tiết</a>
                                                 <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
                                                 </td>
                                           </tr>
@@ -241,7 +241,7 @@
             btnStatus.click( function (e) {
                   e.preventDefault();
                   var id = ddID;
-                  statusForm.action = '/admin/quan-ly-tour/xem-chi-tiet/' + id + '?_method=PUT'; 
+                  statusForm.action = '/chu-tour/quan-ly-tour/xem-chi-tiet/' + id + '?_method=PUT'; 
                   statusForm.submit();
             });
 

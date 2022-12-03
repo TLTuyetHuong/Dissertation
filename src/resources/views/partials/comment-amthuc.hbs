@@ -31,7 +31,7 @@
         <div class="col-1"></div>
         <div class="col like">
             <span>
-                <form name="like-form" action="/du-lich/am-thuc/like/{{this._id}}?_method=PUT" method="post">
+                <form name="like-form" action="/du-lich/like/{{this._id}}?_method=PUT" method="post">
                     <button name="like-submit" data-id="{{this._id}}" type="submit">Thích</button>
                 </form>
             </span>
@@ -69,7 +69,7 @@
             var id= $("button[name='like-submit']").data('id');
             $.ajax({
                 type: "POST",
-                url: "/du-lich/am-thuc/like/"+id+"?_method=PUT",
+                url: "/du-lich/like/"+id+"?_method=PUT",
                 dataType: "json",
                 encode: true,
             }).done(function (data) {

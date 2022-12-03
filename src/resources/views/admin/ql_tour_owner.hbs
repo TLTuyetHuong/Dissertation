@@ -1,7 +1,7 @@
 <div id="page-top">
       <!-- Page Wrapper -->
       <div id="wrapper">
-            {{>admin}}
+            {{>admin-tour}}
             <div>
                   <!-- Begin Page Content -->
                   <div class="container-fluid" id="demo">
@@ -10,14 +10,14 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                               <h1 class="h3 mb-0 text-gray-800">Quản lý Tour</h1>
                               <div style="float: right;">
-                                    <a class="nav-link" href="/admin/quan-ly-tour/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
+                                    <a class="nav-link" href="/chu-tour/quan-ly-tour/thung-rac" id="alertsDropdown" role="button" aria-expanded="false">
                                           <img style="float: right;" src="https://img.icons8.com/avantgarde/512/delete.png" width="40px" alt="">
                                           <span class="badge badge-danger badge-counter">{{deletedCount}}</span>
                                     </a>
                               </div>
                         </div>
                         <div class="d-lex my-3" style="text-align: right;">
-                              <a type="button" class="btn btn-primary m-2" href="/admin/quan-ly-dat-tour">
+                              <a type="button" class="btn btn-primary m-2" href="/chu-tour/quan-ly-dat-tour">
                                     Danh sách các tour đã đặt
                               </a>
                               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCreate">
@@ -69,7 +69,7 @@
                                                             <td style="text-align: center;">{{this.price}}</td>
                                                             <td>{{this.startingGate}}</td>
                                                             <td>
-                                                                  <a href="/admin/quan-ly-tour/{{this._id}}/sua-tour" class="btn btn-warning">Sửa</a>
+                                                                  <a href="/chu-tour/quan-ly-tour/{{this._id}}/sua-tour" class="btn btn-warning">Sửa</a>
                                                                   <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
                                                             </td>
                                                       </tr>
@@ -207,7 +207,7 @@
             });
 
             btnDelete.onclick = function () {
-                  deleteForm.action = '/admin/quan-ly-tour/' + ddID + '?_method=DELETE'; 
+                  deleteForm.action = '/chu-tour/quan-ly-tour/' + ddID + '?_method=DELETE'; 
                   deleteForm.submit();
             }
 

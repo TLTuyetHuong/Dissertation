@@ -2,6 +2,7 @@ const DiaDiem = require('../models/DiaDiem');
 const Tour = require('../models/Tour');
 const TinTuc = require('../models/TinTuc');
 const AmThuc = require('../models/AmThuc');
+const Statistical = require('../models/Statistical');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { validationResult } = require('express-validator');
 const passport = require('passport');
@@ -13,15 +14,16 @@ class SiteController {
         let places = await DiaDiem.find({}).limit(9).catch(next); 
         let tintucs = await TinTuc.find({}).limit(9).catch(next); 
         let amthucs = await AmThuc.find({}).limit(9).catch(next); 
-        // console.log("tours: ", tours.map(tour=>tour.toObject).map(tour=>tour.name));
-        // console.log("places: ", places);
-        
+        let thongke = await Statistical.findOne({}).catch(next);
+        let luottruycap = thongke.accessTimes;
+        luottruycap = luottruycap +1;
         res.render('home', {
             title: 'Quảng bá du lịch và ẩm thực Thành phố Cần Thơ 😋',
             places: multipleMongooseToObject(places),
             tours: multipleMongooseToObject(tours),
             tintucs: multipleMongooseToObject(tintucs),
-            amthucs: multipleMongooseToObject(amthucs)
+            amthucs: multipleMongooseToObject(amthucs),
+            luottruycap,
         });
     }
 
@@ -140,6 +142,15 @@ class SiteController {
     // [GET] /tien-ich/:slug
     tienIchInfo(req, res){
         res.render('tienich/'+req.params.slug, {title: 'Liên hệ khẩn cấp!!!'});
+    }
+
+    // [PUT] /luottruycap/638a0806974ac6409444b67e
+    async accessTimes(req, res, next) {
+        let thongke = await Statistical.findOne({}).catch(next);
+        let luottruycap = thongke.accessTimes;
+        Statistical.updateOne({ _id: req.params.id}, {accessTimes: luottruycap+1})
+            .then(() => res.redirect("back"))
+            .catch(next);
     }
 
 

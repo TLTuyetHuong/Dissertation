@@ -216,16 +216,18 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                            <input type="password" name="password" id="form3Example4c" class="form-control" required/>
-                                            <label class="form-label" for="form3Example4c">Mật khẩu</label>
+                                            <input type="password" name="password" id="password" class="form-control" onblur="return t2()" required/>
+                                            <label class="form-label" for="password">Mật khẩu</label>
+                                            <p id="mkTB"></p>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4cd" class="form-control" required/>
-                                            <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
+                                            <input type="password" name="password1" id="password1" class="form-control" onblur="return t3()" required/>
+                                            <label class="form-label" for="password1">Nhập lại mật khẩu</label>
+                                            <p id="mk1TB"></p>
                                             </div>
                                         </div>
 
@@ -237,6 +239,7 @@
                                                     <option value="ADMIN">Admin</option>
                                                     <option value="USER">User</option>
                                                     <option value="STAFF">Nhân viên</option>
+                                                    <option value="OWNER-TOUR">Chủ tour</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -617,6 +620,54 @@
 <script src="js/sb-admin-2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script>
+    function t2(){
+		var mkdn = document.getElementById("password").value;
+		var mkBTCQ = /^(?=.*\d)(?=.*[A-Za-z])(?!.*[!@#$%^&*()_+].{5,16$})/;
+		if(mkBTCQ .test(mkdn)!=true){
+			document.getElementById("mkTB").innerHTML="Mật khẩu phải có chữ và số!";
+			document.getElementById("mkTB").style.color="red";
+			return  false;
+		}else{
+			document.getElementById("mkTB").innerHTML="";
+            return true;
+		}
+	}
+    function test(){
+		var check= true;
+
+		var mk= document.getElementById("password").value;
+		if(mk==""){
+			document.getElementById("mkTB").innerHTML = "! Vui lòng nhập mật khẩu";
+			document.getElementById("mkTB").style.color="red";
+			check= false;
+		}else{
+			document.getElementById("mkTB").innerHTML = "";
+		}
+
+		var mk1= document.getElementById("password1").value;
+		if(mk1=="" || mk1!=mk){
+			document.getElementById("mk1TB").innerHTML = "! Vui lòng nhập lại mật khẩu";
+			document.getElementById("mk1TB").style.color="red";
+			check= false;
+		}else{
+			document.getElementById("mk1TB").innerHTML = "";
+		}
+
+		return check;
+    }
+    function t3(){
+		var mkdn1 = document.getElementById("password1").value;
+		var mkdn = document.getElementById("password").value;
+		if(mkdn!=mkdn1  && mkdn != "" && mkdn1 != ""){
+			document.getElementById("mk1TB").innerHTML="Mật khẩu không trùng!";
+			document.getElementById("mk1TB").style.color="red";
+			return  false;
+		}else{
+			document.getElementById("mk1TB").innerHTML="";
+			return true;
+		}
+	}
+
     window.addEventListener('load', function(){
         document.querySelector('input[type="file"]').addEventListener('change', function(){
             if(this.files && this.files[0]) {
@@ -632,5 +683,5 @@
                 console.log(imageData);
             }
         })
-    })
+    });
 </script>

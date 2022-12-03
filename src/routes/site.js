@@ -4,6 +4,7 @@ const router = express.Router();
 
 const siteController = require('../app/controllers/SiteController');
 
+router.put('/luot-truy-cap/:id', siteController.accessTimes);
 router.get('/tien-ich/:slug', siteController.tienIchInfo);
 router.get('/tien-ich', siteController.tienIch);
 router.get('/lien-he', siteController.lienHe);

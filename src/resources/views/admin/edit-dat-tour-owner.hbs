@@ -1,0 +1,97 @@
+<div id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+        {{>admin-tour}}
+        <div>
+                <!-- Begin Page Content -->
+                <div class="container-fluid" id="demo">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Quản lý Đặt Tour</h1>
+                </div>
+                <form action="/admin/quan-ly-tour/xem-chi-tiet/{{dattours._id}}?_method=PUT" method="POST">
+                <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">XEM HOẶC CẬP NHẬT LẠI THÔNG TIN</h1>
+                        <a href="/chu-tour/quan-ly-dat-tour" type="button" class="btn-close" aria-label="Close"></a>
+                </div>
+                <div class="modal-body">
+                        <div>
+                                <section style="background-color: #eee; color:black">
+
+                                        <div class="row px-5">
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Tên Tour</label>
+                                                        <input type="text" value="{{dattours.nametour}}" name="nametour" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Giá Tour</label>
+                                                        <input type="text" value="{{dattours.pricetour}}" name="pricetour" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Tên khách hàng</label>
+                                                        <input type="text" value="{{dattours.name}}" name="name" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Email khách hàng</label>
+                                                        <input type="email" value="{{dattours.email}}" name="email" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Số điện thoại</label>
+                                                        <input type="tel" value="{{dattours.phone}}" name="phone" id="form3Example1c" class="form-control" required/>
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Địa chỉ</label>
+                                                        <input type="text" value="{{dattours.address}}" name="address" id="form3Example1c" class="form-control"/>
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form4Example3"><b>Thời gian khởi hành</b></label>
+                                                        <input type="text" class="form-control" value="{{dattours.day}}" name="day" id="form4Example3"></input>
+                                                </div>
+                                                <div class="row">
+                                                        <br>
+                                                        <p class="mt-4">Số người đặt Tour: </p>
+                                                        <div class="col-4 form-outline flex-fill mb-0 py-2">
+                                                                <label class="form-label" for="form3Example1c">Trẻ em nhỏ hơn 6 tuổi:</label>
+                                                                <input type="text" value="{{dattours.sm6}}" name="sm6" id="form3Example1c" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-4 form-outline flex-fill mb-0 py-2">
+                                                                <label class="form-label" for="form3Example1c">Trẻ em từ 6 - 9 tuổi:</label>
+                                                                <input type="text" value="{{dattours.f69}}" name="f69" id="form3Example1c" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-4 form-outline flex-fill mb-0 py-2">
+                                                                <label class="form-label" for="form3Example1c">Từ 10 tuổi trở lên:</label>
+                                                                <input type="text" value="{{dattours.lg9}}" name="lg9" id="form3Example1c" class="form-control"/>
+                                                        </div>
+                                                </div>
+                                                <div>
+                                                        <p class="mt-4">Trạng thái: </p>
+                                                        <span class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" value="Đã duyệt" id="flexRadioDefault1">
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                Đã duyệt
+                                                                </label>
+                                                        </span>
+                                                        <span class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" value="Chưa duyệt" id="flexRadioDefault1" checked>
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                Chưa duyệt
+                                                                </label>
+                                                        </span>
+                                                </div>
+                                                <div>
+                                                        <p class="mt-4" style="text-align: right;"><b>Tổng tiền: </b>{{dattours.total}} VNĐ</p>
+                                                </div>
+                                        </div>
+                                </section>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <a href="/chu-tour/quan-ly-dat-tour" type="button" class="btn btn-secondary">Thoát</a>
+                        <button type="submit" class="btn btn-success">Lưu lại</button>
+                </div>
+                </form>
+                </div>
+        </div>
+</div>
+</div>

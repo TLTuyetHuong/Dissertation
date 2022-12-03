@@ -6,6 +6,7 @@ const Tour = require("../models/Tour");
 const DatTour = require("../models/DatTour");
 const Comment = require("../models/Comment");
 const GoiY = require("../models/GoiY");
+const Statistical = require('../models/Statistical');
 const emailService = require('../services/verifyEmail');
 const path = require("path");
 const fs = require("fs");
@@ -45,6 +46,7 @@ class AdminController {
     // [GET] /admin
     async index(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let thongke = await Statistical.findOne({}).catch(next);
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         if (req.session.daDangNhap) {
             const today = new Date();
@@ -113,6 +115,7 @@ class AdminController {
                 totalVisit: docs.length,
                 admins: mongooseToObject(admins),
                 dattours: multipleMongooseToObject(dattours),
+                luottruycap: thongke.accessTimes,
                 cmt: cmt,
                 thang1: t1,
                 thang2: t2,
@@ -145,6 +148,7 @@ class AdminController {
         });
         if (admins) {
             // check user password with hashed password stored in the database
+            let thongke = await Statistical.findOne({}).catch(next);
             const dattours = await DatTour.find({}).sort({createdAt: -1});
             const validPassword = await bcrypt.compare(
                 req.body.password,
@@ -217,28 +221,56 @@ class AdminController {
                     let sumYear = sum.toLocaleString('vi', {style: 'currency', currency: 'VND' });
                     let sumMonth = sumM.toLocaleString('vi', {style: 'currency', currency: 'VND' });
                     let cmt = await Comment.find({}).countDocuments();
-                    res.render("admin", {
-                        title: "Admin",
-                        Total: sumYear,
-                        Sum: sumMonth,
-                        sumPeople: sumPeople,
-                        totalVisit: docs.length,
-                        admins: mongooseToObject(admins),
-                        dattours: multipleMongooseToObject(dattours),
-                        cmt: cmt,
-                        thang1: t1,
-                        thang2: t2,
-                        thang3: t3,
-                        thang4: t4,
-                        thang5: t5,
-                        thang6: t6,
-                        thang7: t7,
-                        thang8: t8,
-                        thang9: t9,
-                        thang10: t10,
-                        thang11: t11,
-                        thang12: t12,
-                    });
+                    if(admins.roles == 'ADMIN'){
+                        res.render("admin", {
+                            title: "Admin",
+                            Total: sumYear,
+                            Sum: sumMonth,
+                            sumPeople: sumPeople,
+                            totalVisit: docs.length,
+                            admins: mongooseToObject(admins),
+                            dattours: multipleMongooseToObject(dattours),
+                            luottruycap: thongke.accessTimes,
+                            cmt: cmt,
+                            thang1: t1,
+                            thang2: t2,
+                            thang3: t3,
+                            thang4: t4,
+                            thang5: t5,
+                            thang6: t6,
+                            thang7: t7,
+                            thang8: t8,
+                            thang9: t9,
+                            thang10: t10,
+                            thang11: t11,
+                            thang12: t12,
+                        });
+                    }
+                    if(admins.roles == 'OWNER-TOUR') {
+                        res.render("admin-tour", {
+                            title: "Chủ Tour",
+                            Total: sumYear,
+                            Sum: sumMonth,
+                            sumPeople: sumPeople,
+                            totalVisit: docs.length,
+                            admins: mongooseToObject(admins),
+                            dattours: multipleMongooseToObject(dattours),
+                            luottruycap: thongke.accessTimes,
+                            cmt: cmt,
+                            thang1: t1,
+                            thang2: t2,
+                            thang3: t3,
+                            thang4: t4,
+                            thang5: t5,
+                            thang6: t6,
+                            thang7: t7,
+                            thang8: t8,
+                            thang9: t9,
+                            thang10: t10,
+                            thang11: t11,
+                            thang12: t12,
+                        });
+                    }
                 }
             } else {
                 res.render('admin/login',{ 
@@ -330,7 +362,7 @@ class AdminController {
         let admins = await Admin.findById(req.params.id).catch(next); 
         
         res.render("admin/edit-profile-admin", {
-            title: "Quản lý Admin",
+            title: "Sửa thông tin",
             admins: mongooseToObject(admins),
         });
     }
@@ -388,7 +420,7 @@ class AdminController {
                     const password = req.body.password;
                     let avatar = '';
                     if(req.file){
-                        avatar = req.file.filename;
+                        avatar = '/img/'+req.file.filename;
                     }else avatar = 'https://postgraduate.ias.unu.edu/upp/wp-content/uploads/2022/04/IAFOR-Blank-Avatar-Image-1.jpg';
                     const admins = new Admin({
                         name: req.body.name,
@@ -396,6 +428,7 @@ class AdminController {
                         image: avatar,
                         phone: req.body.phone,
                         birthday: req.body.birthday,
+                        roles: req.body.roles,
                         password: bcrypt.hashSync(password, salt),
                     });
                     admins
