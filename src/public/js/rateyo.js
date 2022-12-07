@@ -6,9 +6,11 @@ $(function() {
   var rateyo = document.getElementsByClassName('rate-yo');
   var showAvatar = document.getElementsByClassName('avatar');
   for(var i=0;i<rateyo.length;i++){
-    var ramdom = Math.floor(Math.random() * 20);
+    var random = Math.floor(Math.random() * 2);
     let joeschmoe = ['joe','jocelyn','jess','jia','jai','jana','josh','jenni','jordan','james','jane','jolee','jacques','jack','jake','jon','jaqueline','jazebelle','jeane','jabala','jerry','jude','jeri','josephine','jed','jean','julie','jodi'];
-    var avatar = '<img style="border-radius: 100%;" src="https://joeschmoe.io/api/v1/'+joeschmoe[i+ramdom]+'" width="70px" alt=""/>';
+    //var avatar = '<img style="border-radius: 100%;" src="https://joeschmoe.io/api/v1/'+joeschmoe[i+random]+'" width="70px" alt=""/>';
+    let g = ['male', 'female', 'pixel'];
+    var avatar = '<img style="border-radius: 100%;" src="https://xsgames.co/randomusers/avatar.php?g='+g[i]+'" width="70px" alt=""/>';
     showAvatar[i].innerHTML = avatar;
     $(".rate-yo").rateYo({
       rating    : rateyo[i],
