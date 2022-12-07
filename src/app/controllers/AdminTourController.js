@@ -118,7 +118,7 @@ class AdminTourController {
     // [GET] /admin/quan-ly-tour
     async ql_tour(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        let tours = await Tour.find({}).sort({updatedAt: -1}).catch(next); 
+        let tours = await Tour.find({ownerTour: req.session.email}).sort({updatedAt: -1}).catch(next); 
         const dattours = await DatTour.find({}).sort({createdAt: -1});
         let deletedCount = await Tour.countDocumentsDeleted({}); 
         
@@ -208,7 +208,7 @@ class AdminTourController {
     // [GET] /admin/quan-ly-dat-tour
     async ql_dattour(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
-        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let dattours = await DatTour.find({emailOwnerTour: req.session.email}).catch(next);
         let deletedCount = await DatTour.countDocumentsDeleted({}); 
         if (req.session.daDangNhap) {
             res.render("admin/ql_dattour_owner", {

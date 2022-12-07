@@ -21,6 +21,10 @@
 
                                         <div class="row px-5">
                                                 <div class="form-outline flex-fill mb-0 py-2">
+                                                        <label class="form-label" for="form3Example1c">Email Chủ Tour</label>
+                                                        <input type="text" value="{{dattours.emailOwnerTour}}" name="emailOwnerTour" id="form3Example1c" class="form-control" required />
+                                                </div>
+                                                <div class="form-outline flex-fill mb-0 py-2">
                                                         <label class="form-label" for="form3Example1c">Tên Tour</label>
                                                         <input type="text" value="{{dattours.nametour}}" name="nametour" id="form3Example1c" class="form-control" required />
                                                 </div>
@@ -67,15 +71,33 @@
                                                 <div>
                                                         <p class="mt-4">Trạng thái: </p>
                                                         <span class="form-check">
-                                                                <input class="form-check-input" type="radio" name="status" value="Đã duyệt" id="flexRadioDefault1">
+                                                                <input class="form-check-input" type="radio" name="status" value="Chưa duyệt" id="flexRadioDefault1" checked>
                                                                 <label class="form-check-label" for="flexRadioDefault1">
+                                                                Chưa duyệt
+                                                                </label>
+                                                        </span>
+                                                        <span class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" value="Đã duyệt" id="flexRadioDefault2">
+                                                                <label class="form-check-label" for="flexRadioDefault2">
                                                                 Đã duyệt
                                                                 </label>
                                                         </span>
                                                         <span class="form-check">
-                                                                <input class="form-check-input" type="radio" name="status" value="Chưa duyệt" id="flexRadioDefault1" checked>
-                                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                                Chưa duyệt
+                                                                <input class="form-check-input" type="radio" name="status" value="Chưa duyệt" id="flexRadioDefault3" checked>
+                                                                <label class="form-check-label" for="flexRadioDefault3">
+                                                                Đã thanh toán
+                                                                </label>
+                                                        </span>
+                                                        <span class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" value="Chưa duyệt" id="flexRadioDefault4" checked>
+                                                                <label class="form-check-label" for="flexRadioDefault4">
+                                                                Đã kết thúc
+                                                                </label>
+                                                        </span>
+                                                        <span class="form-check">
+                                                                <input class="form-check-input" type="radio" name="status" value="Chưa duyệt" id="flexRadioDefault5" checked>
+                                                                <label class="form-check-label" for="flexRadioDefault5">
+                                                                Đã huỷ
                                                                 </label>
                                                         </span>
                                                 </div>

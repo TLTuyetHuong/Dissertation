@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const Tour = new Schema({
     name: { type: String, require: true},
+    ownerTour: { type: String, require: true},
     image: { type: String, require: true},
     price: { type: String, require: true},
     time: { type: String},

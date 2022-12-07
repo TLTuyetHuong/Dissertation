@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const DatTour = new Schema({
     name: { type: String, require: true},
+    emailOwnerTour: { type: String, require: true},
     email: { type: String, require: true},
     phone: { type: String, require: true},
     address: { type: String},
