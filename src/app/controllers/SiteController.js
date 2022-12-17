@@ -2,6 +2,7 @@ const DiaDiem = require('../models/DiaDiem');
 const Tour = require('../models/Tour');
 const TinTuc = require('../models/TinTuc');
 const AmThuc = require('../models/AmThuc');
+const Comment = require('../models/Comment');
 const Statistical = require('../models/Statistical');
 const { multipleMongooseToObject } = require('../../until/mongoose');
 const { validationResult } = require('express-validator');
@@ -14,6 +15,7 @@ class SiteController {
         let places = await DiaDiem.find({}).limit(9).catch(next); 
         let tintucs = await TinTuc.find({}).limit(9).catch(next); 
         let amthucs = await AmThuc.find({}).limit(9).catch(next); 
+        let comments = await Comment.find({status: 'Nổi bật'}).catch(next); 
         let thongke = await Statistical.findOne({}).catch(next);
         let luottruycap = thongke.accessTimes;
         luottruycap = luottruycap +1;
@@ -23,6 +25,7 @@ class SiteController {
             tours: multipleMongooseToObject(tours),
             tintucs: multipleMongooseToObject(tintucs),
             amthucs: multipleMongooseToObject(amthucs),
+            comments: multipleMongooseToObject(comments),
             luottruycap,
         });
     }

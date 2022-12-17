@@ -8,6 +8,7 @@ const Comment = new Schema({
     like: { type: Number, default: 0},
     rate: { type: String, default: '3'},
 	date: { type: String},
+    status: { type: String, default: 'Bình thường'},
 }, {
     timestamps: true,
 });

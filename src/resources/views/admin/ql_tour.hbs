@@ -24,6 +24,23 @@
                                     Thêm Tour
                               </button>
                         </div>
+                        <div class="btn-group mb-3">
+                              <h5><a style="color: rgb(81, 81, 81);" href="/admin/quan-ly-tour">Tìm kiếm theo khoảng giá: </a></h5>&#x3164;
+                              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              Tất cả
+                              </button>
+                              <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/300000">0 - 300.000 VNĐ</a></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/500000">300.000 - 500.000 VNĐ</a></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/800000">500.000 - 800.000 VNĐ</a></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/1100000">800.000 - 1.100.000 VNĐ</a></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/1400000">1.100.000 - 1.400.000 VNĐ</a></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/1700000">1.400.000 - 1.700.000 VNĐ</a></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/khoang-gia/2000000">1.700.000 - 2.000.000 VNĐ</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/quan-ly-tour">Tất cả</a></li>
+                              </ul>
+                        </div>
                         <form name="container-form" method="POST" action="/admin/quan-ly-tour/handle-form-action">
                               <div class="d-flex align-items-center mb-3">
                                     <div class="form-check" style="padding-right: 10px;">
@@ -49,7 +66,15 @@
                                                                   {{!-- <a href="?_sort&column=name&type=desc"><img src="https://img.icons8.com/external-jumpicon-glyph-ayub-irawan/512/external-arrows-arrows-jumpicon-glyph-jumpicon-glyph-ayub-irawan-8.png" width="20px" alt=""></a> --}}
                                                             </th>
                                                             <th scope="col">Thời gian Tour</th>
-                                                            <th scope="col">Giá</th>
+                                                            <th scope="col">Giá
+                                                                  <div class="btn-group">
+                                                                        <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="border: non;"></a>
+                                                                        <ul class="dropdown-menu">
+                                                                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/gia/tang-dan">Giá tour tăng dần</a></li>
+                                                                              <li><a class="dropdown-item" href="/admin/quan-ly-tour/gia/giam-dan">Giá tour giảm dần</a></li>
+                                                                        </ul>
+                                                                  </div>
+                                                            </th>
                                                             <th scope="col">Nơi khởi hành</th>
                                                             <th scope="col">Chủ tour</th>
                                                             <th scope="col"></th>
@@ -65,7 +90,10 @@
                                                             </th>
                                                             <th scope="row" style="text-align: center;">{{sum @index 1}}</th>
                                                             <td><img src="{{this.image}}" width="100px" height="70px" alt=""></td>
-                                                            <td>{{this.name}}</td>
+                                                            <td>{{this.name}}<br>
+                                                                  <b>Số lượng khách tối đa: </b>{{this.maxQuantity}}<br>
+                                                                  <b>Số lượng khách còn trống: </b>{{this.quantity}}<br>
+                                                            </td>
                                                             <td style="text-align: center;">{{this.time}}</td>
                                                             <td style="text-align: center;">{{this.price}}</td>
                                                             <td>{{this.startingGate}}</td>
@@ -108,15 +136,19 @@
                                                                               <input type="text" name="name" id="form3Example1c" class="form-control" required />
                                                                               <label class="form-label" for="form3Example1c">Tên Tour</label>
                                                                         </div>
-                                                                        <div class="col">
-                                                                              <div class="form-outline flex-fill mb-0 py-2">
+                                                                        <div class="row">
+                                                                              <div class="col-6 form-outline flex-fill mb-0 py-2">
                                                                                     <input type="text" name="time" id="form3Example1c" class="form-control" required />
                                                                                     <label class="form-label" for="form3Example1c">Thời gian Tour</label>
                                                                               </div>
-                                                                              <div class="form-outline flex-fill mb-0 py-2">
-                                                                                    <input type="text" name="price" id="form3Example1c" class="form-control" />
-                                                                                    <label class="form-label" for="form3Example1c">Giá</label>
+                                                                              <div class="col-6 form-outline flex-fill mb-0 py-2">
+                                                                                    <input type="number" name="maxQuantity" id="maxQuantity" class="form-control" />
+                                                                                    <label class="form-label" for="maxQuantity">Số lượng khách tối đa</label>
                                                                               </div>
+                                                                        </div>
+                                                                        <div class="form-outline flex-fill mb-0 py-2">
+                                                                              <input type="text" name="price" id="form3Example1c" class="form-control" required/>
+                                                                              <label class="form-label" for="form3Example1c">Giá</label>
                                                                         </div>
                                                                         <div class="form-outline flex-fill mb-0 py-2">
                                                                               <input type="text" name="startingGate" id="form3Example1c" class="form-control" />

@@ -534,6 +534,31 @@ class AdminController {
         
     }
 
+    // [GET] /admin/quan-ly-comment/trang-thai/:slug
+    async statusComment(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let comments = await Comment.find({});
+        if(req.params.slug == 'noi-bat'){
+            comments = await Comment.find({status: 'Nổi bật'});
+        }else comments = await Comment.find({status: 'Bình thường'});
+        const dattours = await DatTour.find({}).sort({createdAt: -1});
+        let deletedCount = await Comment.countDocumentsDeleted({}); 
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_comment", {
+                title: "Quản lý Comment",
+                admins: mongooseToObject(admins),
+                comment: multipleMongooseToObject(comment),
+                dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-comment"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+    }
+
     // [GET] /admin/quan-ly-comment/danh-gia-sao/:slug
     async sortStar(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
@@ -655,6 +680,13 @@ class AdminController {
     restoreComment(req, res, next) {
         Comment.restore({ _id: req.params.id })
             .then(() => res.redirect("back"))
+            .catch(next);
+    }
+
+    // [PUT] /admin/quan-ly-comment/:id
+    updateComment(req, res, next) {
+        Comment.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/admin/quan-ly-comment"))
             .catch(next);
     }
 

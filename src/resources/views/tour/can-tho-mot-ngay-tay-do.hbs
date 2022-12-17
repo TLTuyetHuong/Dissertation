@@ -131,7 +131,7 @@
         <div class="modal fade mt-5" id="DatTour" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                <form action="/tour/{{tours.slug}}" method="POST" onsubmit="custombg5()">
+                <form name="form-dattour" action="/tour/{{tours.slug}}" method="POST" onsubmit="custombg5()">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel"><b>ĐIỀN THÔNG TIN LIÊN HỆ</b></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -163,16 +163,16 @@
                         <div>
                             <label class="form-label" for="form4Example1"><b>Số người đặt tour:</b></label><br>
                             <span>
-                                <label class="form-label" for="form4Example1">Trẻ em nhỏ hơn 6 tuổi: </label>
-                                <input type="number" name="sm6" min="1" max="5">
+                                <label class="form-label" for="sm6">Trẻ em nhỏ hơn 6 tuổi: </label>
+                                <input id="sm6" type="number" name="sm6" min="0" max="10">
                             </span>
                             <span class="m-4">
-                                <label class="form-label" for="form4Example1">Trẻ em từ 6 - 9 tuổi: </label>
-                                <input type="number" name="f69" min="1" max="5">
+                                <label class="form-label" for="f69">Trẻ em từ 6 - 9 tuổi: </label>
+                                <input id="f69" type="number" name="f69" min="0" max="10">
                             </span>
                             <span>
-                                <label class="form-label" for="form4Example1">Từ 10 tuổi trở lên: </label>
-                                <input type="number" name="lg9" min="1" max="20">
+                                <label class="form-label" for="lg9">Từ 10 tuổi trở lên: </label>
+                                <input id="lg9" type="number" name="lg9" min="0" max="20">
                             </span>
                         </div>
                     </div>
@@ -188,4 +188,3 @@
     {{>comment-tour}}
 </div>
 {{>footer}}
-

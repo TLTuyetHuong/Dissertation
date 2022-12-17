@@ -11,10 +11,10 @@ class TourController {
     // [GET] /tour
     index(req, res, next) {
         Tour.find({})
-            .then(tours => {
+            .then(tour => {
                 res.render('tour/index', {
                     title: 'Tours',
-                    tours: multipleMongooseToObject(tours)
+                    tour: multipleMongooseToObject(tour)
                 });
             })
             .catch(next);
@@ -44,29 +44,64 @@ class TourController {
         const formData = req.body;
         const tour = await Tour.findOne({name: formData.nametour}).catch(next);
         const startingGate = tour.startingGate;
-        const str = formData.pricetour.slice(0,3) * 1000;
-        const price75 = str * (75/100);
-        const dattours = new DatTour(formData);
-        dattours.total = (formData.f69 * price75) + (formData.lg9 * str);
-        dattours.day = formData.day.slice(8,10) +'-'+ formData.day.slice(5,7) +'-'+ formData.day.slice(0,4);
-        emailService.sendSimpleEmail({
-            emailOwnerTour: formData.emailOwnerTour,
-            receiverEmail: formData.email,
-            patientName: formData.name,
-            patientPhone: formData.phone,
-            patientSM6: formData.sm6,
-            patientF69: formData.f69,
-            patientLG10: formData.lg9,
-            nameTour: formData.nametour,
-            priceTour: formData.pricetour,
-            total: dattours.total.toLocaleString('vi', {style: 'currency', currency: 'VND' }),
-            departureDay: dattours.day,
-            startingGate: startingGate,
+        const quantity = tour.quantity - (parseInt(formData.sm6) + parseInt(formData.f69) + parseInt(formData.lg9));
+        const soChoDat = parseInt(formData.sm6) + parseInt(formData.f69) + parseInt(formData.lg9);
+        if(soChoDat < tour.quantity){
+            const str = formData.pricetour.slice(0,3) * 1000;
+            const price75 = str * (75/100);
+            const dattours = new DatTour(formData);
+            dattours.total = (formData.f69 * price75) + (formData.lg9 * str);
+            dattours.day = formData.day.slice(8,10) +'-'+ formData.day.slice(5,7) +'-'+ formData.day.slice(0,4);
+            emailService.sendSimpleEmail({
+                emailOwnerTour: formData.emailOwnerTour,
+                receiverEmail: formData.email,
+                patientName: formData.name,
+                patientPhone: formData.phone,
+                patientSM6: formData.sm6,
+                patientF69: formData.f69,
+                patientLG10: formData.lg9,
+                nameTour: formData.nametour,
+                priceTour: formData.pricetour,
+                total: dattours.total.toLocaleString('vi', {style: 'currency', currency: 'VND' }),
+                departureDay: dattours.day,
+                startingGate: startingGate,
+            });
+            dattours
+                .save()
+                .then(() => {res.render('tour/thong-bao',{title: 'Thông báo'})})
+                .catch((error) => {});
+    
+            Tour.updateOne({ _id: tour._id}, {quantity: quantity})
+                .then(() => {res.render('tour/thong-bao',{title: 'Thông báo'})})
+                .catch(next);
+        }else{
+            res.render('tour/thong-bao-het-cho',{
+                title: 'Thông báo',
+                slug: tour.slug,
+                quantity: tour.quantity,
+            })
+        }
+    }
+
+    // [GET] /tour/khoang-gia/:slug
+    async khoangGia(req, res, next) {
+        let tour = await Tour.find({numberPrice: {$gt: 300000, $lt: 500000}});
+        
+        if(req.params.slug == '300000'){
+            tour = await Tour.find({$and: [ { numberPrice: { $gt: 0 } }, { numberPrice: { $lt: 300000 } } ]});
+        }else if (req.params.slug == '500000'){
+            tour = await Tour.find({numberPrice: {$gt: 300000, $lt: 500000}});
+        }else if (req.params.slug == '800000'){
+            tour = await Tour.find({ $and: [ { numberPrice: { $gt: 500000 } }, { numberPrice: { $lt: 800000 } } ] });
+        }else if (req.params.slug == '1100000'){
+            tour = await Tour.find({$and: [ { numberPrice: { $gt: 800000 } }, { numberPrice: { $lt: 1100000 } } ]});
+        }else if (req.params.slug == '1700000'){
+            tour = await Tour.find({$and: [ { numberPrice: { $gt: 1100000 } }, { numberPrice: { $lt: 2000000 } } ]});
+        }else tour = await Tour.find({numberPrice:{$gt:1700000,$lt:req.params.slug}});
+        res.render('tour/index', {
+            title: 'Tours',
+            tour: multipleMongooseToObject(tour),
         });
-        dattours
-            .save()
-            .then(() => res.render('tour/thong-bao'))
-            .catch((error) => {});
     }
 
     // [GET] /tour/trai-nghiem/
@@ -180,6 +215,27 @@ class TourController {
         
     }
 
+    // [GET] /admin/quan-ly-tour/khoang-gia/:slug
+    async khoangGiaQL(req, res, next) {
+        let tours = await Tour.find({numberPrice: {$gt: 300000, $lt: 500000}});
+        
+        if(req.params.slug == '300000'){
+            tours = await Tour.find({$and: [ { numberPrice: { $gt: 0 } }, { numberPrice: { $lt: 300000 } } ]});
+        }else if (req.params.slug == '500000'){
+            tours = await Tour.find({numberPrice: {$gt: 300000, $lt: 500000}});
+        }else if (req.params.slug == '800000'){
+            tours = await Tour.find({ $and: [ { numberPrice: { $gt: 500000 } }, { numberPrice: { $lt: 800000 } } ] });
+        }else if (req.params.slug == '1100000'){
+            tours = await Tour.find({$and: [ { numberPrice: { $gt: 800000 } }, { numberPrice: { $lt: 1100000 } } ]});
+        }else if (req.params.slug == '1700000'){
+            tours = await Tour.find({$and: [ { numberPrice: { $gt: 1100000 } }, { numberPrice: { $lt: 2000000 } } ]});
+        }else tours = await Tour.find({numberPrice:{$gt:1700000,$lt:req.params.slug}});
+        res.render('admin/ql_tour', {
+            title: 'Quản lý Tours',
+            tours: multipleMongooseToObject(tours),
+        });
+    }
+
     // [GET] /admin/quan-ly-tour/thung-rac
     async trashTour(req, res, next) {
         let admins = await Admin.findOne({email: req.session.email}).catch(next);
@@ -278,13 +334,47 @@ class TourController {
             dattours = await DatTour.find({status: 'Đã thanh toán'});
         }else if (req.params.slug == 'da-ket-thuc'){
             dattours = await DatTour.find({status: 'Đã kết thúc'});
+        }else if (req.params.slug == 'tong-so-tien-tang-dan'){
+            dattours = await DatTour.find({}).sort({total: 1});
+        }else if (req.params.slug == 'tong-so-tien-giam-dan'){
+            dattours = await DatTour.find({}).sort({total: -1});
         }else dattours = await DatTour.find({status: 'Đã huỷ tour'});
+        
         let deletedCount = await DatTour.countDocumentsDeleted({}); 
+        
         if (req.session.daDangNhap) {
             res.render("admin/ql_dattour", {
                 title: "Quản lý Tours",
                 admins: mongooseToObject(admins),
                 dattours: multipleMongooseToObject(dattours),
+                deletedCount,
+            });
+        }
+        else { 
+            req.session.back="/admin/quan-ly-dat-tour"; //req.originalUrl
+            res.redirect("/admin/login");
+        }
+    }
+
+    // [GET] /admin/quan-ly-tour/gia/:slug
+    async sortPrice(req, res, next) {
+        let admins = await Admin.findOne({email: req.session.email}).catch(next);
+        let dattours = await DatTour.find({}).sort({createdAt: -1});
+        let tours = await Tour.find({});
+        if(req.params.slug == 'tang-dan'){
+            tours = await Tour.find({}).sort({numberPrice: 1});
+        }else{
+            tours = await Tour.find({}).sort({numberPrice: -1});
+        }
+        
+        let deletedCount = await Tour.countDocumentsDeleted({}); 
+        
+        if (req.session.daDangNhap) {
+            res.render("admin/ql_tour", {
+                title: "Quản lý Tours",
+                admins: mongooseToObject(admins),
+                dattours: multipleMongooseToObject(dattours),
+                tours: multipleMongooseToObject(tours),
                 deletedCount,
             });
         }

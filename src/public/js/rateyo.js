@@ -4,7 +4,9 @@ $(function() {
   countComment.innerHTML = '<ul class="nav nav-tabs"><li class="nav-item"><b>Bình luận ('+comment.length+')</b></li></ul>';
 
   var rateyo = document.getElementsByClassName('rate-yo');
+  console.log(rateyo);
   var showAvatar = document.getElementsByClassName('avatar');
+  console.log(showAvatar);
   for(var i=0;i<rateyo.length;i++){
     var random = Math.floor(Math.random() * 2);
     let joeschmoe = ['joe','jocelyn','jess','jia','jai','jana','josh','jenni','jordan','james','jane','jolee','jacques','jack','jake','jon','jaqueline','jazebelle','jeane','jabala','jerry','jude','jeri','josephine','jed','jean','julie','jodi'];

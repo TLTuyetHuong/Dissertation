@@ -78,6 +78,9 @@
                     {{#each tours}}
                     <div class="col-sm-6 col-lg-4 py-2">
                         <div class="card" style="width: 25rem;">
+                            <a class="card-img-overlay text-center p-2 quantity">
+                                {{this.quantity}} chỗ còn trống
+                            </a>
                             <a href="/tour/{{this.slug}}">
                                 <img style="height: 270px;" src="{{this.image}}" class="card-img-top"
                                     alt="{{this.name}}">
@@ -87,7 +90,7 @@
                                     <h5 class="card-title"><b>{{this.name}}</b></h5>
                                 </a>
                                 <p class="card-text text-center" style="line-height: 1px;"><i>Thời gian: {{this.time}}</i></p>
-                                <p style="margin-left: 0;"><b>Giá:</b> {{this.price}}<a style="margin-left: 28%" href="{{this.contact}}" target="_blank" class="btn btn-danger">Tìm hiểu</a></p>
+                                <p style="margin-left: 0;"><b>Giá:</b> {{this.price}}<a style="margin-left: 28%; background: linear-gradient(60deg,#ff0000,#fc631c);" href="/tour/{{this.slug}}" target="_blank" class="btn btn-danger">Tìm hiểu</a></p>
                                 
                             </div>
                         </div>
@@ -334,8 +337,8 @@
 </div>
 
 {{!-- -------Ban-Do----------------- --}}
-<div class="mt-5" style="background-color: #ebebeb;">
-<div class="container text-center py-3 mt-5">
+<div style="background-color: #ebebeb; margin-top: 100px;">
+<div class="container text-center py-3" style="margin-top: 150px;">
     <h2 style="text-align: center; font-size: 50px; margin-top: 50px;"><b>Bản đồ các điểm đến du lịch ở Cần Thơ</b></h2>
     <br>
     <iframe style="width: 100%; height: 700px" src="https://www.google.com/maps/d/embed?mid=1fIVue2jq1eCYSVpHQY5XKytHDQB9PWY&hl=vi&ehbc=2E312F" width="640" height="480"></iframe>
@@ -343,7 +346,7 @@
 </div>
 </div>
 {{!-- Lịch Trình Gợi Ý --}}
-<div class="container mt-5">
+<div class="container" style="margin-top: 100px;">
     <h2 style="text-align: center; font-size: 50px; margin-top: 50px;"><b>Lịch Trình Gợi Ý</b></h2>
     <br>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -470,9 +473,42 @@
         </button>
         </div>
 </div>
+{{!-- ---Comment - Nổi bật-------------------- --}}
+{{!-- <div style="margin-top: 200px;">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item text-center active">
+                <div class="caption">
+                    <h1 style="text-align: center;">Các bình luận nổi bật</h1>
+                    <div id="rateYo"></div>
+                </div>
+                <img src="/img/1267213.png" class="d-block w-100" alt="...">
+            </div>
+            {{#each comments}}
+            <div class="carousel-item">
+                <div class="caption">
+                    <div class="col-1 mt-4 avatar" style="text-align: right;"></div>
+                    <h3 style="text-align: center;"><i>"{{this.comment}}"</i></h3>
+                    <span class="rate-yo" data-rateyo-rating="{{this.rate}}"></span>
+                    <div id="rateYo"></div>
+                </div>
+                <img src="/img/1267213.png" class="d-block w-100" alt="...">
+            </div>
+            {{/each}}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div> --}}
 {{!-- ---Goc-ReView---Trai-Nghiem-------------------- --}}
-<div class="mt-5" style="background-color: #ebebeb;">
-<div class="container py-5">
+<div  style="margin-top: 100px; background-image: url('/img/1267213.png')">
+<div class="container">
     <br>
     <h2 style="text-align: center; font-size: 50px;" class="mb-5"><b>Góc ReView - Trải nghiệm</b></h2>
     <div class="row py-4" style="text-align: justify; font-size: 18px;">
@@ -525,7 +561,12 @@
         }).done(function (data) {
             console.log(data);
         });
-    })
+    });
+    $(function () {
+        $("#rateYo").rateYo({
+            rating: 5
+        });
+    });
 </script>
 {{!-- ---------------------------- --}}
 {{>footer}}

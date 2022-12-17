@@ -9,6 +9,9 @@ const Tour = new Schema({
     image: { type: String, require: true},
     price: { type: String, require: true},
     time: { type: String},
+    numberPrice: { type: Number},
+    maxQuantity: { type: Number, default: 20},
+    quantity: { type: Number, default: 20},
     startingGate: { type: String},
     slug: { type: String, slug: 'name', unique: true }
 },{

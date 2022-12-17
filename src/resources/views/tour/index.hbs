@@ -9,11 +9,34 @@
         <img style="width: 50px; height: 50px;" src="https://img.icons8.com/clouds/344/passenger-with-baggage.png" alt="">
     </h1>
     <hr>
+    <div class="d-flex align-items-center mb-3" style="text-align: right;">
+        <h5><b><a style="color: rgb(24, 24, 24);" href="/tour">Tìm kiếm theo khoảng giá: </a></b></h5>&#x3164;
+        <!-- Example single danger button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Tất cả
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/tour/khoang-gia/300000">0 - 300.000 VNĐ</a></li>
+                <li><a class="dropdown-item" href="/tour/khoang-gia/500000">300.000 - 500.000 VNĐ</a></li>
+                <li><a class="dropdown-item" href="/tour/khoang-gia/800000">500.000 - 800.000 VNĐ</a></li>
+                <li><a class="dropdown-item" href="/tour/khoang-gia/1100000">800.000 - 1.100.000 VNĐ</a></li>
+                <li><a class="dropdown-item" href="/tour/khoang-gia/1400000">1.100.000 - 1.400.000 VNĐ</a></li>
+                <li><a class="dropdown-item" href="/tour/khoang-gia/1700000">1.400.000 - 1.700.000 VNĐ</a></li>
+                <li><a class="dropdown-item" href="/tour/khoang-gia/2000000">1.700.000 - 2.000.000 VNĐ</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/tour">Tất cả</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="mt-3 p-3 tour">
         <div class="row">
-            {{#each tours}}
+            {{#each tour}}
             <div class="col-sm-6 col-lg-4 py-2">
                 <div class="card" style="width: 25rem;">
+                    <a class="card-img-overlay text-center p-2 quantity">
+                        {{this.quantity}} chỗ còn trống
+                    </a>
                     <a href="/tour/{{this.slug}}">
                         <img style="height: 270px;" src="{{this.image}}" class="card-img-top"
                             alt="{{this.name}}">
@@ -23,10 +46,14 @@
                             <h5 class="card-title"><b>{{this.name}}</b></h5>
                         </a>
                         <p class="card-text text-center" style="line-height: 1px;"><i>Thời gian: {{this.time}}</i></p>
-                        <p style="margin-left: 0;"><b>Giá:</b> {{this.price}}<a style="margin-left: 28%" href="/tour/{{this.slug}}" class="btn btn-danger">Tìm hiểu</a></p>
-                        
+                        <p style="margin-left: 0;"><b>Giá:</b> {{this.price}}<a style="margin-left: 28%; background: linear-gradient(60deg,#ff0000,#fc631c);" href="/tour/{{this.slug}}" class="btn btn-danger">Tìm hiểu</a></p>
+                        <input type="text" class="price" name="price" value="{{this.price}}" hidden/>
                     </div>
                 </div>
+            </div>
+            {{else}}
+            <div class="text-center">
+                <h3>KHÔNG CÓ TOUR NÀO ĐƯỢC TÌM THẤY</h3>
             </div>
             {{/each}}
         </div>

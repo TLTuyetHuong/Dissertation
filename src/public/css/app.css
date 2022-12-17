@@ -445,3 +445,33 @@ body a {
 
 .rate-yo {
   margin-bottom: -10px; }
+
+.quantity {
+  height: 35px;
+  width: 40px;
+  overflow: hidden;
+  color: aliceblue;
+  text-overflow: clip;
+  margin: 0 0 50px;
+  font-weight: bold;
+  transition: all .3s ease;
+  background: linear-gradient(90deg, #5c0000 0%, #9c0d0d 35%, #ff0505 100%); }
+  .quantity:hover {
+    width: 50%;
+    transition: all .3s ease;
+    font-weight: bold;
+    overflow: visible;
+    height: 35px;
+    background: linear-gradient(90deg, #05005c 0%, #0d1e9c 35%, #05eaff 100%); }
+
+.range-slider {
+  position: relative;
+  height: 80px; }
+
+.caption {
+  margin-left: 35%;
+  text-align: center;
+  color: black;
+  position: absolute;
+  z-index: 1;
+  margin-top: 10%; }

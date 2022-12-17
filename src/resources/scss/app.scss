@@ -569,3 +569,36 @@ body a {
     margin-bottom: -10px;
 }
 
+.quantity {
+    height:35px; 
+    width: 40px;
+    overflow:hidden; 
+    color: aliceblue;
+    text-overflow:clip;
+    margin: 0 0 50px;
+    font-weight: bold;
+    transition: all .3s ease;
+    background: linear-gradient(90deg,  rgb(92, 0, 0) 0%, rgb(156, 13, 13) 35%, rgb(255, 5, 5) 100%);
+    &:hover {
+        width: 50%;
+        transition: all .3s ease;
+        font-weight: bold;
+        overflow: visible;
+        height: 35px;
+        background: linear-gradient(90deg,  rgb(5, 0, 92) 0%, rgb(13, 30, 156) 35%, rgb(5, 234, 255) 100%);
+    }
+}
+
+.range-slider {
+    position: relative;
+    height: 80px;
+}
+
+.caption {
+    margin-left: 35%;
+    text-align: center;
+    color: black;
+    position: absolute;
+    z-index: 1;
+    margin-top: 10%;
+}

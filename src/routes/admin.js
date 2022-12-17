@@ -32,6 +32,7 @@ router.get('/quan-ly-khach-san/thung-rac', khachSanController.trashKhachSan);
 router.get('/quan-ly-khach-san', khachSanController.ql_khachsan);
 
 // Quan ly Comment
+router.put('/quan-ly-comment/trang-thai/:id', adminController.updateComment);
 router.post('/quan-ly-comment/handle-form-action', adminController.handleFormActionsCmt);
 router.post('/quan-ly-comment/trash-form-action', adminController.trashFormActionsCmt);
 router.patch('/quan-ly-comment/:id/khoi-phuc', adminController.restoreComment);
@@ -39,6 +40,7 @@ router.delete('/quan-ly-comment/:id/force', adminController.forceComment);
 router.delete('/quan-ly-comment/:id', adminController.deleteComment);
 router.get('/quan-ly-comment/so-luot-thich/:slug', adminController.sortLike);
 router.get('/quan-ly-comment/danh-gia-sao/:slug', adminController.sortStar);
+router.get('/quan-ly-comment/trang-thai/:slug', adminController.statusComment);
 router.get('/quan-ly-comment/thung-rac', adminController.trashComment);
 router.get('/quan-ly-comment', adminController.ql_comment);
 
@@ -61,6 +63,8 @@ router.get('/quan-ly-dat-tour/trang-thai/:slug', tourController.statusDatTour);
 router.get('/quan-ly-tour/danh-sach-khach-dat-tour', tourController.ds_tour);
 router.get('/quan-ly-tour/thung-rac', tourController.trashTour);
 router.get('/quan-ly-dat-tour/thung-rac', tourController.trashDatTour);
+router.get('/quan-ly-tour/khoang-gia/:slug', tourController.khoangGiaQL);
+router.get('/quan-ly-tour/gia/:slug', tourController.sortPrice);
 router.get('/quan-ly-dat-tour', tourController.ql_dattour);
 router.get('/quan-ly-tour', tourController.ql_tour);
 

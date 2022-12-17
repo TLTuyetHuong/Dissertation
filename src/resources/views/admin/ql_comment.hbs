@@ -46,8 +46,6 @@
                                                                   <ul class="dropdown-menu">
                                                                         <li><a class="dropdown-item" href="/admin/quan-ly-comment/danh-gia-sao/giam-dan">Đánh giá sao giảm dần</a></li>
                                                                         <li><a class="dropdown-item" href="/admin/quan-ly-comment/danh-gia-sao/tang-dan">Đánh giá sao tăng dần</a></li>
-                                                                        <li><hr class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment">Tất cả</a></li>
                                                                   </ul>
                                                             </div>
                                                       </th>
@@ -57,12 +55,20 @@
                                                                   <ul class="dropdown-menu">
                                                                         <li><a class="dropdown-item" href="/admin/quan-ly-comment/so-luot-thich/giam-dan">Số lượt thích giảm dần</a></li>
                                                                         <li><a class="dropdown-item" href="/admin/quan-ly-comment/so-luot-thich/tang-dan">Số lượt thích tăng dần</a></li>
-                                                                        <li><hr class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item" href="/admin/quan-ly-comment">Tất cả</a></li>
                                                                   </ul>
                                                             </div>
                                                       </th>
                                                       <th scope="col">Cmt của Bài Viết</th>
+                                                      <th scope="col">Trạng thái
+                                                            <div class="btn-group">
+                                                            <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="border: non;"></a>
+                                                            <ul class="dropdown-menu">
+                                                                  <li><a class="dropdown-item" href="/admin/quan-ly-comment/trang-thai/noi-bat">Nổi bật</a></li>
+                                                                  <li><hr class="dropdown-divider"></li>
+                                                                  <li><a class="dropdown-item" href="/admin/quan-ly-comment">Tất cả</a></li>
+                                                            </ul>
+                                                      </div>
+                                                      </th>
                                                       <th scope="col"></th>
                                                 </tr>
                                           </thead>
@@ -83,6 +89,7 @@
                                                       <td style="text-align: center;">{{this.rate}}</td>
                                                       <td style="text-align: center;">{{this.like}}</td>
                                                       <td>{{this.posts}}</td>
+                                                      <td><a type="button" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#modalStatus">{{this.status}}</a></td>
                                                       <td>
                                                             <a href="" class="btn btn-danger" data-bs-id="{{this._id}}"  data-bs-toggle="modal" data-bs-target="#modalDelete">Xoá</a>
                                                       </td>
@@ -97,6 +104,39 @@
                               </div>
                         </div>
                         </form>
+                        <!-- Modal Status -->
+                        <div class="modal fade" id="modalStatus" tabindex="-1" aria-labelledby="exampleModalLabel"
+                              aria-hidden="true">
+                              <form name="form-dd-status" class="modal-dialog" method="POST">
+                                    <div class="modal-content">
+                                          <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Chuyển đổi trạng thái?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" value="Nổi bật" id="flexRadioDefault1">
+                                                      <label class="form-check-label" for="flexRadioDefault1">
+                                                      Nổi bật
+                                                      </label>
+                                                </div>
+                                                <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="status" value="Bình thường" id="flexRadioDefault2">
+                                                      <label class="form-check-label" for="flexRadioDefault2">
+                                                      Bình thường
+                                                      </label>
+                                                </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Huỷ</button>
+                                                <button type="button" id="btn-status"
+                                                      class="btn btn-danger">Đổi</button>
+                                          </div>
+                                    </div>
+                              </form>
+                        </div>
                         <!-- Modal Xoá -->
                         <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
                               aria-hidden="true">
@@ -153,8 +193,11 @@
             var ddID;
             var deleteForm = document.forms['form-dd-delete'];
             var containerForm = $('form[name="container-form"]');
-
+            var statusForm = document.forms['form-dd-status'];
+            
             var btnDelete = document.getElementById('btn-delete');
+            var btnStatus = $('#btn-status');
+
             var checkboxAll = $('#checkbox-all');
             var itemCheckbox = $('input[name="commentIds[]"]');
             var checkAllSubmitBtn = $('.check-all-submit-btn');
@@ -166,10 +209,25 @@
                   ddID = button.getAttribute('data-bs-id')
             });
 
+
             btnDelete.onclick = function () {
                   deleteForm.action = '/admin/quan-ly-comment/' + ddID + '?_method=DELETE'; 
                   deleteForm.submit();
             }
+
+            $('#modalStatus').on('show.bs.modal', event => {
+                  // Button that triggered the modal
+                  var button = event.relatedTarget
+                  // Extract info from data-bs-* attributes
+                  ddID = button.getAttribute('data-id')
+            });
+            
+            btnStatus.click( function (e) {
+                  e.preventDefault();
+                  var id = ddID;
+                  statusForm.action = '/admin/quan-ly-comment/trang-thai/' + id + '?_method=PUT'; 
+                  statusForm.submit();
+            });
 
             // Checkbox all click
             checkboxAll.change(function () {
